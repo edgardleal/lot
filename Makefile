@@ -40,8 +40,8 @@ clean:
 	ctags -R .
 
 test: setup $(TEST_OBJ)
-	setup 
-	gcc -g $(CFLAGS) $^ -o $(OUTDIR)/test
+	ANSI=1 
+	gcc -g $(CFLAGS) $(TEST_OBJ) -o $(OUTDIR)/test
 	$(OUTDIR)/test
 
 all: clean test compile production
