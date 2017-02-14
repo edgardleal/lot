@@ -17,6 +17,19 @@ static void num_switch(struct Num* this, int a, int b)
 	this->bols[b] = tmp;
 }	
 
+extern void num_clone(struct Num *this)
+{
+	struct Num *result = newNum();
+	int i = 0;
+	for(i = 0; i < 25; i = i + 1)
+	{
+		result->bols[i] = this->bols[i];
+	}
+
+	return result;
+}
+
+
 /**
  * Returns the number of bols closed to the end ( 25 )
  *
@@ -130,7 +143,8 @@ static void num_toString(struct Num *this, char* text)
 
 extern void num_destroy(struct Num *this)
 {
-	free(this);
+	if(this)
+	  free(this);
 }
 
 extern struct Num *newNum()
@@ -142,6 +156,8 @@ extern struct Num *newNum()
 	result->print        = &num_print;
 	result->inc          = &num_inc;
 	result->switchNumbers= &num_switch;
+	result->clone        = &num_clone;
+	result->destroy      = &num_destroy;
 
 	int i               = 0;
 	for(i = 0;i<25;i++) {

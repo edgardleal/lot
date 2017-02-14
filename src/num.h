@@ -8,10 +8,13 @@ struct Num {
 	void (*print)(struct Num*);
 	void (*inc)(struct Num*);
 	void (*switchNumbers)(struct Num*, int, int);
+	void (*destroy)(struct Num*);
+	struct Num* (*clone)(struct Num*);
 };
 
 extern struct Num *newNum();
 extern void num_destroy(struct Num *this);
+extern void num_clone(struct Num *this);
 static void num_switch(struct Num* this, int a, int b);
 static int bols_in_the_end(struct Num* this);
 static void num_inc(struct Num* this);

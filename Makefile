@@ -7,12 +7,13 @@ IDIR=
 CFLAGS=-ansi
 
 
-DEPS=$(SRC)/num.h
+DEPS=$(SRC)/num.h $(SRC)/tree.h
 
-
-_OBJ = num.o
+_OBJ = num.o tree.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
 TEST_OBJ=$(OBJ) $(OUTDIR)/test.o $(OUTDIR)/tap.o
+
+all: clean test compile production
 
 checklibtap:
 	if [ ! -d "./libtap" ]; then git submodule update --recursive --remote; fi
@@ -44,13 +45,12 @@ production: setup compileProduction
 compile: setup compileDebug 
 
 clean:
-	rm *.o || true
+	rm -r $(OUTDIR) || true
 	ctags -R .
 
 test: setup compileTest
 	$(OUTDIR)/test
 
-all: clean test compile production
 
 .DEFAULT: test
 .PHONY: clean
