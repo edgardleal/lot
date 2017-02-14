@@ -147,6 +147,19 @@ extern void num_destroy(struct Num *this)
 	  free(this);
 }
 
+static int num_compare(struct Num *this, struct Num *other)
+{
+	int i, result = 0;
+	for(i = 0; i < 24; i = i + 1)
+	{
+		if(this->bols[i] && other->bols[i])
+		{
+			result = result + 1;
+		}
+	}
+	return result;
+}
+
 extern struct Num *newNum()
 {
   struct Num* result   = (struct Num*)malloc(sizeof(struct Num));
@@ -157,6 +170,7 @@ extern struct Num *newNum()
 	result->inc          = &num_inc;
 	result->switchNumbers= &num_switch;
 	result->clone        = &num_clone;
+	result->compare      = &num_compare;
 	result->destroy      = &num_destroy;
 
 	int i               = 0;

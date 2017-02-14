@@ -2,6 +2,7 @@
 #include "num.h"
 
 void check_balls(struct Num* this);
+void test_compare();
 
 int
 main()
@@ -10,7 +11,7 @@ main()
     num = newNum();
     char error = 0;
 
-    plan(10);
+    plan(11);
     check_balls(num);
     num->inc(num);
 
@@ -20,11 +21,23 @@ main()
     ok(num->bols[15] == 0, "Ball 16 should be zero after seccond inc operation and is: %d", num->bols[15]);
     ok(num->bols[16] == 1, "Ball 17 should be one after seccond inc operation and is: %d", num->bols[16]);
 
+		test_compare();
     done_testing();
 
     free(num);
 
     return 0;
+}
+
+void test_compare()
+{
+	struct Num *this = newNum(),
+		  *other = newNum();
+	int result = this->compare(this, other);
+	is(result, 15, "Result should be 15");
+
+	this->destroy(this);
+	other->destroy(other);
 }
 
 void
