@@ -27,21 +27,27 @@ $(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
 $(OUTDIR)/tap.o: libtap/tap.c
 	$(CC) $(CFLAGS) -c -o $@ $< 
 
-compile: $(OBJ) $(OUTDIR)/main.o 
-	setup
+compileDebug: $(OBJ) $(OUTDIR)/main.o 
+	ANSI=1 
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
 
-production: $(OBJ) $(OUTDIR)/main.o
-	setup 
+compileTest: $(TEST_OBJ)
+	ANSI=1 
+	gcc -g $(CFLAGS) $^ -o $(OUTDIR)/test
+
+compileProduction: $(OBJ) $(OUTDIR)/main.o
+	ANSI=1 
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot
+
+production: setup compileProduction
+
+compile: setup compileDebug 
 
 clean:
 	rm *.o || true
 	ctags -R .
 
-test: setup $(TEST_OBJ)
-	ANSI=1 
-	gcc -g $(CFLAGS) $(TEST_OBJ) -o $(OUTDIR)/test
+test: setup compileTest
 	$(OUTDIR)/test
 
 all: clean test compile production

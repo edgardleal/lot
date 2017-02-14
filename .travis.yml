@@ -1,1 +1,3 @@
 language: c
+compile: gcc
+script: make test
