@@ -10,11 +10,15 @@ main()
     num = newNum();
     char error = 0;
 
-    plan(8);
+    plan(10);
     check_balls(num);
     num->inc(num);
 
     ok(num->bols[14] == 0, "Ball 15 should be zero after first inc operation and is: %d", num->bols[14]);
+
+    num->inc(num);
+    ok(num->bols[15] == 0, "Ball 16 should be zero after seccond inc operation and is: %d", num->bols[15]);
+    ok(num->bols[16] == 1, "Ball 17 should be one after seccond inc operation and is: %d", num->bols[16]);
 
     done_testing();
 
