@@ -17,7 +17,7 @@ static void num_switch(struct Num* this, int a, int b)
 	this->bols[b] = tmp;
 }	
 
-extern void num_clone(struct Num *this)
+extern struct Num * num_clone(struct Num *this)
 {
 	struct Num *result = newNum();
 	int i = 0;
@@ -28,7 +28,6 @@ extern void num_clone(struct Num *this)
 
 	return result;
 }
-
 
 /**
  * Returns the number of bols closed to the end ( 25 )
