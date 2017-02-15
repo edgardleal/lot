@@ -29,12 +29,14 @@ compileTest: $(TEST_OBJ)
 	gcc -g $(CFLAGS) $^ -o $(OUTDIR)/test
 
 compileProduction: $(OBJ) $(OUTDIR)/main.o
-	ANSI=1 
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot
 
 production: setup compileProduction
 
 compile: setup compileDebug 
+
+memory: compile
+	valgrind obj/debug
 
 clean:
 	rm -r $(OUTDIR) || true

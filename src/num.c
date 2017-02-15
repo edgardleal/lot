@@ -5,10 +5,74 @@
 #include <stdlib.h>
 #include <string.h>
 #include "num.h"
+#include "tree.h"
 #define IS_DEBUG 1
 
 
 static unsigned long id_counter = 0;
+
+static struct Node * num_load_file(struct Num *this, char *file_name)
+{
+    char c, 
+         in_comment_line = 0, 
+         is_new_line = 1,
+         last_char = 0,
+         *number,
+         number_parts[3]; /* last is \0 */
+    struct Node *result = newTree();
+    FILE *file = fopen(file_name, "r");
+    int value = 0;
+
+    while((c = fgetc(file)) != EOF)
+    {
+        if(!in_comment_line)
+        {
+            if(c == ' ') /* process number */
+            {
+                /**
+                 * TODO: finalize this implementation 
+                 */
+                if(number_parts[0] != '\0')
+                {
+                    number_parts[1] = last_char;
+                    number_parts[2] = '\0';
+                } else {
+                    number_parts[0] = last_char;
+                    number_parts[1] = '\0';
+                }
+
+                value = atoi(number_parts);
+                /*
+                 *
+                 * TODO: Add to bols 
+                 */
+
+                number_parts[0] = '\0';
+            } else {
+
+            }
+
+        }
+        if(is_new_line)
+        {
+            if(c == '*')
+            {
+                in_comment_line = 1;
+            }
+            is_new_line = 0;
+        } else {
+            if(c == '\n')
+            {
+                in_comment_line = 0;
+                is_new_line = 1;
+            }
+        } /* new line */
+        last_char = c;
+    }
+
+    fclose(file);
+    return result;
+}
 
 static void num_switch(struct Num* this, int a, int b)
 {
