@@ -8,7 +8,6 @@ char * test_compare();
 char * test_init();
 char * test_all();
 
-int tests_run = 0;
 
 int
 main()
@@ -16,14 +15,8 @@ main()
     char *result = 0;
 
     result = test_all();
-    if(result)
-    {
-        printf("%s\n", result);
-    }else {
-        printf("All Tests Passed!\n");
-    }
 
-    return result != 0;
+    return tests_error_count != 0;
 }
 
 char *
@@ -86,8 +79,8 @@ check_balls(struct Num *this)
     mu_assert("Ball 13 should be one  ", this->bols[12]);
     mu_assert("Ball 14 should be one  ", this->bols[13]);
     mu_assert("Ball 15 should be one  ", this->bols[14]);
-    mu_assert("Ball 16 should be zero ", this->bols[15]);
-    mu_assert("Ball 17 should be zero ", this->bols[16]);
-    mu_assert("Ball 18 should be zero ", this->bols[17]);
+    ok(this->bols[15] == 0, "Ball 16 should be zero");
+    ok(this->bols[16] == 0, "Ball 17 should be zero");
+    ok(this->bols[17] == 0, "Ball 18 should be zero");
     return 0;
 }

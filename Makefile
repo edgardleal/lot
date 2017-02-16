@@ -11,7 +11,7 @@ DEPS=$(SRC)/num.h $(SRC)/tree.h
 
 _OBJ = num.o tree.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
-TEST_OBJ=$(OBJ) $(OUTDIR)/test.o
+TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
 all: clean test compile production
 
