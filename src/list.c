@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "num.h"
-#include "tree.h"
+#include "list.h"
 
 static long instances_count = 0;
 static unsigned char DEBUG = 1;

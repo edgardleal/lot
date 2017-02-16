@@ -7,9 +7,9 @@ IDIR=
 CFLAGS=
 
 
-DEPS=$(SRC)/num.h $(SRC)/tree.h
+DEPS=$(SRC)/num.h $(SRC)/list.h
 
-_OBJ = num.o tree.o
+_OBJ = num.o list.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
