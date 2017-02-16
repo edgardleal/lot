@@ -4,14 +4,32 @@
 #include <stdlib.h>
 #include "num.h"
 #include "list.h"
+#include "strbuffer.h"
 
 static long instances_count = 0;
 static unsigned char DEBUG = 1;
 
 extern struct Node *loadFromFile(char *fileName)
 {
-	/* TODO: implement */
-	return NULL;
+	struct Node *result = newTree();
+	FILE *file = fopen(fileName, "r");
+	char c;
+	struct StrBuffer *buffer = newBuffer();
+
+	while((c = fgetc(file)) != EOF)
+	{
+		if(c == '*')
+		{
+
+			/* TODO: process buffer */
+		} else {
+			buffer->cat(buffer, c);
+		}
+	}
+
+	free(buffer);
+	fclose(file);
+	return result;
 }
 
 static void tree_destroy_and_clean(struct Node *this)
