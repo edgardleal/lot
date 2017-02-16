@@ -7,6 +7,7 @@
 int main() 
 {
     struct Num  *num  = newNum();
+    num->write_to_file(num, "saida.txt");
     struct Node *tree = newTree();
     tree->current = num;
     int i = 0;

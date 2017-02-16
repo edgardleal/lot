@@ -74,6 +74,22 @@ static struct Node * num_load_file(struct Num *this, char *file_name)
     return result;
 }
 
+static void num_write_file(struct Num *this, char *fileName)
+{
+    FILE *fp = fopen(fileName, "w");
+    char *out;
+
+    if(!fp)
+    {
+        printf("Canot open the file [%s]", fileName);
+        return;
+    } else {
+        this->toString(this, out);
+        fprintf(fp, "%s", out);
+        fclose(fp);
+    }
+}
+
 static void num_switch(struct Num* this, int a, int b)
 {
 	int tmp = this->bols[a];
@@ -235,6 +251,7 @@ extern struct Num *newNum()
 	result->clone        = &num_clone;
 	result->compare      = &num_compare;
 	result->destroy      = &num_destroy;
+	result->write_to_file= &num_write_file;
 
 	int i               = 0;
 	for(i = 0;i<25;i++) {
