@@ -8,6 +8,12 @@
 static long instances_count = 0;
 static unsigned char DEBUG = 1;
 
+extern struct Node *loadFromFile(char *fileName)
+{
+	/* TODO: implement */
+	return NULL;
+}
+
 static void tree_destroy_and_clean(struct Node *this)
 {
 	if(this->next != NULL)

@@ -24,6 +24,7 @@ test_all()
 {
     mu_run_test(test_init);
     mu_run_test(test_compare);
+		mu_run_test(test_reset);
 
     return 0;
 }
@@ -83,4 +84,15 @@ check_balls(struct Num *this)
     ok(this->bols[16] == 0, "Ball 17 should be zero");
     ok(this->bols[17] == 0, "Ball 18 should be zero");
     return 0;
+}
+
+void test_reset()
+{
+	struct Num *num = newNum();
+	num->inc(num);
+	num->reset(num);
+	
+	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
+
+	num->destroy(num);
 }

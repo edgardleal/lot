@@ -10,11 +10,15 @@ struct Num {
 	void (*switchNumbers)(struct Num*, int, int);
 	void (*destroy)(struct Num*);
 	int  (*compare)(struct Num*, struct Num*);
-    void (*write_to_file)(struct Num*, char*);
+  void (*write_to_file)(struct Num*, char*);
+  void (*load_string)(struct Num*, char*);
+  void (*reset)(struct Num*);
 	struct Num* (*clone)(struct Num*);
 };
 
 extern struct Num * newNum();
+static void num_load_string(struct Num *this, char *text);
+static void num_reset(struct Num *this);
 extern void num_destroy(struct Num *this);
 extern struct Num * num_clone(struct Num *this);
 static struct Node * num_load_file(struct Num*, char*);

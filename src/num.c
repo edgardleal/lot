@@ -11,6 +11,37 @@
 
 static unsigned long id_counter = 0;
 
+static void num_load_string(struct Num *this, char *text)
+{
+	int i = 0;
+	int size = strlen(text);
+	char tmp[3], lastchar, currentchar;
+	for(i = 0; i < size; i = i + 1)
+	{
+		currentchar = text[i];
+		if(currentchar != ' ')
+		{
+			if(tmp[0] == '\0')
+			{
+				tmp[0] = currentchar;
+				tmp[1] = '\0';
+			} else {
+				tmp[1] = currentchar;
+				tmp[2] = '\0';
+			}
+
+		}
+		else if(tmp[0] != '\0') /* if string tmp is not empty */
+		{
+			this->bols[atoi(tmp)] = 1;
+			tmp[0] = '\0';
+		}
+
+	}
+	if(tmp[0] != '\0')
+		this->bols[atoi(tmp)] = 1;
+}
+
 static struct Node * num_load_file(struct Num *this, char *file_name)
 {
     char c, 
@@ -239,19 +270,34 @@ static int num_compare(struct Num *this, struct Num *other)
 	return result;
 }
 
+static void num_reset(struct Num *this)
+{
+	int i;
+	for(i = 0; i < 24; i = i + 1)
+	{
+		if( i < 15)
+			this->bols[i] = 1;
+		else
+			this->bols[i] = 0;
+	}
+}
+
 extern struct Num *newNum()
 {
-  struct Num* result   = (struct Num*)malloc(sizeof(struct Num));
-	id_counter           = id_counter + 1;
-	result->id           = id_counter;
-	result->toString     = &num_toString;
-	result->print        = &num_print;
-	result->inc          = &num_inc;
-	result->switchNumbers= &num_switch;
-	result->clone        = &num_clone;
-	result->compare      = &num_compare;
-	result->destroy      = &num_destroy;
-	result->write_to_file= &num_write_file;
+  struct Num* result     = (struct Num*)malloc(sizeof(struct Num));
+	id_counter             = id_counter + 1;
+	result->id             = id_counter;
+	result->toString       = &num_toString;
+	result->print          = &num_print;
+	result->inc            = &num_inc;
+	result->switchNumbers  = &num_switch;
+	result->clone          = &num_clone;
+	result->compare        = &num_compare;
+	result->destroy        = &num_destroy;
+	result->write_to_file  = &num_write_file;
+	result->load_string    = &num_load_string;
+	result->reset          = &num_reset;
+
 
 	int i               = 0;
 	for(i = 0;i<25;i++) {
