@@ -16,6 +16,13 @@ static void num_load_string(struct Num *this, char *text)
 	int i = 0;
 	int size = strlen(text);
 	char tmp[3], lastchar, currentchar;
+
+	tmp[0] = '\0';
+	for(i = 0; i < 24; i = i + 1)
+	{
+		this->bols[i] = 0;
+	}
+
 	for(i = 0; i < size; i = i + 1)
 	{
 		currentchar = text[i];
@@ -33,13 +40,13 @@ static void num_load_string(struct Num *this, char *text)
 		}
 		else if(tmp[0] != '\0') /* if string tmp is not empty */
 		{
-			this->bols[atoi(tmp)] = 1;
+			this->bols[atoi(tmp) - 1] = 1;
 			tmp[0] = '\0';
 		}
 
 	}
 	if(tmp[0] != '\0')
-		this->bols[atoi(tmp)] = 1;
+		this->bols[atoi(tmp) - 1] = 1;
 }
 
 static struct Node * num_load_file(struct Num *this, char *file_name)

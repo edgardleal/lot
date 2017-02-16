@@ -25,7 +25,7 @@ test_all()
     mu_run_test(test_init);
     mu_run_test(test_compare);
 		mu_run_test(test_reset);
-
+		mu_run_test(test_load_string);
     return 0;
 }
 
@@ -96,3 +96,21 @@ void test_reset()
 
 	num->destroy(num);
 }
+
+
+void test_load_string()
+{
+	char *text = "15 16 17 18\n19 20 21 22 23 24 25";
+	struct Num *num = newNum();
+	ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
+	num->load_string(num, text);
+	
+	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
+	ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
+	ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
+	ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
+
+	num->destroy(num);
+}
+
+/* vim: set expandtab tabstop=4 :*/

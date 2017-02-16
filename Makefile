@@ -3,8 +3,7 @@ CC=gcc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
-# CFLAGS=-ansi
-CFLAGS=
+CFLAGS=-ansi
 
 
 DEPS=$(SRC)/num.h $(SRC)/list.h
@@ -20,7 +19,7 @@ setup:
 
 $(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
 	@echo "compiling " $@
-	$(CC) $(CFLAGS) -c -o $@ $< 
+	$(CC) -g $(CFLAGS) -c -o $@ $< 
 
 compileDebug: $(OBJ) $(OUTDIR)/main.o 
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
