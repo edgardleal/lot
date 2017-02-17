@@ -3,6 +3,11 @@
 #include <string.h>
 #include "strbuffer.h"
 
+static int str_size(struct StrBuffer *this)
+{
+    return strlen(this->buffer);
+}
+
 extern struct StrBuffer *newBuffer()
 {
 	struct StrBuffer *result = (struct StrBuffer*)malloc(sizeof(struct StrBuffer));
@@ -11,6 +16,7 @@ extern struct StrBuffer *newBuffer()
 	result->cat = &str_cat;
 	result->strcat = &str_strcat;
 	result->clear = &str_clear;
+	result->size = &str_size;
 
 	return result;
 }

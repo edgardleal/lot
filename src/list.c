@@ -11,103 +11,111 @@ static unsigned char DEBUG = 1;
 
 extern struct Node *loadFromFile(char *fileName)
 {
-	struct Node *result = newTree();
-	FILE *file = fopen(fileName, "r");
-	char c;
-	struct StrBuffer *buffer = newBuffer();
+    struct Node *result = newTree();
+    FILE *file = fopen(fileName, "r");
+    struct Num *num;
+    unsigned char line[80];
+    
+    struct StrBuffer *lineBuffer = newBuffer();
 
-	while((c = fgetc(file)) != EOF)
-	{
-		if(c == '*')
-		{
+    while((fgets(line, 80, file)) != NULL)
+    {
+        if(line[0] == '*') {
+            continue;
+        }
+        num = newNum();
+        num->load_string(num, line);
+        result->add(result, num);
+    }
 
-			/* TODO: process buffer */
-		} else {
-			buffer->cat(buffer, c);
-		}
-	}
-
-	free(buffer);
-	fclose(file);
-	return result;
+    free(num);
+    fclose(file);
+    return result;
 }
 
 static void tree_destroy_and_clean(struct Node *this)
 {
-	if(this->next != NULL)
-	{
-		this->next->previus = NULL;
-		tree_destroy_and_clean(this->next);
-	}
+    if(this->next != NULL)
+    {
+        this->next->previus = NULL;
+        tree_destroy_and_clean(this->next);
+    }
 
-	if(this->previus != NULL) 
-	{
-		this->previus->next = NULL;
-		tree_destroy_and_clean(this->previus);
-	}
+    if(this->previus != NULL) 
+    {
+        this->previus->next = NULL;
+        tree_destroy_and_clean(this->previus);
+    }
 
-	if(this)
-	{
-		if(this->current != NULL)
-		{
-			this->current->destroy(this->current);
-		}
-	  free(this);
-	}
+    if(this)
+    {
+        if(this->current != NULL)
+        {
+            free(this->current);
+            this->current = NULL;
+        }
+        free(this);
+    }
 
-	instances_count = instances_count - 1;
-	if(DEBUG)
-	printf("%d instances\n", instances_count);
+    instances_count = instances_count - 1;
+    if(DEBUG)
+        printf("%d instances\n", instances_count);
 }
 
 static void destroyTree(struct Node *this)
 {
-	if(this->next != NULL)
-	{
-		this->next->previus = NULL;
-		destroyTree(this->next);
-	}
+    if(this->next != NULL)
+    {
+        this->next->previus = NULL;
+        destroyTree(this->next);
+    }
 
-	if(this->previus != NULL) 
-	{
-		this->previus->next = NULL;
-		destroyTree(this->previus);
-	}
+    if(this->previus != NULL) 
+    {
+        this->previus->next = NULL;
+        destroyTree(this->previus);
+    }
 
-	if(this)
-	  free(this);
-	instances_count = instances_count - 1;
-	if(DEBUG)
-	printf("%d instances\n", instances_count);
+    if(this)
+        free(this);
+    instances_count = instances_count - 1;
+    if(DEBUG)
+        printf("%d instances\n", instances_count);
 }
 
 
 static void addNode(struct Node* this, struct Num *num)
 {
-	if(this->next)
-	{
-		this->next->add(this->next, num);
-	} 
-	else 
-	{
-		struct Node *new = newTree();
-		new->previus = this;
-		new->current = num;
-		this->next = new;
-	}	
+    if(this->current == NULL) {
+        this->current = num;
+    } else 
+    if(this->next)
+    {
+        this->next->add(this->next, num);
+    } 
+    else 
+    {
+        struct Node *new = newTree();
+        new->previus = this;
+        new->current = num;
+        this->next = new;
+    }    
 }
 
 
 extern struct Node *newTree()
 {
-	struct Node *result = (struct Node*)malloc(sizeof(struct Node));
-	result->destroy = &destroyTree;
-	result->add     = &addNode;
-	result->destroyAndClean = &tree_destroy_and_clean;
-	
-	instances_count = instances_count  + 1;
-	printf("%d instances\n", instances_count);
-	return result;
+    struct Node *result = (struct Node*)malloc(sizeof(struct Node));
+    result->destroy = &destroyTree;
+    result->add     = &addNode;
+    result->destroyAndClean = &tree_destroy_and_clean;
+    result->current = NULL;
+    result->next    = NULL;
+    result->previus = NULL;
+    
+    instances_count = instances_count  + 1;
+    printf("%d instances\n", instances_count);
+    return result;
 }
 #endif
-
+/* vim: set expandtab tabstop=4 :*/
