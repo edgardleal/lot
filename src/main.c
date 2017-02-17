@@ -4,22 +4,28 @@
 #include "num.h"
 #include "list.h"
 
+/**
+ *
+ *
+ */
 int main() 
 {
     struct Num  *num  = newNum();
-    num->write_to_file(num, "saida.txt");
-    struct Node *tree = newTree();
-    tree->current = num;
-    int i = 0;
-    while(i < 252) 
+    struct Node *tree = loadFromFile("numbers");
+    unsigned int i = 0, diff = 0;
+    tree->current->print(tree->current);
+    while(i < 3000000) 
     {
-        num->print(num);
+        /* num->print(num); */
+        diff = num->compare(num, tree->current);
+        if(diff < 8) {
+            num->print(num);
+        }
         num->inc(num);
         i = i + 1;
-            tree->add(tree, num->clone(num));
     }
-    struct Node *tmp = tree->next;
 
+    num->destroy(num);
     tree->destroyAndClean(tree);
 
     return 0;
