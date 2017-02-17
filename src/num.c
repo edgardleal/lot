@@ -175,7 +175,7 @@ static void num_inc(struct Num* this)
         {
             if(this->bols[i])
             {
-                if(is_out_of_end_queue)
+                if(is_out_of_end_queue) /* reset */
                 {
                     this->switchNumbers(this, i, i + 1);
                     /* get all numbers on the end and put they closed to the number on ( i + 1 ) */
