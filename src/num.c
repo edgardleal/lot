@@ -10,6 +10,7 @@
 
 
 static unsigned long id_counter = 0;
+static void inc_next_filled(struct Num *this);
 
 static void num_load_string(struct Num *this, char *text)
 {
@@ -165,38 +166,41 @@ static int bols_in_the_end(struct Num* this)
     return result;
 }
 
+static void inc_next_filled(struct Num *this)
+{
+	int i;
+	for(i = 24; i >= 0; i = i + 1)
+	{
+		if(this->bols[i])
+		{
+			this->switchNumbers(i, i + 1);
+			break;
+		}
+	}
+}
+
+/*
+ * Steps: 
+ *
+ * 1 - if last number isnt filled 
+ *   1.2 - Find next filled and inc this 
+ * 2 - Find empty numbers
+ *   2.1 - register last  empty number 
+ *   2.2 - register penultimate empty number 
+ * 3 - Find next filled number 
+ *   3.1 - If finded 
+ *     3.1.1 - switch number finded with last empty 
+ * 4 -  
+ *
+ *
+ */
 static void num_inc(struct Num* this)
 {
     int i = 23;
-    if(this->bols[24]) 
+    if(this->bols[24] == o) 
     {
-        char is_out_of_end_queue = 0;
-        for(i = 23; i > -1; i = i - 1) /* if last number is filled */
-        {
-            if(this->bols[i])
-            {
-                if(is_out_of_end_queue)
-                {
-                    this->switchNumbers(this, i, i + 1);
-                    /* get all numbers on the end and put they closed to the number on ( i + 1 ) */
-                    int bolsInTheEnd = bols_in_the_end(this);
-                    int newStart = i + 2;
-                    int j;
-                    for(j = 0; j <= bolsInTheEnd; j = j + 1)
-                    {
-                        this->switchNumbers(this, newStart + j, 24 - (bolsInTheEnd - j)); 
-                    }
-
-                    this->switchNumbers(this, i, i + 1);
-                    break;
-                }
-            } else {
-                if(is_out_of_end_queue == 0) 
-                {
-                    is_out_of_end_queue = 1;
-                }
-            }
-        }
+			this->inc_next_filled(this);
+			continue;
     } else {                         /* if last number is not filled */
         for(i = 23; i > -1; i = i - 1)
         {
