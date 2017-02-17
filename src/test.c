@@ -44,7 +44,27 @@ test_init()
     mu_assert("Ball 16 should be zero after seccond inc operation", num->bols[15] == 0);
     mu_assert("Ball 17 should be one after seccond inc operation ", num->bols[16] == 1);
 
-    free(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    ok(num->bols[24] == 1, "25 should be 1");
+
+
+    num->print(num);
+    /* after 25 should reset */
+    num->inc(num);
+    ok(num->bols[24] == 0, "25 should be 0 after first reset");
+    ok(num->bols[13] == 0, "14 should be 0 after first reset");
+    ok(num->bols[14] == 1, "15 should be 1 after first reset");
+    ok(num->bols[15] == 1, "16 should be 1 after first reset");
+    num->print(num);
+
+    num->destroy(num);
     return 0;
 }
 
@@ -81,6 +101,7 @@ check_balls(struct Num *this)
     mu_assert("Ball 14 should be one  ", this->bols[13]);
     mu_assert("Ball 15 should be one  ", this->bols[14]);
     ok(this->bols[15] == 0, "Ball 16 should be zero");
+    
     ok(this->bols[16] == 0, "Ball 17 should be zero");
     ok(this->bols[17] == 0, "Ball 18 should be zero");
     return 0;
