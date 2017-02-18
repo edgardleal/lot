@@ -7,15 +7,13 @@ char * check_balls(struct Num* this);
 char * test_compare();
 char * test_init();
 char * test_all();
-
+void test_reset(void);
+void test_load_string(void);
 
 int
 main()
 {
-    char *result = 0;
-
-    result = test_all();
-
+    test_all();
     return tests_error_count != 0;
 }
 
@@ -24,8 +22,8 @@ test_all()
 {
     mu_run_test(test_init);
     mu_run_test(test_compare);
-		mu_run_test(test_reset);
-		mu_run_test(test_load_string);
+    mu_run_test(test_reset);
+    mu_run_test(test_load_string);
     return 0;
 }
 
@@ -44,20 +42,37 @@ test_init()
     mu_assert("Ball 16 should be zero after seccond inc operation", num->bols[15] == 0);
     mu_assert("Ball 17 should be one after seccond inc operation ", num->bols[16] == 1);
 
-    free(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    num->inc(num);
+    ok(num->bols[24] == 1, "25 should be 1");
+
+    /* after 25 should reset */
+    num->inc(num);
+    ok(num->bols[24] == 0, "25 should be 0 after first reset");
+    ok(num->bols[13] == 0, "14 should be 0 after first reset");
+    ok(num->bols[14] == 1, "15 should be 1 after first reset");
+    ok(num->bols[15] == 1, "16 should be 1 after first reset");
+
+    num->destroy(num);
     return 0;
 }
 
 char *
 test_compare()
 {
-	struct Num *this = newNum(),
-		  *other = newNum();
-	int result = this->compare(this, other);
-	mu_assert("Result should be 15", result == 15);
+    struct Num *this = newNum(),
+          *other = newNum();
+    int result = this->compare(this, other);
+    mu_assert("Result should be 15", result == 15);
 
-	this->destroy(this);
-	other->destroy(other);
+    this->destroy(this);
+    other->destroy(other);
     return 0;
 }
 
@@ -81,6 +96,7 @@ check_balls(struct Num *this)
     mu_assert("Ball 14 should be one  ", this->bols[13]);
     mu_assert("Ball 15 should be one  ", this->bols[14]);
     ok(this->bols[15] == 0, "Ball 16 should be zero");
+    
     ok(this->bols[16] == 0, "Ball 17 should be zero");
     ok(this->bols[17] == 0, "Ball 18 should be zero");
     return 0;
@@ -88,29 +104,28 @@ check_balls(struct Num *this)
 
 void test_reset()
 {
-	struct Num *num = newNum();
-	num->inc(num);
-	num->reset(num);
-	
-	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
+    struct Num *num = newNum();
+    num->inc(num);
+    num->reset(num);
+    
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
 
-	num->destroy(num);
+    num->destroy(num);
 }
-
 
 void test_load_string()
 {
-	char *text = "15 16 17 18\n19 20 21 22 23 24 25";
-	struct Num *num = newNum();
-	ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
-	num->load_string(num, text);
-	
-	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
-	ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
-	ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
-	ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
+    char *text = "15 16 17 18\n19 20 21 22 23 24 25";
+    struct Num *num = newNum();
+    ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
+    num->load_string(num, text);
+    
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
+    ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
+    ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
+    ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
 
-	num->destroy(num);
+    num->destroy(num);
 }
 
 /* vim: set expandtab tabstop=4 :*/

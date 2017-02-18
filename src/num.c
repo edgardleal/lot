@@ -9,8 +9,15 @@
 #define IS_DEBUG 1
 #define MAX_NUMBER 3268720
 
+#ifdef IS_DEBUG
+#define debug(text, args...) do { char *format___; sprintf(format___, text, ##args); printf("%s\n", format___); } while(0)
+#else
+#define debug(text, args...) /* nothing */
+#endif
+
 
 static unsigned long id_counter = 0;
+static void inc_next_filled(struct Num *this, unsigned int start);
 
 static void num_load_string(struct Num *this, char *text)
 {
@@ -166,45 +173,66 @@ static int bols_in_the_end(struct Num* this)
     return result;
 }
 
+static void inc_next_filled(struct Num *this, unsigned int start)
+{
+    int i;
+    for(i = start; i >= 0; i = i - 1)
+    {
+        if(this->bols[i])
+        {
+            this->switchNumbers(this, i, i + 1);
+            break;
+        }
+    }
+}
+
+/*
+ * Steps: 
+ *
+ * 1 - if last number isnt filled                   | Done  
+ *   1.2 - Find next filled and inc this            | Done 
+ * 2 - Find empty numbers                      - i am here
+ *   2.1 - Register last filled 
+ *   2.2 - find next filled 
+ *     2.2.1 - 
+ *   2.1 - register last  empty number 
+ *   2.2 - register penultimate empty number 
+ * 3 - Find next filled number 
+ *   3.1 - If finded 
+ *     3.1.1 - switch number finded with last empty 
+ * 4 -  
+ *
+ *
+ */
 static void num_inc(struct Num* this)
 {
     int i = 23;
-    if(this->bols[24]) 
+    if(this->bols[24] == 0) 
     {
-        char is_out_of_end_queue = 0;
-        for(i = 23; i > -1; i = i - 1) /* if last number is filled */
-        {
-            if(this->bols[i])
-            {
-                if(is_out_of_end_queue)
-                {
-                    this->switchNumbers(this, i, i + 1);
-                    /* get all numbers on the end and put they closed to the number on ( i + 1 ) */
-                    int bolsInTheEnd = bols_in_the_end(this);
-                    int newStart = i + 2;
-                    int j;
-                    for(j = 0; j <= bolsInTheEnd; j = j + 1)
-                    {
-                        this->switchNumbers(this, newStart + j, 24 - (bolsInTheEnd - j)); 
-                    }
-
-                    this->switchNumbers(this, i, i + 1);
-                    break;
-                }
-            } else {
-                if(is_out_of_end_queue == 0) 
-                {
-                    is_out_of_end_queue = 1;
-                }
-            }
-        }
+        inc_next_filled(this, 24);
     } else {                         /* if last number is not filled */
-        for(i = 23; i > -1; i = i - 1)
+        int lastFilled;
+        for(i = 23; i >= 0; i = i - 1)
         {
-            if(this->bols[i])
+            if(this->bols[i] == 0)
             {
-                this->switchNumbers(this, i, i + 1);
-                break;
+                int j;
+                lastFilled = i + 1;
+                for(j = i; j >= 0; j = j - 1)
+                {
+                    if(this->bols[j]) /* finded next filled */
+                    {
+                        this->switchNumbers(this, j, j + 1);
+                        int k, lastsNumbersIndex = 0;
+                        for(k = lastFilled; k < 25; k = k + 1) /* reset number in the end */
+                        {
+                            this->switchNumbers(this, k, j + 2 + lastsNumbersIndex);
+                            lastsNumbersIndex = lastsNumbersIndex = 1;
+                        }
+                        break; /* j */
+                    }
+                }
+                break; /* i */
             }
         }
     }                                /* if last number is not filled */
@@ -213,7 +241,8 @@ static void num_inc(struct Num* this)
 static void num_print(struct Num *this)
 {
     char text[80];
-    this->toString(this, text);
+    text[0] = '\0';
+    num_toString(this, text);
     printf("%s", text);
     printf("***************\n");
 }
@@ -229,6 +258,7 @@ static char* iff(int condition, char* iftrue, char* iffalse)
 
 static void num_toString(struct Num *this, char* text)
 {
+    text[0] = '\0';
     sprintf(text, "%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n",
             iff(this->bols[0], " 1", "  "),
             iff(this->bols[1], " 2", "  "),
@@ -255,7 +285,7 @@ static void num_toString(struct Num *this, char* text)
             iff(this->bols[22],"23", "  "),
             iff(this->bols[23],"24", "  "),
             iff(this->bols[24],"25", "  ")
-            );
+    );
 }
 
 extern void num_destroy(struct Num *this)
