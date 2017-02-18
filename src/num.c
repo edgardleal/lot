@@ -8,6 +8,12 @@
 #include "list.h"
 #define IS_DEBUG 1
 
+#ifdef IS_DEBUG
+#define debug(text, args...) do { char *format___; sprintf(format___, text, ##args); printf("%s\n", format___); } while(0)
+#else
+#define debug(text, args...) /* nothing */
+#endif
+
 
 static unsigned long id_counter = 0;
 static void inc_next_filled(struct Num *this);
@@ -168,21 +174,21 @@ static int bols_in_the_end(struct Num* this)
 
 static void inc_next_filled(struct Num *this)
 {
-	int i;
-	for(i = 24; i >= 0; i = i + 1)
-	{
-		if(this->bols[i])
-		{
-			this->switchNumbers(i, i + 1);
-			break;
-		}
-	}
+    int i;
+    for(i = 24; i >= 0; i = i - 1)
+    {
+        if(this->bols[i])
+        {
+            this->switchNumbers(this, i, i + 1);
+            break;
+        }
+    }
 }
 
 /*
  * Steps: 
  *
- * 1 - if last number isnt filled 
+ * 1 - if last number isnt filled                      - i am here
  *   1.2 - Find next filled and inc this 
  * 2 - Find empty numbers
  *   2.1 - register last  empty number 
@@ -197,10 +203,9 @@ static void inc_next_filled(struct Num *this)
 static void num_inc(struct Num* this)
 {
     int i = 23;
-    if(this->bols[24] == o) 
+    if(this->bols[24] == 0) 
     {
-			this->inc_next_filled(this);
-			continue;
+        inc_next_filled(this);
     } else {                         /* if last number is not filled */
         for(i = 23; i > -1; i = i - 1)
         {
@@ -216,7 +221,8 @@ static void num_inc(struct Num* this)
 static void num_print(struct Num *this)
 {
     char text[80];
-    this->toString(this, text);
+    text[0] = '\0';
+    num_toString(this, text);
     printf("%s", text);
     printf("***************\n");
 }
@@ -232,6 +238,7 @@ static char* iff(int condition, char* iftrue, char* iffalse)
 
 static void num_toString(struct Num *this, char* text)
 {
+    text[0] = '\0';
     sprintf(text, "%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n",
             iff(this->bols[0], " 1", "  "),
             iff(this->bols[1], " 2", "  "),
@@ -258,7 +265,7 @@ static void num_toString(struct Num *this, char* text)
             iff(this->bols[22],"23", "  "),
             iff(this->bols[23],"24", "  "),
             iff(this->bols[24],"25", "  ")
-            );
+    );
 }
 
 extern void num_destroy(struct Num *this)

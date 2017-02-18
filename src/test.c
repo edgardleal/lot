@@ -7,15 +7,13 @@ char * check_balls(struct Num* this);
 char * test_compare();
 char * test_init();
 char * test_all();
-
+void test_reset(void);
+void test_load_string(void);
 
 int
 main()
 {
-    char *result = 0;
-
-    result = test_all();
-
+    test_all();
     return tests_error_count != 0;
 }
 
@@ -24,8 +22,8 @@ test_all()
 {
     mu_run_test(test_init);
     mu_run_test(test_compare);
-		mu_run_test(test_reset);
-		mu_run_test(test_load_string);
+    mu_run_test(test_reset);
+    mu_run_test(test_load_string);
     return 0;
 }
 
@@ -38,6 +36,7 @@ test_init()
     check_balls(num);
     num->inc(num);
 
+    num->print(num);
     mu_assert("Ball 15 should be zero after first inc operation", num->bols[14] == 0);
 
     num->inc(num);
@@ -71,13 +70,13 @@ test_init()
 char *
 test_compare()
 {
-	struct Num *this = newNum(),
-		  *other = newNum();
-	int result = this->compare(this, other);
-	mu_assert("Result should be 15", result == 15);
+    struct Num *this = newNum(),
+          *other = newNum();
+    int result = this->compare(this, other);
+    mu_assert("Result should be 15", result == 15);
 
-	this->destroy(this);
-	other->destroy(other);
+    this->destroy(this);
+    other->destroy(other);
     return 0;
 }
 
@@ -109,29 +108,28 @@ check_balls(struct Num *this)
 
 void test_reset()
 {
-	struct Num *num = newNum();
-	num->inc(num);
-	num->reset(num);
-	
-	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
+    struct Num *num = newNum();
+    num->inc(num);
+    num->reset(num);
+    
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
 
-	num->destroy(num);
+    num->destroy(num);
 }
-
 
 void test_load_string()
 {
-	char *text = "15 16 17 18\n19 20 21 22 23 24 25";
-	struct Num *num = newNum();
-	ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
-	num->load_string(num, text);
-	
-	ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
-	ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
-	ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
-	ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
+    char *text = "15 16 17 18\n19 20 21 22 23 24 25";
+    struct Num *num = newNum();
+    ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
+    num->load_string(num, text);
+    
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
+    ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
+    ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
+    ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
 
-	num->destroy(num);
+    num->destroy(num);
 }
 
 /* vim: set expandtab tabstop=4 :*/
