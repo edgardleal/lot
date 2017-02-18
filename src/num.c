@@ -7,7 +7,6 @@
 #include "num.h"
 #include "list.h"
 #define IS_DEBUG 1
-#define MAX_NUMBER 3268720
 
 #ifdef IS_DEBUG
 #define debug(text, args...) do { char *format___; sprintf(format___, text, ##args); printf("%s\n", format___); } while(0)
@@ -297,7 +296,7 @@ extern void num_destroy(struct Num *this)
 static int num_compare(struct Num *this, struct Num *other)
 {
     int i, result = 0;
-    for(i = 0; i < 24; i = i + 1)
+    for(i = 0; i < 25; i = i + 1)
     {
         if(this->bols[i] && other->bols[i])
         {
