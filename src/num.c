@@ -7,6 +7,7 @@
 #include "num.h"
 #include "list.h"
 #define IS_DEBUG 1
+#define MAX_NUMBER 3268720
 
 
 static unsigned long id_counter = 0;
