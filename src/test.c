@@ -36,7 +36,6 @@ test_init()
     check_balls(num);
     num->inc(num);
 
-    num->print(num);
     mu_assert("Ball 15 should be zero after first inc operation", num->bols[14] == 0);
 
     num->inc(num);
@@ -53,15 +52,12 @@ test_init()
     num->inc(num);
     ok(num->bols[24] == 1, "25 should be 1");
 
-
-    num->print(num);
     /* after 25 should reset */
     num->inc(num);
     ok(num->bols[24] == 0, "25 should be 0 after first reset");
     ok(num->bols[13] == 0, "14 should be 0 after first reset");
     ok(num->bols[14] == 1, "15 should be 1 after first reset");
     ok(num->bols[15] == 1, "16 should be 1 after first reset");
-    num->print(num);
 
     num->destroy(num);
     return 0;

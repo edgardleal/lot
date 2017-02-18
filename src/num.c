@@ -16,7 +16,7 @@
 
 
 static unsigned long id_counter = 0;
-static void inc_next_filled(struct Num *this);
+static void inc_next_filled(struct Num *this, unsigned int start);
 
 static void num_load_string(struct Num *this, char *text)
 {
@@ -172,10 +172,10 @@ static int bols_in_the_end(struct Num* this)
     return result;
 }
 
-static void inc_next_filled(struct Num *this)
+static void inc_next_filled(struct Num *this, unsigned int start)
 {
     int i;
-    for(i = 24; i >= 0; i = i - 1)
+    for(i = start; i >= 0; i = i - 1)
     {
         if(this->bols[i])
         {
@@ -188,9 +188,12 @@ static void inc_next_filled(struct Num *this)
 /*
  * Steps: 
  *
- * 1 - if last number isnt filled                      - i am here
- *   1.2 - Find next filled and inc this 
- * 2 - Find empty numbers
+ * 1 - if last number isnt filled                   | Done  
+ *   1.2 - Find next filled and inc this            | Done 
+ * 2 - Find empty numbers                      - i am here
+ *   2.1 - Register last filled 
+ *   2.2 - find next filled 
+ *     2.2.1 - 
  *   2.1 - register last  empty number 
  *   2.2 - register penultimate empty number 
  * 3 - Find next filled number 
@@ -205,14 +208,30 @@ static void num_inc(struct Num* this)
     int i = 23;
     if(this->bols[24] == 0) 
     {
-        inc_next_filled(this);
+        inc_next_filled(this, 24);
     } else {                         /* if last number is not filled */
-        for(i = 23; i > -1; i = i - 1)
+        int lastFilled;
+        for(i = 23; i >= 0; i = i - 1)
         {
-            if(this->bols[i])
+            if(this->bols[i] == 0)
             {
-                this->switchNumbers(this, i, i + 1);
-                break;
+                int j;
+                lastFilled = i + 1;
+                for(j = i; j >= 0; j = j - 1)
+                {
+                    if(this->bols[j]) /* finded next filled */
+                    {
+                        this->switchNumbers(this, j, j + 1);
+                        int k, lastsNumbersIndex = 0;
+                        for(k = lastFilled; k < 25; k = k + 1) /* reset number in the end */
+                        {
+                            this->switchNumbers(this, k, j + 2 + lastsNumbersIndex);
+                            lastsNumbersIndex = lastsNumbersIndex = 1;
+                        }
+                        break; /* j */
+                    }
+                }
+                break; /* i */
             }
         }
     }                                /* if last number is not filled */
