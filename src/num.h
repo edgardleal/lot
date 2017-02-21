@@ -19,6 +19,7 @@ struct Num {
 
 extern struct Num * newNum();
 extern struct Num * num_clone(struct Num *this);
+extern int num_line(struct Num *this, int line);
 extern void num_destroy(struct Num *this);
 static char * iff(int condition, char *iftrue, char *iffalse);
 static int bols_in_the_end(struct Num *this);

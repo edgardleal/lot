@@ -16,11 +16,18 @@ int main()
     tree->current->print(tree->current);
     while(i < MAX_NUMBER) 
     {
-        /* num->print(num); */
+         /* num->print(num); */
         diff = num->compare(num, tree->current);
         if(diff < 7) {
-            printf("# Equal: %d\n", diff);
-            num->print(num);
+            if(num_line(num, 1) >= 3)
+            if(num_line(num, 2) >= 3)
+            if(num_line(num, 3) >= 3)
+            if(num_line(num, 4) >= 3)
+            if(num_line(num, 5) >= 3)
+				    {
+                printf("# Equal: %d\n", diff);
+                num->print(num);
+				    }
         }
         num->inc(num);
         i = i + 1;

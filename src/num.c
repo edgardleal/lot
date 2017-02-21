@@ -241,6 +241,7 @@ static void num_print(struct Num *this)
 {
     char text[80];
     text[0] = '\0';
+
     num_toString(this, text);
     printf("%s", text);
     printf("***************\n");
@@ -304,6 +305,19 @@ static int num_compare(struct Num *this, struct Num *other)
         }
     }
     return result;
+}
+
+extern int num_line(struct Num *this, int line)
+{
+	int i, start = (line - 1) * 5, result = 0;
+	for(i = start; i < start + 5; i = i + 1)
+	{
+		if(this->bols[i])
+			result = result + 1;
+
+	}
+
+	return result;
 }
 
 static void num_reset(struct Num *this)
