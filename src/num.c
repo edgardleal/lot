@@ -294,6 +294,10 @@ extern void num_destroy(struct Num *this)
       free(this);
 }
 
+/**
+ * Return the amount of numbers are equals in both numbers.
+ *
+ */
 static int num_compare(struct Num *this, struct Num *other)
 {
     int i, result = 0;
