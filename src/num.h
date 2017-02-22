@@ -1,23 +1,25 @@
 #ifndef NUM_H
 #define NUM_H
+#define MAX_NUMBER 3268720
 
 struct Num {
-	long id;
-	int bols[25];
-	void (*toString)(struct Num*, char*);
-	void (*print)(struct Num*);
-	void (*inc)  (struct Num*);
-	void (*switchNumbers)(struct Num*, int, int);
-	void (*destroy)(struct Num*);
-	int  (*compare)(struct Num*, struct Num*);
-  void (*write_to_file)(struct Num*, char*);
-  void (*load_string)(struct Num*, char*);
-  void (*reset)(struct Num*);
-	struct Num* (*clone)(struct Num*);
+    long id;
+    int bols[25];
+    void (*toString)(struct Num*, char*);
+    void (*print)(struct Num*);
+    void (*inc)  (struct Num*);
+    void (*switchNumbers)(struct Num*, int, int);
+    void (*destroy)(struct Num*);
+    int  (*compare)(struct Num*, struct Num*);
+    void (*write_to_file)(struct Num*, char*);
+    void (*load_string)(struct Num*, char*);
+    void (*reset)(struct Num*);
+    struct Num* (*clone)(struct Num*);
 };
 
 extern struct Num * newNum();
 extern struct Num * num_clone(struct Num *this);
+extern int num_line(struct Num *this, int line);
 extern void num_destroy(struct Num *this);
 static char * iff(int condition, char *iftrue, char *iffalse);
 static int bols_in_the_end(struct Num *this);

@@ -24,6 +24,7 @@ test_all()
     mu_run_test(test_compare);
     mu_run_test(test_reset);
     mu_run_test(test_load_string);
+    mu_run_test(test_line_count);
     return 0;
 }
 
@@ -70,6 +71,14 @@ test_compare()
           *other = newNum();
     int result = this->compare(this, other);
     mu_assert("Result should be 15", result == 15);
+    other->inc(other);
+    result = other->compare(other, this);
+    ok(14 == result, "Equals bols decrease after inc ");
+
+    other->inc(other);
+    result = other->compare(other, this);
+    ok(14 == result, "When second inc the last ball is 17 and result of compare continue 14");
+
 
     this->destroy(this);
     other->destroy(other);
@@ -110,6 +119,20 @@ void test_reset()
     
     ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
 
+    num->destroy(num);
+}
+
+void test_line_count() {
+    struct Num *num = newNum();
+    num->inc(num);
+    num->reset(num);
+
+    ok(num_line(num, 1) == 5, "Line 1 have five numbers");
+    ok(num_line(num, 2) == 5, "Line 2 have five numbers");
+    ok(num_line(num, 3) == 5, "Line 3 have five numbers");
+    ok(num_line(num, 4) == 0, "Line 4 have five numbers");
+    ok(num_line(num, 5) == 0, "Line 5 have five numbers");
+    
     num->destroy(num);
 }
 

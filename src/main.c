@@ -4,6 +4,8 @@
 #include "num.h"
 #include "list.h"
 
+#define MAX_EQUAL 6
+
 /**
  *
  *
@@ -12,14 +14,44 @@ int main()
 {
     struct Num  *num  = newNum();
     struct Node *tree = loadFromFile("numbers");
-    unsigned int i = 0, diff = 0;
+    unsigned long i = 0, equal = 0;
     tree->current->print(tree->current);
-    while(i < 3000000) 
+
+    struct Node *node = NULL;
+    while(i < MAX_NUMBER) 
     {
-        /* num->print(num); */
-        diff = num->compare(num, tree->current);
-        if(diff < 8) {
-            num->print(num);
+        node = tree;
+        int maxEqual = 0;
+        while(node != NULL && node->current != NULL)
+        {
+            /* */
+            equal = num->compare(num, node->current);
+            if(equal > maxEqual)
+            {
+                maxEqual = equal;
+            }
+
+            if(node->next != NULL)
+            {
+                node = node->next;
+            } else {
+                node = NULL;
+            }
+        }
+        /* num->print(num); 
+        equal = num->compare(num, tree->current);
+        * */
+        if(maxEqual <= MAX_EQUAL) {
+            if(num_line(num, 1) >= 3)
+            if(num_line(num, 2) >= 3)
+            if(num_line(num, 3) >= 3)
+            if(num_line(num, 4) >= 3)
+            if(num_line(num, 5) >= 3)
+            {
+                printf("# Equal: %d\n", maxEqual);
+                num->print(num);
+                tree->add(tree, num->clone(num));
+            }
         }
         num->inc(num);
         i = i + 1;
