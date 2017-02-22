@@ -22,7 +22,7 @@ static void num_load_string(struct Num *this, char *text)
 {
     int i = 0;
     int size = strlen(text);
-    char tmp[3], lastchar, currentchar;
+    char tmp[3];
 
     tmp[0] = '\0';
     for(i = 0; i < 24; i = i + 1)
@@ -32,7 +32,7 @@ static void num_load_string(struct Num *this, char *text)
 
     for(i = 0; i < size; i = i + 1)
     {
-        currentchar = text[i];
+        char currentchar = text[i];
         if(currentchar != ' ' && currentchar != '\n')
         {
             if(tmp[0] == '\0')
@@ -61,11 +61,9 @@ static struct Node * num_load_file(struct Num *this, char *file_name)
          in_comment_line = 0, 
          is_new_line = 1,
          last_char = 0,
-         *number,
          number_parts[3]; /* last is \0 */
     struct Node *result = newTree();
     FILE *file = fopen(file_name, "r");
-    int value = 0;
 
     while((c = fgetc(file)) != EOF)
     {
@@ -85,7 +83,6 @@ static struct Node * num_load_file(struct Num *this, char *file_name)
                     number_parts[1] = '\0';
                 }
 
-                value = atoi(number_parts);
                 /*
                  *
                  * TODO: Add to bols 
@@ -121,13 +118,13 @@ static struct Node * num_load_file(struct Num *this, char *file_name)
 static void num_write_file(struct Num *this, char *fileName)
 {
     FILE *fp = fopen(fileName, "w");
-    char *out;
 
     if(!fp)
     {
         printf("Canot open the file [%s]", fileName);
         return;
     } else {
+				char *out;
         this->toString(this, out);
         fprintf(fp, "%s", out);
         fclose(fp);
@@ -161,7 +158,7 @@ extern struct Num * num_clone(struct Num *this)
 static int bols_in_the_end(struct Num* this)
 {
     int i, result = 0;
-    for(i = 24; i > -1; i = i + 1)
+    for(i = 24; i > -1; i = i - 1)
     {
         if(this->bols[i] == 0)
         {
@@ -205,12 +202,12 @@ static void inc_next_filled(struct Num *this, unsigned int start)
  */
 static void num_inc(struct Num* this)
 {
-    int i = 23;
     if(this->bols[24] == 0) 
     {
         inc_next_filled(this, 24);
     } else {                         /* if last number is not filled */
         int lastFilled;
+                int i = 23;
         for(i = 23; i >= 0; i = i - 1)
         {
             if(this->bols[i] == 0)
@@ -313,15 +310,15 @@ static int num_compare(struct Num *this, struct Num *other)
 
 extern int num_line(struct Num *this, int line)
 {
-	int i, start = (line - 1) * 5, result = 0;
-	for(i = start; i < start + 5; i = i + 1)
-	{
-		if(this->bols[i])
-			result = result + 1;
+    int i, start = (line - 1) * 5, result = 0;
+    for(i = start; i < start + 5; i = i + 1)
+    {
+        if(this->bols[i])
+            result = result + 1;
 
-	}
+    }
 
-	return result;
+    return result;
 }
 
 static void num_reset(struct Num *this)
@@ -366,3 +363,4 @@ extern struct Num *newNum()
 }
 
 #endif
+/* vim: set ts : */

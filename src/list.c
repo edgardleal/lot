@@ -16,8 +16,6 @@ extern struct Node *loadFromFile(char *fileName)
     struct Num *num;
     unsigned char line[80];
     
-    struct StrBuffer *lineBuffer = newBuffer();
-
     while((fgets(line, 80, file)) != NULL)
     {
         if(line[0] == '*') {
@@ -59,7 +57,7 @@ static void tree_destroy_and_clean(struct Node *this)
 
     instances_count = instances_count - 1;
     if(DEBUG)
-        printf("%d instances\n", instances_count);
+        printf("%ld instances\n", instances_count);
 }
 
 static void destroyTree(struct Node *this)
@@ -80,7 +78,7 @@ static void destroyTree(struct Node *this)
         free(this);
     instances_count = instances_count - 1;
     if(DEBUG)
-        printf("%d instances\n", instances_count);
+        printf("%ld instances\n", instances_count);
 }
 
 
@@ -114,8 +112,8 @@ extern struct Node *newTree()
     result->previus = NULL;
     
     instances_count = instances_count  + 1;
-    printf("%d instances\n", instances_count);
+    printf("%ld instances\n", instances_count);
     return result;
 }
 #endif
-/* vim: set expandtab tabstop=4 :*/
+/* vim: set expandtab tabstop=4 shiftwidth=4 :*/

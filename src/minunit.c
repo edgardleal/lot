@@ -15,8 +15,7 @@ int tests_error_count = 0;
 
 extern void print_test( int result, char * message)
 {
-    char output[255],
-         *color,
+    char *color,
          *status;
     if(result)
     {

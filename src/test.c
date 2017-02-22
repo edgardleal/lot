@@ -71,6 +71,14 @@ test_compare()
           *other = newNum();
     int result = this->compare(this, other);
     mu_assert("Result should be 15", result == 15);
+    other->inc(other);
+    result = other->compare(other, this);
+    ok(14 == result, "Equals bols decrease after inc ");
+
+    other->inc(other);
+    result = other->compare(other, this);
+    ok(14 == result, "When second inc the last ball is 17 and result of compare continue 14");
+
 
     this->destroy(this);
     other->destroy(other);
