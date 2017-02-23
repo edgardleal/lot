@@ -6,9 +6,11 @@ IDIR=
 CFLAGS=-ansi
 
 
-DEPS=$(SRC)/num.h $(SRC)/list.h $(SRC)/strbuffer.h
+# DEPS=$(SRC)/num.h $(SRC)/list.h $(SRC)/strbuffer.h $(SRC)/args.h
+_DEPS= args.h num.h list.h strbuffer.h
+DEPS=$(patsubst %,$(SRC)/%,$(_DEPS))
 
-_OBJ = num.o list.o strbuffer.o
+_OBJ = args.o num.o list.o strbuffer.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
