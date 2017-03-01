@@ -6,11 +6,9 @@ IDIR=
 CFLAGS=-ansi
 
 
-# DEPS=$(SRC)/num.h $(SRC)/list.h $(SRC)/strbuffer.h $(SRC)/args.h
-_DEPS= args.h num.h list.h strbuffer.h
+_DEPS= csv.h args.h num.h list.h strbuffer.h
 DEPS=$(patsubst %,$(SRC)/%,$(_DEPS))
-
-_OBJ = args.o num.o list.o strbuffer.o
+_OBJ = args.o num.o list.o strbuffer.o csv.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
@@ -45,6 +43,9 @@ clean:
 
 test: setup compileTest
 	$(OUTDIR)/test
+
+debug: setup compileDebug 
+	gdb $(OUTDIR)/test
 
 
 .DEFAULT: test
