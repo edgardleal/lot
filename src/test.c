@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "minunit.h"
 #include "num.h"
+#include "csv.h"
 
 char * check_balls(struct Num* this);
 char * test_compare();
@@ -9,11 +11,15 @@ char * test_init();
 char * test_all();
 void test_reset(void);
 void test_load_string(void);
+void test_csv(void);
+void test_line_count(void);
+void test_strcpy();
 
 int
 main()
 {
     test_all();
+    test_summary();
     return tests_error_count != 0;
 }
 
@@ -21,10 +27,12 @@ char *
 test_all()
 {
     mu_run_test(test_init);
+    mu_run_test(test_strcpy);
     mu_run_test(test_compare);
     mu_run_test(test_reset);
     mu_run_test(test_load_string);
     mu_run_test(test_line_count);
+    mu_run_test(test_csv);
     return 0;
 }
 
@@ -143,12 +151,47 @@ void test_load_string()
     ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
     num->load_string(num, text);
     
-    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
-    ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
-    ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
-    ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in ");
+    ok(num->bols[15] == 1, "Ball 16 should be 1 in ");
+    ok(num->bols[16] == 1, "Ball 17 should be 1 in ");
+    ok(num->bols[24] == 1, "Ball 25 should be 1 in ");
 
     num->destroy(num);
 }
 
-/* vim: set expandtab tabstop=4 :*/
+void test_strcpy()
+{
+    char dest[5];
+    char src[200];
+    src[0] = 'A';
+    src[1] = 'B';
+    src[2] = 'C';
+    src[3] = '\0';
+
+    strcpy(dest, src);
+    ok(dest[0] == 'A', "first letter");
+    ok(dest[1] == 'B', "seccond letter");
+    ok(dest[2] == 'C', "third letter");
+}
+
+void test_csv()
+{
+    char *text = "XXXX";
+
+    ok(text[0] == 'X', "X founded");
+
+    char *line = "1,2,3\0";
+    char **columns = (char**)malloc(sizeof(char**) * 20);
+    /*
+     *
+    */
+    csv_start_columns(columns, 20);
+    ok(1, "Started");
+
+    split_csv(line, columns);
+    ok(columns[0][0] == '1', "start");
+    ok(columns[1][0] == '2', "second char equal 2");
+    ok(columns[2][0] == '3', "third char equal 3");
+}
+
+/* vim: set expandtab tabstop=4 tabshift=4 :*/
