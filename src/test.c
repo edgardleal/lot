@@ -4,14 +4,14 @@
 #include "minunit.h"
 #include "num.h"
 #include "csv.h"
+#include "test/test_csv.c"
 
-char * check_balls(struct Num* this);
-char * test_compare();
-char * test_init();
-char * test_all();
+void check_balls(struct Num* this);
+void test_compare();
+void test_init();
+void test_all();
 void test_reset(void);
 void test_load_string(void);
-void test_csv(void);
 void test_line_count(void);
 void test_strcpy();
 
@@ -23,8 +23,7 @@ main()
     return tests_error_count != 0;
 }
 
-char *
-test_all()
+void test_all()
 {
     mu_run_test(test_init);
     mu_run_test(test_strcpy);
@@ -33,11 +32,10 @@ test_all()
     mu_run_test(test_load_string);
     mu_run_test(test_line_count);
     mu_run_test(test_csv);
-    return 0;
+    mu_run_test(test_csv_new_num_from_string);
 }
 
-char *
-test_init() 
+void test_init() 
 {
     struct Num *num;
     num = newNum();
@@ -69,11 +67,9 @@ test_init()
     ok(num->bols[15] == 1, "16 should be 1 after first reset");
 
     num->destroy(num);
-    return 0;
 }
 
-char *
-test_compare()
+void test_compare()
 {
     struct Num *this = newNum(),
           *other = newNum();
@@ -90,11 +86,9 @@ test_compare()
 
     this->destroy(this);
     other->destroy(other);
-    return 0;
 }
 
-char *
-test_toString()
+void test_toString()
 {
     struct Num *this = newNum();
 
@@ -102,11 +96,9 @@ test_toString()
     this->toString(this, text);
 
     free(this);
-    return 0;
 }
 
-char *
-check_balls(struct Num *this)
+void check_balls(struct Num *this)
 {
     mu_assert("Ball 12 should be one  ", this->bols[11]);
     mu_assert("Ball 13 should be one  ", this->bols[12]);
@@ -116,7 +108,6 @@ check_balls(struct Num *this)
     
     ok(this->bols[16] == 0, "Ball 17 should be zero");
     ok(this->bols[17] == 0, "Ball 18 should be zero");
-    return 0;
 }
 
 void test_reset()
@@ -130,7 +121,8 @@ void test_reset()
     num->destroy(num);
 }
 
-void test_line_count() {
+void test_line_count()
+{
     struct Num *num = newNum();
     num->inc(num);
     num->reset(num);
@@ -172,26 +164,6 @@ void test_strcpy()
     ok(dest[0] == 'A', "first letter");
     ok(dest[1] == 'B', "seccond letter");
     ok(dest[2] == 'C', "third letter");
-}
-
-void test_csv()
-{
-    char *text = "XXXX";
-
-    ok(text[0] == 'X', "X founded");
-
-    char *line = "1,2,3\0";
-    char **columns = (char**)malloc(sizeof(char**) * 20);
-    /*
-     *
-    */
-    csv_start_columns(columns, 20);
-    ok(1, "Started");
-
-    split_csv(line, columns);
-    ok(columns[0][0] == '1', "start");
-    ok(columns[1][0] == '2', "second char equal 2");
-    ok(columns[2][0] == '3', "third char equal 3");
 }
 
 /* vim: set expandtab tabstop=4 tabshift=4 :*/
