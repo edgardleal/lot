@@ -6,14 +6,7 @@
 #include <string.h>
 #include "num.h"
 #include "list.h"
-#define IS_DEBUG 1
-
-#ifdef IS_DEBUG
-#define debug(text, args...) do { char *format___; sprintf(format___, text, ##args); printf("%s\n", format___); } while(0)
-#else
-#define debug(text, args...) /* nothing */
-#endif
-
+#include "args.h"
 
 static unsigned long id_counter = 0;
 static void inc_next_filled(struct Num *this, unsigned int start);

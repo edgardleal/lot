@@ -6,10 +6,13 @@ IDIR=
 CFLAGS=-ansi
 
 
-DEPS=$(SRC)/num.h $(SRC)/list.h $(SRC)/strbuffer.h
-
-_OBJ = num.o list.o strbuffer.o
+_DEPS= csv.h args.h num.h list.h strbuffer.h
+DEPS=$(patsubst %,$(SRC)/%,$(_DEPS))
+_OBJ = args.o num.o list.o strbuffer.o csv.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
+
+_TEST = test_csv.o
+TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
 all: clean test compile production
@@ -34,6 +37,9 @@ production: setup compileProduction
 
 compile: setup compileDebug 
 
+doc:
+	doxygen .doxygen
+
 memory: compile
 	valgrind obj/debug
 
@@ -43,6 +49,9 @@ clean:
 
 test: setup compileTest
 	$(OUTDIR)/test
+
+debug: setup compileDebug 
+	gdb $(OUTDIR)/test
 
 
 .DEFAULT: test

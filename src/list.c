@@ -2,6 +2,7 @@
 #define TREE_C
 #include <stdio.h>
 #include <stdlib.h>
+#include "args.h"
 #include "num.h"
 #include "list.h"
 #include "strbuffer.h"
@@ -13,7 +14,7 @@ extern struct Node *loadFromFile(char *fileName)
 {
     struct Node *result = newTree();
     FILE *file = fopen(fileName, "r");
-    struct Num *num;
+    struct Num *num = NULL;
     unsigned char line[80];
     
     while((fgets(line, 80, file)) != NULL)
@@ -56,8 +57,7 @@ static void tree_destroy_and_clean(struct Node *this)
     }
 
     instances_count = instances_count - 1;
-    if(DEBUG)
-        printf("%ld instances\n", instances_count);
+    debug("%ld instances\n", instances_count);
 }
 
 static void destroyTree(struct Node *this)
@@ -77,8 +77,7 @@ static void destroyTree(struct Node *this)
     if(this)
         free(this);
     instances_count = instances_count - 1;
-    if(DEBUG)
-        printf("%ld instances\n", instances_count);
+    debug("%ld instances\n", instances_count);
 }
 
 
@@ -112,7 +111,7 @@ extern struct Node *newTree()
     result->previus = NULL;
     
     instances_count = instances_count  + 1;
-    printf("%ld instances\n", instances_count);
+    debug("%ld instances\n", instances_count);
     return result;
 }
 #endif

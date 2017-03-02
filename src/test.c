@@ -1,35 +1,41 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "minunit.h"
 #include "num.h"
+#include "csv.h"
+#include "test/test_csv.c"
 
-char * check_balls(struct Num* this);
-char * test_compare();
-char * test_init();
-char * test_all();
+void check_balls(struct Num* this);
+void test_compare();
+void test_init();
+void test_all();
 void test_reset(void);
 void test_load_string(void);
+void test_line_count(void);
+void test_strcpy();
 
 int
 main()
 {
     test_all();
+    test_summary();
     return tests_error_count != 0;
 }
 
-char *
-test_all()
+void test_all()
 {
     mu_run_test(test_init);
+    mu_run_test(test_strcpy);
     mu_run_test(test_compare);
     mu_run_test(test_reset);
     mu_run_test(test_load_string);
     mu_run_test(test_line_count);
-    return 0;
+    mu_run_test(test_csv);
+    mu_run_test(test_csv_new_num_from_string);
 }
 
-char *
-test_init() 
+void test_init() 
 {
     struct Num *num;
     num = newNum();
@@ -61,11 +67,9 @@ test_init()
     ok(num->bols[15] == 1, "16 should be 1 after first reset");
 
     num->destroy(num);
-    return 0;
 }
 
-char *
-test_compare()
+void test_compare()
 {
     struct Num *this = newNum(),
           *other = newNum();
@@ -82,11 +86,9 @@ test_compare()
 
     this->destroy(this);
     other->destroy(other);
-    return 0;
 }
 
-char *
-test_toString()
+void test_toString()
 {
     struct Num *this = newNum();
 
@@ -94,11 +96,9 @@ test_toString()
     this->toString(this, text);
 
     free(this);
-    return 0;
 }
 
-char *
-check_balls(struct Num *this)
+void check_balls(struct Num *this)
 {
     mu_assert("Ball 12 should be one  ", this->bols[11]);
     mu_assert("Ball 13 should be one  ", this->bols[12]);
@@ -108,7 +108,6 @@ check_balls(struct Num *this)
     
     ok(this->bols[16] == 0, "Ball 17 should be zero");
     ok(this->bols[17] == 0, "Ball 18 should be zero");
-    return 0;
 }
 
 void test_reset()
@@ -122,7 +121,8 @@ void test_reset()
     num->destroy(num);
 }
 
-void test_line_count() {
+void test_line_count()
+{
     struct Num *num = newNum();
     num->inc(num);
     num->reset(num);
@@ -143,12 +143,27 @@ void test_load_string()
     ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
     num->load_string(num, text);
     
-    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_load_string");
-    ok(num->bols[15] == 1, "Ball 16 should be 1 in test_load_string");
-    ok(num->bols[16] == 1, "Ball 17 should be 1 in test_load_string");
-    ok(num->bols[24] == 1, "Ball 25 should be 1 in test_load_string");
+    ok(num->bols[14] == 1, "Ball 15 should be 1 in ");
+    ok(num->bols[15] == 1, "Ball 16 should be 1 in ");
+    ok(num->bols[16] == 1, "Ball 17 should be 1 in ");
+    ok(num->bols[24] == 1, "Ball 25 should be 1 in ");
 
     num->destroy(num);
 }
 
-/* vim: set expandtab tabstop=4 :*/
+void test_strcpy()
+{
+    char dest[5];
+    char src[200];
+    src[0] = 'A';
+    src[1] = 'B';
+    src[2] = 'C';
+    src[3] = '\0';
+
+    strcpy(dest, src);
+    ok(dest[0] == 'A', "first letter");
+    ok(dest[1] == 'B', "seccond letter");
+    ok(dest[2] == 'C', "third letter");
+}
+
+/* vim: set expandtab tabstop=4 tabshift=4 :*/

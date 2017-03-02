@@ -1,3 +1,7 @@
+/* \file color.h 
+ * \brief This file was copied from GIT project.
+ *
+ */
 #ifndef COLOR_H
 #define COLOR_H
 #include <stdio.h>
