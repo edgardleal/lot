@@ -1,5 +1,5 @@
 engines:
-  eslint:
+  gnu-complexity:
     enabled: true
 exclude_paths:
 - docs/**/*
