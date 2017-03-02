@@ -1,5 +1,7 @@
 # Lot
-[![Build Status](https://travis-ci.org/edgardleal/lot.svg?branch=master)](https://travis-ci.org/edgardleal/lot)  
+[![Build Status](https://travis-ci.org/edgardleal/lot.svg?branch=master)](https://travis-ci.org/edgardleal/lot)   
+[![Code Climate](https://codeclimate.com/github/edgardleal/lot/badges/gpa.svg)](https://codeclimate.com/github/edgardleal/lot)   
+
 
 Tool for Brazilian Lottery written in Ansi C
 This application was created to help in generating all 3,268,720 of possible numbers.
