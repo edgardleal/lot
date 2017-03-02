@@ -37,6 +37,9 @@ production: setup compileProduction
 
 compile: setup compileDebug 
 
+doc:
+	doxygen .doxygen
+
 memory: compile
 	valgrind obj/debug
 
