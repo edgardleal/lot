@@ -13,7 +13,7 @@ extern struct Node *loadFromFile(char *fileName)
 {
     struct Node *result = newTree();
     FILE *file = fopen(fileName, "r");
-    struct Num *num;
+    struct Num *num = NULL;
     unsigned char line[80];
     
     while((fgets(line, 80, file)) != NULL)

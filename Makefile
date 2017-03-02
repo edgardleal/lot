@@ -10,6 +10,9 @@ DEPS=$(SRC)/csv.h $(SRC)/num.h $(SRC)/list.h $(SRC)/strbuffer.h
 
 _OBJ = num.o list.o strbuffer.o csv.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
+
+_TEST = test_csv.o
+TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 
 all: clean test compile production
