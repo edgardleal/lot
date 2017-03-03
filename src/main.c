@@ -14,12 +14,11 @@
  */
 int main(int argc, char *argv[]) 
 {
-    struct config config;
-    args_default(&config);
+    args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
 
     struct Num  *num  = newNum();
-    struct Node *tree = loadFromFile("numbers");
+    struct Node *tree = loadFromFile(config.MY_NUMBERS_FILE_NAME);
     unsigned long i = 0, equal = 0;
     tree->current->print(tree->current);
 
@@ -63,7 +62,6 @@ int main(int argc, char *argv[])
         i = i + 1;
     }
 
-    num->destroy(num);
     tree->destroyAndClean(tree);
 
     return 0;
