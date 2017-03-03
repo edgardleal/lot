@@ -1,3 +1,20 @@
+/*! \file Main
+ * =====================================================================================
+ *
+ *       Filename:  main.c
+ *
+ *    Description:  Main entry point of application
+ *
+ *        Version:  1.0
+ *        Created:  01-03-2017 18:53:17
+ *       Revision:  none
+ *       Compiler:  gcc
+ *
+ *         Author:  Edgard Leal
+ *   Organization:  
+ *
+ * =====================================================================================
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,11 +25,7 @@
 
 #define MAX_EQUAL 6
 
-
-/**
- *
- */
-int main(int argc, char *argv[]) 
+int main() 
 {
     args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
@@ -43,9 +56,6 @@ int main(int argc, char *argv[])
                 node = NULL;
             }
         }
-        /* num->print(num); 
-        equal = num->compare(num, tree->current);
-        * */
         if(maxEqual <= MAX_EQUAL) {
             if(num_line(num, 1) >= 3)
             if(num_line(num, 2) >= 3)

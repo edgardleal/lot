@@ -1,3 +1,5 @@
 tags
 obj/
 *.swp
+doc/doxygen_sqlite3.db
+doc/latex

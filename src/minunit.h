@@ -11,10 +11,12 @@
 
 #define assertok(test, message, var) do { char *text; sprintf(text, message, var); ok(test, text);} while (0)
 
-#define mu_run_test(test) do {test();} while (0)
- extern int tests_run;
- extern int tests_error_count;
+#define mu_run_test(test) do {test_module(#test); test();} while (0)
+extern int tests_run;
+extern int tests_error_count;
 
- extern void print_test(int result, char * test);
+extern void print_test(int result, char * test);
+extern void test_module(char *module);
+extern void test_summary();
 
 #endif
