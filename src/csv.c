@@ -15,9 +15,7 @@ extern void split_csv(char *line, char **result)
     for(i = 0; i <= strlen(line); i++){
         if(line[i] == ',' || line[i] == '\0')
         {
-            result[columnCount][0] = buffer[0];
-            result[columnCount][1] = buffer[1];
-            result[columnCount][2] = buffer[2];
+            strcpy(result[columnCount], buffer);
             columnCount = columnCount + 1;
             buffer[0] = '\0';
             j = 0;
@@ -69,7 +67,7 @@ extern void csv_load_from_file(char *file_name, struct Node *node)
     fclose(file);
 }
 
-/*!
+/*! \fn
  * Setup each column string with an empty String with 4 blocks
  *
  */

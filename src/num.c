@@ -48,65 +48,6 @@ static void num_load_string(struct Num *this, char *text)
         this->bols[atoi(tmp) - 1] = 1;
 }
 
-static struct Node * num_load_file(struct Num *this, char *file_name)
-{
-    char c, 
-         in_comment_line = 0, 
-         is_new_line = 1,
-         last_char = 0,
-         number_parts[3]; /* last is \0 */
-    struct Node *result = newTree();
-    FILE *file = fopen(file_name, "r");
-
-    while((c = fgetc(file)) != EOF)
-    {
-        if(!in_comment_line)
-        {
-            if(c == ' ') /* process number */
-            {
-                /**
-                 * TODO: finalize this implementation 
-                 */
-                if(number_parts[0] != '\0')
-                {
-                    number_parts[1] = last_char;
-                    number_parts[2] = '\0';
-                } else {
-                    number_parts[0] = last_char;
-                    number_parts[1] = '\0';
-                }
-
-                /*
-                 *
-                 * TODO: Add to bols 
-                 */
-
-                number_parts[0] = '\0';
-            } else {
-
-            }
-
-        }
-        if(is_new_line)
-        {
-            if(c == '*')
-            {
-                in_comment_line = 1;
-            }
-            is_new_line = 0;
-        } else {
-            if(c == '\n')
-            {
-                in_comment_line = 0;
-                is_new_line = 1;
-            }
-        } /* new line */
-        last_char = c;
-    }
-
-    fclose(file);
-    return result;
-}
 
 static void num_write_file(struct Num *this, char *fileName)
 {
@@ -143,9 +84,8 @@ extern struct Num * num_clone(struct Num *this)
     return result;
 }
 
-/**
+/** \fn
  * Returns the number of bols closed to the end ( 25 )
- *
  *
  */
 static int bols_in_the_end(struct Num* this)
@@ -175,7 +115,7 @@ static void inc_next_filled(struct Num *this, unsigned int start)
     }
 }
 
-/*
+/** \fn
  * Steps: 
  *
  * 1 - if last number isnt filled                   | Done  
@@ -284,9 +224,9 @@ extern void num_destroy(struct Num *this)
       free(this);
 }
 
-/**
- * Return the amount of numbers are equals in both numbers.
- *
+/** \fn
+ * Return the amount of numbers are equals in both numbers.  
+ * 
  */
 static int num_compare(struct Num *this, struct Num *other)
 {
