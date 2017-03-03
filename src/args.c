@@ -23,7 +23,8 @@ extern void args_default()
     config.LINE5 = 0;
     config.DEBUG = 0;
     config.LIMIT = MAX_NUMBER;
-    config.MY_NUMBERS_FILE_NAME = NULL;
+    config.MY_NUMBERS_FILE_NAME = "~/.lot/mynumbers";
+    mkdir("~/.lot", 0775);
     config.OUTPUT_FORMAT = "g";
     IS_DEBUG = 0;
 }
