@@ -341,7 +341,7 @@ static void num_toString(struct Num *this, char* text)
 
 extern void num_destroy(struct Num *this)
 {
-    debug("Destroing the number id: %d\n", this->id);
+    debug("Destroing the number id: %ld\n", this->id);
     if(this)
       free(this);
 }

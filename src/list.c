@@ -26,7 +26,9 @@ extern struct Node *loadFromFile(char *fileName)
         result->add(result, num);
     }
 
+    /* This object ( num ) will be freed in list 
     free(num);
+     */
     fclose(file);
     return result;
 }
