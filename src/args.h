@@ -25,6 +25,11 @@ static char description[] = "Lotofacil in C";
 static struct argp_option options[] = {
     {"debug", 'd', 0, 0, "Execute in debug mode"},
     {"limit", 'l', "limit", 0, "Define the max numbers generated"},
+    {"my", 'm', "myNumbers", 0, "The file path to your saved numbers in csv format"},
+    {"format", 'f', "format", 0, "Output format, should be b for binary, g for geometric and l for inline"},
+    {"llimit", 'n', "lineLimit", 0, "This is the limit of numbers by line in geometric form"},
+    {"similarity", 's', "similarity", 0, "How many the numbers has similarities, how they are equals."},
+    {"report", 'r', 0, 0, "Print a analitics report over the results dataset."},
     {0}
 };
 int IS_DEBUG;
@@ -36,17 +41,24 @@ extern struct config {
     int LINE4;
     int LINE5;
     int DEBUG;
+    int LINE_LIMIT;
+    int SIMILARITY;
+    char *MY_NUMBERS_FILE_NAME;
+    char *OUTPUT_FORMAT;
     long LIMIT;
 };
 
+extern struct config config;
+
 extern error_t 
 parse_opt(int, char *, struct argp_state*);
-extern void args_default(struct config*);
+extern void args_default(void);
 
 static struct argp argp = { 
     options, 
     parse_opt, 
     args_doc, 
-    description, 0, 0, 0 };
+    description, 0, 0, 0 
+};
 
 #endif

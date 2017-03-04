@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Lot: src/list.h File Reference</title>
+<title>Lot: StrBuffer Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -37,8 +37,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
-      <li class="current"><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -59,8 +59,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   </div>
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
-      <li><a href="files.html"><span>File&#160;List</span></a></li>
-      <li><a href="globals.html"><span>Globals</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
+      <li><a href="classes.html"><span>Data&#160;Structure&#160;Index</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -77,58 +77,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Data Structures</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">list.h File Reference</div>  </div>
+<div class="title">StrBuffer Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>Implements a linked list of <a class="el" href="structNum.html">Num</a>.  
-<a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;num.h&quot;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for list.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="list_8h__incl.png" border="0" usemap="#src_2list_8h" alt=""/></div>
-<map name="src_2list_8h" id="src_2list_8h">
-<area shape="rect" id="node2" href="num_8h_source.html" title="num.h" alt="" coords="12,80,71,107"/></map>
-</div>
-</div>
-<p><a href="list_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNode.html">Node</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a53a5ab9319b544637cbdd4f0682daffd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53a5ab9319b544637cbdd4f0682daffd"></a>
-struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>newTree</b> ()</td></tr>
-<tr class="separator:a53a5ab9319b544637cbdd4f0682daffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a085f55fa9398b0f52d0fc46728b362f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a085f55fa9398b0f52d0fc46728b362f1"></a>
-struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>loadFromFile</b> (char *)</td></tr>
-<tr class="separator:a085f55fa9398b0f52d0fc46728b362f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a1d4142681b46b5b2d50543b65de1c1f4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d4142681b46b5b2d50543b65de1c1f4"></a>
+char&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> [255]</td></tr>
+<tr class="separator:a1d4142681b46b5b2d50543b65de1c1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f8a295e4e96391578561f8ab9dfda88"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f8a295e4e96391578561f8ab9dfda88"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>cat</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *, char)</td></tr>
+<tr class="separator:a2f8a295e4e96391578561f8ab9dfda88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a025341ab8b67a237b3102b6c9b19771d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a025341ab8b67a237b3102b6c9b19771d"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>strcat</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *, char *)</td></tr>
+<tr class="separator:a025341ab8b67a237b3102b6c9b19771d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a130f4d5731c0e50cdf7b635ef66021db"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a130f4d5731c0e50cdf7b635ef66021db"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *)</td></tr>
+<tr class="separator:a130f4d5731c0e50cdf7b635ef66021db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae727a3018476c574981e72db0051435b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae727a3018476c574981e72db0051435b"></a>
+int(*&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *)</td></tr>
+<tr class="separator:ae727a3018476c574981e72db0051435b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implements a linked list of <a class="el" href="structNum.html">Num</a>. </p>
-<p>===================================================================================== </p><pre class="fragment">  Filename:  list.h
-</pre><p> Description: Implements a linked list of structs <a class="el" href="structNum.html">Num</a> </p><pre class="fragment">Version:  1.0
-Created:  01-03-2017 18:53:17
-</pre><p> Revision: none Compiler: gcc</p>
-<p>Author: Edgard Leal <a href="#" onclick="location.href='mai'+'lto:'+'edg'+'ar'+'dle'+'al'+'@gm'+'ai'+'l.c'+'om'; return false;">edgar<span style="display: none;">.nosp@m.</span>dlea<span style="display: none;">.nosp@m.</span>l@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> Organization: </p><hr/>
-</div></div><!-- contents -->
+<hr/>The documentation for this struct was generated from the following file:<ul>
+<li>src/<a class="el" href="strbuffer_8h_source.html">strbuffer.h</a></li>
+</ul>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 1 2017 20:11:47 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 4 2017 20:06:16 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

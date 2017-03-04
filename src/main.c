@@ -23,16 +23,13 @@
 #include "list.h"
 #include "args.h"
 
-#define MAX_EQUAL 6
-
-int main() 
+int main(int argc, char argv[]) 
 {
-    struct config config;
-    args_default(&config);
+    args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
 
     struct Num  *num  = newNum();
-    struct Node *tree = loadFromFile("numbers");
+    struct Node *tree = loadFromFile(config.MY_NUMBERS_FILE_NAME);
     unsigned long i = 0, equal = 0;
     tree->current->print(tree->current);
 
@@ -57,12 +54,12 @@ int main()
                 node = NULL;
             }
         }
-        if(maxEqual <= MAX_EQUAL) {
-            if(num_line(num, 1) >= 3)
-            if(num_line(num, 2) >= 3)
-            if(num_line(num, 3) >= 3)
-            if(num_line(num, 4) >= 3)
-            if(num_line(num, 5) >= 3)
+        if(maxEqual <= config.SIMILARITY) {
+            if(num_line(num, 1) >= config.LINE_LIMIT)
+            if(num_line(num, 2) >= config.LINE_LIMIT)
+            if(num_line(num, 3) >= config.LINE_LIMIT)
+            if(num_line(num, 4) >= config.LINE_LIMIT)
+            if(num_line(num, 5) >= config.LINE_LIMIT)
             {
                 debug("# Equal: %d\n", maxEqual);
                 num->print(num);
@@ -73,7 +70,6 @@ int main()
         i = i + 1;
     }
 
-    num->destroy(num);
     tree->destroyAndClean(tree);
 
     return 0;

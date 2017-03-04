@@ -35,6 +35,8 @@ compileProduction: $(OBJ) $(OUTDIR)/main.o
 
 production: setup compileProduction
 
+install: production
+
 compile: setup compileDebug 
 
 doc:

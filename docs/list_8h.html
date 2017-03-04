@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.8"/>
-<title>Lot: src/csv.h File Reference</title>
+<title>Lot: src/list.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -84,77 +84,51 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">csv.h File Reference</div>  </div>
+<div class="title">list.h File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Load contents to csv files.  
+<p>Implements a linked list of <a class="el" href="structNum.html">Num</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
+<div class="textblock"><code>#include &quot;num.h&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for csv.h:</div>
+Include dependency graph for list.h:</div>
 <div class="dyncontent">
-<div class="center"><img src="csv_8h__incl.png" border="0" usemap="#src_2csv_8h" alt=""/></div>
+<div class="center"><img src="list_8h__incl.png" border="0" usemap="#src_2list_8h" alt=""/></div>
+<map name="src_2list_8h" id="src_2list_8h">
+<area shape="rect" id="node2" href="num_8h_source.html" title="num.h" alt="" coords="12,80,71,107"/></map>
 </div>
 </div>
-<p><a href="csv_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="list_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structNode.html">Node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2f1f92faa7f156bca530c80755148af3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f1f92faa7f156bca530c80755148af3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>split_csv</b> (char *, char **)</td></tr>
-<tr class="separator:a2f1f92faa7f156bca530c80755148af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adab19be41073608c3063ce0bd3901d40"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="csv_8h.html#adab19be41073608c3063ce0bd3901d40">csv_start_columns</a> (char **, int)</td></tr>
-<tr class="separator:adab19be41073608c3063ce0bd3901d40"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42ae68308c6cb4d203d2214698ff1c97"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42ae68308c6cb4d203d2214698ff1c97"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>csv_load_from_file</b> (char *, struct <a class="el" href="structNode.html">Node</a> *)</td></tr>
-<tr class="separator:a42ae68308c6cb4d203d2214698ff1c97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a82da0447821d9478cc7be555394aafb2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82da0447821d9478cc7be555394aafb2"></a>
-struct <a class="el" href="structNum.html">Num</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>csv_new_num_from_string</b> (char *)</td></tr>
-<tr class="separator:a82da0447821d9478cc7be555394aafb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a5ab9319b544637cbdd4f0682daffd"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a53a5ab9319b544637cbdd4f0682daffd"></a>
+struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>newTree</b> ()</td></tr>
+<tr class="separator:a53a5ab9319b544637cbdd4f0682daffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a085f55fa9398b0f52d0fc46728b362f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a085f55fa9398b0f52d0fc46728b362f1"></a>
+struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>loadFromFile</b> (char *)</td></tr>
+<tr class="separator:a085f55fa9398b0f52d0fc46728b362f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Load contents to csv files. </p>
-<p>===================================================================================== </p><pre class="fragment">  Filename:  csv.h
-</pre><p> Description: Define functions for csv file proccess </p><pre class="fragment">Version:  1.0
+<div class="textblock"><p>Implements a linked list of <a class="el" href="structNum.html">Num</a>. </p>
+<p>===================================================================================== </p><pre class="fragment">  Filename:  list.h
+</pre><p> Description: Implements a linked list of structs <a class="el" href="structNum.html">Num</a> </p><pre class="fragment">Version:  1.0
 Created:  01-03-2017 18:53:17
 </pre><p> Revision: none Compiler: gcc</p>
-<p>Author: Edgard Leal Organization: </p><hr/>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="adab19be41073608c3063ce0bd3901d40"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void csv_start_columns </td>
-          <td>(</td>
-          <td class="paramtype">char **&#160;</td>
-          <td class="paramname"><em>columns</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>Setup each column string with an empty String with 4 blocks </p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p>Author: Edgard Leal <a href="#" onclick="location.href='mai'+'lto:'+'edg'+'ar'+'dle'+'al'+'@gm'+'ai'+'l.c'+'om'; return false;">edgar<span style="display: none;">.nosp@m.</span>dlea<span style="display: none;">.nosp@m.</span>l@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> Organization: </p><hr/>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 1 2017 20:11:47 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat Mar 4 2017 20:06:16 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>
