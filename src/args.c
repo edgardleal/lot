@@ -23,7 +23,9 @@ extern void args_default()
     config.LINE5 = 0;
     config.DEBUG = 0;
     config.LIMIT = MAX_NUMBER;
+    config.LINE_LIMIT = 4;
     config.MY_NUMBERS_FILE_NAME = "~/.lot/mynumbers";
+    config.SIMILARITY = 8;
     mkdir("~/.lot", 0775);
     config.OUTPUT_FORMAT = "g";
     IS_DEBUG = 0;
@@ -53,6 +55,14 @@ parse_opt(int key, char *arg, struct argp_state *state)
         case 'f':
             config.OUTPUT_FORMAT = arg;
             debug("Defining output format to: [%s]\n", arg);
+            break;
+        case 'n':
+            config.LINE_LIMIT = atoi(arg);
+            debug("Defining line limit to: [%s]\n", arg);
+            break;
+        case 's':
+            config.SIMILARITY = atoi(arg);
+            debug("Defining similarity to: [%s]\n", arg);
             break;
         case ARGP_KEY_ARG: return 0;
         default: return ARGP_ERR_UNKNOWN;
