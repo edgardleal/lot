@@ -1,13 +1,19 @@
 engines:
   gnu-complexity:
     enabled: true
+    config:
+      threshold: 100
+  markdownlint:
+    enabled: true
   duplication:
         enabled: true
     config:
         languages:
         - c
+exclude_paths:
+- docs/**/*
+
 ratings:
   paths:
-  - src/**
-exclude_paths:
-- docs/**
+  - "**.md"
+  - "./src/**/*"
