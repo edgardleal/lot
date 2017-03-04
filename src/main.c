@@ -25,7 +25,7 @@
 
 #define MAX_EQUAL 6
 
-int main() 
+int main(int argc, char argv[]) 
 {
     args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
