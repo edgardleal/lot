@@ -23,9 +23,7 @@
 #include "list.h"
 #include "args.h"
 
-#define MAX_EQUAL 6
-
-int main() 
+int main(int argc, char argv[]) 
 {
     args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
@@ -56,12 +54,12 @@ int main()
                 node = NULL;
             }
         }
-        if(maxEqual <= MAX_EQUAL) {
-            if(num_line(num, 1) >= 3)
-            if(num_line(num, 2) >= 3)
-            if(num_line(num, 3) >= 3)
-            if(num_line(num, 4) >= 3)
-            if(num_line(num, 5) >= 3)
+        if(maxEqual <= config.SIMILARITY) {
+            if(num_line(num, 1) >= config.LINE_LIMIT)
+            if(num_line(num, 2) >= config.LINE_LIMIT)
+            if(num_line(num, 3) >= config.LINE_LIMIT)
+            if(num_line(num, 4) >= config.LINE_LIMIT)
+            if(num_line(num, 5) >= config.LINE_LIMIT)
             {
                 debug("# Equal: %d\n", maxEqual);
                 num->print(num);
