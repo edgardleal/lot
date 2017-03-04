@@ -114,7 +114,7 @@ static void num_write_file(struct Num *this, char *fileName)
 
     if(!fp)
     {
-        printf("Canot open the file [%s]", fileName);
+        die("Canot open the file [%s]", fileName);
         return;
     } else {
 				char *out;
@@ -233,8 +233,8 @@ static void num_print(struct Num *this)
     text[0] = '\0';
 
     num_toString(this, text);
-    printf("%s", text);
-    printf("***************\n");
+    out("%s", text);
+    debug("***************\n");
 }
 
 static char* iff(int condition, char* iftrue, char* iffalse)
@@ -341,7 +341,7 @@ static void num_toString(struct Num *this, char* text)
 
 extern void num_destroy(struct Num *this)
 {
-    debug("Destroing the number id: %d\n", this->id);
+    debug("Destroing the number id: %ld\n", this->id);
     if(this)
       free(this);
 }
@@ -355,7 +355,7 @@ static int num_compare(struct Num *this, struct Num *other)
     int i, result = 0;
     for(i = 0; i < 25; i = i + 1)
     {
-        if(this->bols[i] && other->bols[i])
+        if(this->bols[i] == 1 && other->bols[i] == 1)
         {
             result = result + 1;
         }
