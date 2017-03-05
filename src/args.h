@@ -1,7 +1,5 @@
-/*
- * =====================================================================================
- *
- *       Filename:  args.h
+/** \file args.h
+ *  \brief Parse and manager configurations 
  *
  *    Description:  Parser and manager arguments passed for an application
  *
@@ -13,7 +11,6 @@
  *         Author:  Edgard Leal (), 
  *   Organization:  
  *
- * =====================================================================================
  */
 #ifndef ARGS_H
 #define ARGS_H
@@ -37,6 +34,9 @@ static struct argp_option options[] = {
 };
 int IS_DEBUG;
 
+/** \struct config
+ * Store configuration for an execution.
+ */
 extern struct config {
     int LINE1;
     int LINE2;

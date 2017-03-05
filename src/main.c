@@ -1,7 +1,5 @@
-/*! \file Main
- * =====================================================================================
- *
- *       Filename:  main.c
+/** \file main.c
+ *  \brief Main entry point for application
  *
  *    Description:  Main entry point of application
  *
@@ -13,12 +11,12 @@
  *         Author:  Edgard Leal
  *   Organization:  
  *
- * =====================================================================================
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <argp.h>
+#include "report.h"
 #include "num.h"
 #include "list.h"
 #include "args.h"
@@ -53,8 +51,13 @@ int main(int argc, char **argv)
 void print_report()
 {
     struct Node *result = newTree();
+    struct MostUsed *data = newMostUsed();
     csv_load_from_file(config.RESULT_PATH, result);
 
+    fill_most_used(result, data);
+    print_most_used(data);
+
+    free(data);
     result->destroyAndClean(result);
 }
 

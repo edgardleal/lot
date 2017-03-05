@@ -6,12 +6,12 @@ IDIR=
 CFLAGS=-ansi
 
 
-_DEPS= csv.h args.h num.h list.h strbuffer.h
+_DEPS= report.h csv.h args.h num.h list.h strbuffer.h
 DEPS=$(patsubst %,$(SRC)/%,$(_DEPS))
-_OBJ = args.o num.o list.o strbuffer.o csv.o
+_OBJ = args.o num.o list.o strbuffer.o csv.o report.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
 
-_TEST = test_csv.o
+_TEST = test_csv.o test_report.o
 TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 

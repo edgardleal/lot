@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['strbuffer',['StrBuffer',['../structStrBuffer.html',1,'']]]
+  ['node',['Node',['../structNode.html',1,'']]],
+  ['num',['Num',['../structNum.html',1,'']]]
 ];
