@@ -1,19 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "test.h"
 #include "minunit.h"
 #include "num.h"
 #include "csv.h"
 #include "test/test_csv.c"
-
-void check_balls(struct Num* this);
-void test_compare();
-void test_init();
-void test_all();
-void test_reset(void);
-void test_load_string(void);
-void test_line_count(void);
-void test_strcpy();
+#include "test/test_report.c"
 
 int
 main()
@@ -33,6 +26,7 @@ void test_all()
     mu_run_test(test_line_count);
     mu_run_test(test_csv);
     mu_run_test(test_csv_new_num_from_string);
+    mu_run_test(test_color_scale);
 }
 
 void test_init() 

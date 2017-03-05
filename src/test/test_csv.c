@@ -5,6 +5,8 @@
  * @author Edgard Leal <edgardleal@gmail.com> 
  *
  **/
+#ifndef TEST_CSV_C
+#define TEST_CSV_C
 #include "../minunit.h"
 
 extern void test_csv(void);
@@ -22,7 +24,7 @@ extern void test_csv(void)
     csv_start_columns(columns, 20);
     ok(1, "Started");
 
-    split_csv(line, columns);
+    split_csv(line, columns, 20);
     ok(columns[0][0] == '1', "start");
     ok(columns[1][0] == '2', "second char equal 2");
     ok(columns[2][0] == '3', "third char equal 3");
@@ -39,4 +41,6 @@ extern void test_csv_new_num_from_string(void)
 
     free(result);
 }
+
+#endif
 /* vim: set expandtab tabstop=4 shiftwidth=4 :*/

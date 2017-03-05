@@ -114,7 +114,7 @@ static void num_write_file(struct Num *this, char *fileName)
 
     if(!fp)
     {
-        printf("Canot open the file [%s]", fileName);
+        die("Canot open the file [%s]", fileName);
         return;
     } else {
 				char *out;
@@ -233,8 +233,8 @@ static void num_print(struct Num *this)
     text[0] = '\0';
 
     num_toString(this, text);
-    printf("%s", text);
-    printf("***************\n");
+    out("%s", text);
+    debug("***************\n");
 }
 
 static char* iff(int condition, char* iftrue, char* iffalse)
@@ -249,37 +249,99 @@ static char* iff(int condition, char* iftrue, char* iffalse)
 static void num_toString(struct Num *this, char* text)
 {
     text[0] = '\0';
-    sprintf(text, "%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n",
-            iff(this->bols[0], " 1", "  "),
-            iff(this->bols[1], " 2", "  "),
-            iff(this->bols[2], " 3", "  "),
-            iff(this->bols[3], " 4", "  "),
-            iff(this->bols[4], " 5", "  "),
-            iff(this->bols[5], " 6", "  "),
-            iff(this->bols[6], " 7", "  "),
-            iff(this->bols[7], " 8", "  "),
-            iff(this->bols[8], " 9", "  "),
-            iff(this->bols[9], "10", "  "),
-            iff(this->bols[10],"11", "  "),
-            iff(this->bols[11],"12", "  "),
-            iff(this->bols[12],"13", "  "),
-            iff(this->bols[13],"14", "  "),
-            iff(this->bols[14],"15", "  "),
-            iff(this->bols[15],"16", "  "),
-            iff(this->bols[16],"17", "  "),
-            iff(this->bols[17],"18", "  "),
-            iff(this->bols[18],"19", "  "),
-            iff(this->bols[19],"20", "  "),
-            iff(this->bols[20],"21", "  "),
-            iff(this->bols[21],"22", "  "),
-            iff(this->bols[22],"23", "  "),
-            iff(this->bols[23],"24", "  "),
-            iff(this->bols[24],"25", "  ")
-    );
+    if(config.OUTPUT_FORMAT[0] == 'g')
+    {
+        sprintf(text, "%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n",
+                iff(this->bols[0], " 1", "  "),
+                iff(this->bols[1], " 2", "  "),
+                iff(this->bols[2], " 3", "  "),
+                iff(this->bols[3], " 4", "  "),
+                iff(this->bols[4], " 5", "  "),
+                iff(this->bols[5], " 6", "  "),
+                iff(this->bols[6], " 7", "  "),
+                iff(this->bols[7], " 8", "  "),
+                iff(this->bols[8], " 9", "  "),
+                iff(this->bols[9], "10", "  "),
+                iff(this->bols[10],"11", "  "),
+                iff(this->bols[11],"12", "  "),
+                iff(this->bols[12],"13", "  "),
+                iff(this->bols[13],"14", "  "),
+                iff(this->bols[14],"15", "  "),
+                iff(this->bols[15],"16", "  "),
+                iff(this->bols[16],"17", "  "),
+                iff(this->bols[17],"18", "  "),
+                iff(this->bols[18],"19", "  "),
+                iff(this->bols[19],"20", "  "),
+                iff(this->bols[20],"21", "  "),
+                iff(this->bols[21],"22", "  "),
+                iff(this->bols[22],"23", "  "),
+                iff(this->bols[23],"24", "  "),
+                iff(this->bols[24],"25", "  ")
+        );
+    } else 
+    if(config.OUTPUT_FORMAT[0] == 'b')
+    {
+        sprintf(text, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",
+                this->bols[0],
+                this->bols[1],
+                this->bols[2],
+                this->bols[3],
+                this->bols[4],
+                this->bols[5],
+                this->bols[6],
+                this->bols[7],
+                this->bols[8],
+                this->bols[9],
+                this->bols[10],
+                this->bols[11],
+                this->bols[12],
+                this->bols[13],
+                this->bols[14],
+                this->bols[15],
+                this->bols[16],
+                this->bols[17],
+                this->bols[18],
+                this->bols[19],
+                this->bols[20],
+                this->bols[21],
+                this->bols[22],
+                this->bols[23],
+                this->bols[24]);
+    } else {
+       sprintf(text, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
+                iff(this->bols[0], "  1", ""),
+                iff(this->bols[1], "  2", ""),
+                iff(this->bols[2], "  3", ""),
+                iff(this->bols[3], "  4", ""),
+                iff(this->bols[4], "  5", ""),
+                iff(this->bols[5], "  6", ""),
+                iff(this->bols[6], "  7", ""),
+                iff(this->bols[7], "  8", ""),
+                iff(this->bols[8], "  9", ""),
+                iff(this->bols[9], " 10", ""),
+                iff(this->bols[10]," 11", ""),
+                iff(this->bols[11]," 12", ""),
+                iff(this->bols[12]," 13", ""),
+                iff(this->bols[13]," 14", ""),
+                iff(this->bols[14]," 15", ""),
+                iff(this->bols[15]," 16", ""),
+                iff(this->bols[16]," 17", ""),
+                iff(this->bols[17]," 18", ""),
+                iff(this->bols[18]," 19", ""),
+                iff(this->bols[19]," 20", ""),
+                iff(this->bols[20]," 21", ""),
+                iff(this->bols[21]," 22", ""),
+                iff(this->bols[22]," 23", ""),
+                iff(this->bols[23]," 24", ""),
+                iff(this->bols[24]," 25", "")
+        );
+ 
+    }
 }
 
 extern void num_destroy(struct Num *this)
 {
+    debug("Destroing the number id: %ld\n", this->id);
     if(this)
       free(this);
 }
@@ -293,7 +355,7 @@ static int num_compare(struct Num *this, struct Num *other)
     int i, result = 0;
     for(i = 0; i < 25; i = i + 1)
     {
-        if(this->bols[i] && other->bols[i])
+        if(this->bols[i] == 1 && other->bols[i] == 1)
         {
             result = result + 1;
         }
