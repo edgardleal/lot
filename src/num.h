@@ -1,7 +1,17 @@
+/** \file num.h
+ *  \brief This file represents a combination of numbers 
+ *
+ *  Represents a uniq combination of number an your funcionalities.
+ */
 #ifndef NUM_H
 #define NUM_H
 #define MAX_NUMBER 3268720
 
+/** \struct Num
+ *  \brief A combination of numbers 
+ *
+ *  This represents a combination of number for Lotofacil.
+ */
 struct Num {
     long id;
     int bols[25];

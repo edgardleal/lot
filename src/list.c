@@ -8,7 +8,6 @@
 #include "strbuffer.h"
 
 static long instances_count = 0;
-static unsigned char DEBUG = 1;
 
 extern struct Node *loadFromFile(char *fileName)
 {
@@ -27,7 +26,9 @@ extern struct Node *loadFromFile(char *fileName)
         result->add(result, num);
     }
 
+    /* This object ( num ) will be freed in list 
     free(num);
+     */
     fclose(file);
     return result;
 }
@@ -38,12 +39,14 @@ static void tree_destroy_and_clean(struct Node *this)
     {
         this->next->previus = NULL;
         tree_destroy_and_clean(this->next);
+        this->next = NULL;
     }
 
     if(this->previus != NULL) 
     {
         this->previus->next = NULL;
         tree_destroy_and_clean(this->previus);
+        this->previus = NULL;
     }
 
     if(this)
