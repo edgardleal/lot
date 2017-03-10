@@ -19,24 +19,34 @@
 #include "../report.h"
 #include "../minunit.h"
 void test_color_scale(void);
+char *get_ratio(void);
+int min, max, value;
+char *result;
+
+char *get_ratio()
+{
+    result = color_for_ratio(min, max, value);
+    return result;
+}
 
 void test_color_scale(void)
 {
-    char *result = color_for_ratio(0, 25, 0);
-    ok(strcmp(GIT_COLOR_BOLD_BLUE, result) == 0, "GIT_COLOR_BOLD_BLUE"); 
 
-    result = color_for_ratio(0, 25, 3);
-    ok(strcmp(GIT_COLOR_BLUE, result) == 0, "GIT_COLOR_BLUE"); 
+    ok(1, "%sGIT_COLOR_BOLD_BLUE%s",  GIT_COLOR_BOLD_BLUE, GIT_COLOR_RESET);
+    ok(1, "%sGIT_COLOR_BLUE%s",       GIT_COLOR_BLUE, GIT_COLOR_RESET);
+    ok(1, "%sGIT_COLOR_BOLD_GREEN%s", GIT_COLOR_BOLD_GREEN, GIT_COLOR_RESET);
+    ok(1, "%sGIT_COLOR_GREEN%s",      GIT_COLOR_GREEN, GIT_COLOR_RESET);
+    ok(1, "%sGIT_COLOR_BOLD_YELLOW%s",GIT_COLOR_BOLD_YELLOW, GIT_COLOR_RESET);
 
-    result = color_for_ratio(0, 25, 5);
-    ok(strcmp(GIT_COLOR_BOLD_GREEN, result) == 0, "GIT_COLOR_BOLD_GREEN"); 
+    min = 0;
+    max = 25;
+    value = 0;
+    ok(strcmp(GIT_COLOR_BOLD_BLUE, get_ratio()) == 0, "Value = 0 %sGIT_COLOR_BOLD_BLUE%s", result, GIT_COLOR_RESET); 
 
-    result = color_for_ratio(0, 25, 8);
-    ok(strcmp(GIT_COLOR_GREEN, result) == 0, "GIT_COLOR_GREEN"); 
-
-    result = color_for_ratio(10, 15, 10);
-    ok(strcmp(GIT_COLOR_BOLD_BLUE, result) == 0, "%sGIT_COLOR_BOLD_BLUE%s", result, GIT_COLOR_RESET); 
-
+    min   = 10;
+    max   = 15;
+    value = 10;
+    ok(strcmp(GIT_COLOR_BOLD_BLUE, get_ratio()) == 0, "%sGIT_COLOR_BOLD_BLUE%s", get_ratio(), GIT_COLOR_RESET); 
 }
 #endif
 /* vim: set expandtab tabstop=4 shiftwidth=4 :*/
