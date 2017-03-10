@@ -3,13 +3,14 @@ CC=gcc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
-CFLAGS=-ansi
+CFLAGS=-ansi -lm
 
 
 _DEPS= report.h csv.h args.h num.h list.h strbuffer.h
-DEPS=$(patsubst %,$(SRC)/%,$(_DEPS))
+DEPS=$(patsubst %,$(SRC)/%,$(_DEPS)) ./genann/genann.h
+
 _OBJ = args.o num.o list.o strbuffer.o csv.o report.o
-OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ))
+OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
 _TEST = test_csv.o test_report.o
 TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))

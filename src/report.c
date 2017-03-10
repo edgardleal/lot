@@ -58,6 +58,7 @@ extern struct MostUsed *newMostUsed()
 
 char *color_for_ratio(int min, int max, int value)
 {
+    IS_DEBUG = 1;
     if(value <= min)
         return COLOR_SCALE[0];
     int v = max - min;
