@@ -15,8 +15,6 @@
 #ifndef ARGS_H
 #define ARGS_H
 #include <argp.h>
-#define out(text, args...) do { printf(text, ##args); } while(0)
-#define debug(text, args...) do { if(IS_DEBUG) out(text, ##args); } while(0)
 
 static char args_doc[] = "none";
 static char description[] = "Lotofacil in C";
@@ -36,7 +34,6 @@ static struct argp_option options[] = {
     {"similarity", 's', "similarity", 0, "How many the numbers has similarities, how they are equals."},
     {0}
 };
-int IS_DEBUG;
 
 /** \struct
  * Store the defaults options and modified option by command line arguments passed by the user.

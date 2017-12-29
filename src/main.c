@@ -17,6 +17,7 @@
 #include <argp.h>
 #include "report.h"
 #include "args.h"
+#include "app.h"
 #include "csv.h"
 
 void generate_numbers(void);
@@ -57,6 +58,11 @@ void print_report()
 
     free(data);
     result->destroyAndClean(result);
+}
+
+void simulation()
+{
+
 }
 
 /** \fn 

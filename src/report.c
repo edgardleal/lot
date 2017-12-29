@@ -2,7 +2,7 @@
 #define REPORT_C
 #include <stdlib.h>
 #include "report.h"
-#include "args.h"
+#include "app.h"
 #define max(a, b) a>b?a:b;
 
 char *COLOR_SCALE[10] = {
@@ -57,6 +57,7 @@ extern struct MostUsed *newMostUsed()
 
 char *color_for_ratio(int min, int max, int value)
 {
+    // TODO: review
     if(value <= min)
         return COLOR_SCALE[0];
     int v = max - min;
@@ -90,7 +91,11 @@ void print_most_used(struct MostUsed *data)
                 GIT_COLOR_RESET, 
                 space);
     }
-    out("\n");
+    out("\n----------------------------------------\n");
+    for (i = 0; i < 25; i++) {
+        out("%s%d - %d\n", i  < 9 ? "0" : "", i + 1, data->balls[i]);
+    }
+    out("\n----------------------------------------\n");
 }
 #endif
 /* vim: set expandtab tabstop=4 shiftwidth=4 :*/

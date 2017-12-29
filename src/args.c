@@ -14,6 +14,7 @@
 #include <sys/stat.h>
 #include "args.h"
 #include "num.h"
+#include "app.h"
 
 struct config config;
 extern void args_default()
