@@ -71,7 +71,7 @@ extern struct Num * csv_new_num_from_string(char *string)
 
     int i;
     for (i = 0; i < 15; i++) {
-        result->bols[atoi(columns[i + 3]) - 1] = 1;
+        result->balls[atoi(columns[i + 3]) - 1] = 1;
         free(columns[i + 3]);
     }
     for (i = 18; i < 30; i++) {

@@ -14,13 +14,13 @@ static void inc_next_filled(struct Num *this, unsigned int start);
 static void num_load_string(struct Num *this, char *text)
 {
     int i = 0;
-    int size = strlen(text);
+    size_t size = strlen(text);
     char tmp[3];
 
     tmp[0] = '\0';
     for(i = 0; i < 24; i = i + 1)
     {
-        this->bols[i] = 0;
+        this->balls[i] = 0;
     }
 
     for(i = 0; i < size; i = i + 1)
@@ -39,13 +39,13 @@ static void num_load_string(struct Num *this, char *text)
         }
         else if(tmp[0] != '\0') /* if string tmp is not empty */
         {
-            this->bols[atoi(tmp) - 1] = 1;
+            this->balls[atoi(tmp) - 1] = 1;
             tmp[0] = '\0';
         }
 
     }
     if(tmp[0] != '\0')
-        this->bols[atoi(tmp) - 1] = 1;
+        this->balls[atoi(tmp) - 1] = 1;
 }
 
 static struct Node * num_load_file(struct Num *this, char *file_name)
@@ -78,7 +78,7 @@ static struct Node * num_load_file(struct Num *this, char *file_name)
 
                 /*
                  *
-                 * TODO: Add to bols 
+                 * TODO: Add to balls
                  */
 
                 number_parts[0] = '\0';
@@ -126,9 +126,9 @@ static void num_write_file(struct Num *this, char *fileName)
 
 static void num_switch(struct Num* this, int a, int b)
 {
-    int tmp = this->bols[a];
-    this->bols[a] = this->bols[b];
-    this->bols[b] = tmp;
+    int tmp = this->balls[a];
+    this->balls[a] = this->balls[b];
+    this->balls[b] = tmp;
 }    
 
 extern struct Num * num_clone(struct Num *this)
@@ -137,7 +137,7 @@ extern struct Num * num_clone(struct Num *this)
     int i = 0;
     for(i = 0; i < 25; i = i + 1)
     {
-        result->bols[i] = this->bols[i];
+        result->balls[i] = this->balls[i];
     }
 
     return result;
@@ -153,7 +153,7 @@ static int bols_in_the_end(struct Num* this)
     int i, result = 0;
     for(i = 24; i > -1; i = i - 1)
     {
-        if(this->bols[i] == 0)
+        if(this->balls[i] == 0)
         {
             break;
         }
@@ -167,7 +167,7 @@ static void inc_next_filled(struct Num *this, unsigned int start)
     int i;
     for(i = start; i >= 0; i = i - 1)
     {
-        if(this->bols[i])
+        if(this->balls[i])
         {
             this->switchNumbers(this, i, i + 1);
             break;
@@ -195,7 +195,7 @@ static void inc_next_filled(struct Num *this, unsigned int start)
  */
 static void num_inc(struct Num* this)
 {
-    if(this->bols[24] == 0) 
+    if(this->balls[24] == 0)
     {
         inc_next_filled(this, 24);
     } else {                         /* if last number is not filled */
@@ -203,13 +203,13 @@ static void num_inc(struct Num* this)
                 int i = 23;
         for(i = 23; i >= 0; i = i - 1)
         {
-            if(this->bols[i] == 0)
+            if(this->balls[i] == 0)
             {
                 int j;
                 lastFilled = i + 1;
                 for(j = i; j >= 0; j = j - 1)
                 {
-                    if(this->bols[j]) /* finded next filled */
+                    if(this->balls[j]) /* finded next filled */
                     {
                         this->switchNumbers(this, j, j + 1);
                         int k, lastsNumbersIndex = 0;
@@ -252,88 +252,88 @@ static void num_toString(struct Num *this, char* text)
     if(config.OUTPUT_FORMAT[0] == 'g')
     {
         sprintf(text, "%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n%s %s %s %s %s\n",
-                iff(this->bols[0], " 1", "  "),
-                iff(this->bols[1], " 2", "  "),
-                iff(this->bols[2], " 3", "  "),
-                iff(this->bols[3], " 4", "  "),
-                iff(this->bols[4], " 5", "  "),
-                iff(this->bols[5], " 6", "  "),
-                iff(this->bols[6], " 7", "  "),
-                iff(this->bols[7], " 8", "  "),
-                iff(this->bols[8], " 9", "  "),
-                iff(this->bols[9], "10", "  "),
-                iff(this->bols[10],"11", "  "),
-                iff(this->bols[11],"12", "  "),
-                iff(this->bols[12],"13", "  "),
-                iff(this->bols[13],"14", "  "),
-                iff(this->bols[14],"15", "  "),
-                iff(this->bols[15],"16", "  "),
-                iff(this->bols[16],"17", "  "),
-                iff(this->bols[17],"18", "  "),
-                iff(this->bols[18],"19", "  "),
-                iff(this->bols[19],"20", "  "),
-                iff(this->bols[20],"21", "  "),
-                iff(this->bols[21],"22", "  "),
-                iff(this->bols[22],"23", "  "),
-                iff(this->bols[23],"24", "  "),
-                iff(this->bols[24],"25", "  ")
+                iff(this->balls[0], " 1", "  "),
+                iff(this->balls[1], " 2", "  "),
+                iff(this->balls[2], " 3", "  "),
+                iff(this->balls[3], " 4", "  "),
+                iff(this->balls[4], " 5", "  "),
+                iff(this->balls[5], " 6", "  "),
+                iff(this->balls[6], " 7", "  "),
+                iff(this->balls[7], " 8", "  "),
+                iff(this->balls[8], " 9", "  "),
+                iff(this->balls[9], "10", "  "),
+                iff(this->balls[10],"11", "  "),
+                iff(this->balls[11],"12", "  "),
+                iff(this->balls[12],"13", "  "),
+                iff(this->balls[13],"14", "  "),
+                iff(this->balls[14],"15", "  "),
+                iff(this->balls[15],"16", "  "),
+                iff(this->balls[16],"17", "  "),
+                iff(this->balls[17],"18", "  "),
+                iff(this->balls[18],"19", "  "),
+                iff(this->balls[19],"20", "  "),
+                iff(this->balls[20],"21", "  "),
+                iff(this->balls[21],"22", "  "),
+                iff(this->balls[22],"23", "  "),
+                iff(this->balls[23],"24", "  "),
+                iff(this->balls[24],"25", "  ")
         );
     } else 
     if(config.OUTPUT_FORMAT[0] == 'b')
     {
         sprintf(text, "%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",
-                this->bols[0],
-                this->bols[1],
-                this->bols[2],
-                this->bols[3],
-                this->bols[4],
-                this->bols[5],
-                this->bols[6],
-                this->bols[7],
-                this->bols[8],
-                this->bols[9],
-                this->bols[10],
-                this->bols[11],
-                this->bols[12],
-                this->bols[13],
-                this->bols[14],
-                this->bols[15],
-                this->bols[16],
-                this->bols[17],
-                this->bols[18],
-                this->bols[19],
-                this->bols[20],
-                this->bols[21],
-                this->bols[22],
-                this->bols[23],
-                this->bols[24]);
+                this->balls[0],
+                this->balls[1],
+                this->balls[2],
+                this->balls[3],
+                this->balls[4],
+                this->balls[5],
+                this->balls[6],
+                this->balls[7],
+                this->balls[8],
+                this->balls[9],
+                this->balls[10],
+                this->balls[11],
+                this->balls[12],
+                this->balls[13],
+                this->balls[14],
+                this->balls[15],
+                this->balls[16],
+                this->balls[17],
+                this->balls[18],
+                this->balls[19],
+                this->balls[20],
+                this->balls[21],
+                this->balls[22],
+                this->balls[23],
+                this->balls[24]);
     } else {
        sprintf(text, "%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s\n",
-                iff(this->bols[0], "  1", ""),
-                iff(this->bols[1], "  2", ""),
-                iff(this->bols[2], "  3", ""),
-                iff(this->bols[3], "  4", ""),
-                iff(this->bols[4], "  5", ""),
-                iff(this->bols[5], "  6", ""),
-                iff(this->bols[6], "  7", ""),
-                iff(this->bols[7], "  8", ""),
-                iff(this->bols[8], "  9", ""),
-                iff(this->bols[9], " 10", ""),
-                iff(this->bols[10]," 11", ""),
-                iff(this->bols[11]," 12", ""),
-                iff(this->bols[12]," 13", ""),
-                iff(this->bols[13]," 14", ""),
-                iff(this->bols[14]," 15", ""),
-                iff(this->bols[15]," 16", ""),
-                iff(this->bols[16]," 17", ""),
-                iff(this->bols[17]," 18", ""),
-                iff(this->bols[18]," 19", ""),
-                iff(this->bols[19]," 20", ""),
-                iff(this->bols[20]," 21", ""),
-                iff(this->bols[21]," 22", ""),
-                iff(this->bols[22]," 23", ""),
-                iff(this->bols[23]," 24", ""),
-                iff(this->bols[24]," 25", "")
+                iff(this->balls[0], "  1", ""),
+                iff(this->balls[1], "  2", ""),
+                iff(this->balls[2], "  3", ""),
+                iff(this->balls[3], "  4", ""),
+                iff(this->balls[4], "  5", ""),
+                iff(this->balls[5], "  6", ""),
+                iff(this->balls[6], "  7", ""),
+                iff(this->balls[7], "  8", ""),
+                iff(this->balls[8], "  9", ""),
+                iff(this->balls[9], " 10", ""),
+                iff(this->balls[10]," 11", ""),
+                iff(this->balls[11]," 12", ""),
+                iff(this->balls[12]," 13", ""),
+                iff(this->balls[13]," 14", ""),
+                iff(this->balls[14]," 15", ""),
+                iff(this->balls[15]," 16", ""),
+                iff(this->balls[16]," 17", ""),
+                iff(this->balls[17]," 18", ""),
+                iff(this->balls[18]," 19", ""),
+                iff(this->balls[19]," 20", ""),
+                iff(this->balls[20]," 21", ""),
+                iff(this->balls[21]," 22", ""),
+                iff(this->balls[22]," 23", ""),
+                iff(this->balls[23]," 24", ""),
+                iff(this->balls[24]," 25", "")
         );
  
     }
@@ -355,7 +355,7 @@ static int num_compare(struct Num *this, struct Num *other)
     int i, result = 0;
     for(i = 0; i < 25; i = i + 1)
     {
-        if(this->bols[i] == 1 && other->bols[i] == 1)
+        if(this->balls[i] == 1 && other->balls[i] == 1)
         {
             result = result + 1;
         }
@@ -368,7 +368,7 @@ extern int num_line(struct Num *this, int line)
     int i, start = (line - 1) * 5, result = 0;
     for(i = start; i < start + 5; i = i + 1)
     {
-        if(this->bols[i])
+        if(this->balls[i])
             result = result + 1;
 
     }
@@ -382,9 +382,9 @@ static void num_reset(struct Num *this)
     for(i = 0; i < 24; i = i + 1)
     {
         if( i < 15)
-            this->bols[i] = 1;
+            this->balls[i] = 1;
         else
-            this->bols[i] = 0;
+            this->balls[i] = 0;
     }
 }
 
@@ -408,9 +408,9 @@ extern struct Num *newNum()
     int i               = 0;
     for(i = 0;i<25;i++) {
         if ( i < 15) {
-            result->bols[i] = 1;
+            result->balls[i] = 1;
         } else { 
-            result->bols[i] = 0;
+            result->balls[i] = 0;
         }
     }
 

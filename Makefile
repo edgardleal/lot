@@ -3,7 +3,7 @@ CC=gcc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
-CFLAGS=-ansi
+CFLAGS=-ansi /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 
 
 _DEPS= report.h csv.h args.h num.h list.h strbuffer.h

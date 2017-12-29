@@ -18,7 +18,9 @@ struct config config;
 extern void args_default()
 {
     char *home = getenv("HOME");
-    char data_path[155], numbers_file_name[200], results_file_name[200];
+    char data_path[155], 
+         numbers_file_name[200], 
+         results_file_name[200];
     data_path[0] = '\0';
     strcat(data_path, home);
     strcat(data_path, "/.lot/");

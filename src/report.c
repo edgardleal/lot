@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "report.h"
 #include "args.h"
-#define min(a, b) a<b?a:b;
 #define max(a, b) a>b?a:b;
 
 char *COLOR_SCALE[10] = {
@@ -26,7 +25,7 @@ void fill_most_used(struct Node *node, struct MostUsed *data)
     do {
         for (i = 0; i < 25; i++) {
             data->balls[i] += 
-                tmp->current->bols[i];
+                tmp->current->balls[i];
         }
         tmp = tmp->next;
     } while(tmp != NULL);

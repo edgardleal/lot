@@ -14,12 +14,10 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <argp.h>
 #include "report.h"
-#include "num.h"
-#include "list.h"
 #include "args.h"
+#include "csv.h"
 
 void generate_numbers(void);
 void print_report(void);

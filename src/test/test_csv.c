@@ -7,17 +7,16 @@
  **/
 #ifndef TEST_CSV_C
 #define TEST_CSV_C
+
+#include <stdlib.h>
 #include "../minunit.h"
+#include "../csv.h"
 
 extern void test_csv(void);
 extern void test_csv_new_num_from_string(void);
 
 extern void test_csv(void)
 {
-    char *text = "XXXX";
-
-    ok(text[0] == 'X', "X founded");
-
     char *line = "1,2,3\0";
     char **columns = (char**)malloc(sizeof(char**) * 20);
 
@@ -30,14 +29,17 @@ extern void test_csv(void)
     ok(columns[2][0] == '3', "third char equal 3");
 }
 
+/** \fn test_csv_new_num_from_string
+ *  Test the creation of a new Num from an csv String.
+ */
 extern void test_csv_new_num_from_string(void)
 {
     char *line = "1,222, \"01/02/1500\", 20, 15,2";
     struct Num *result = csv_new_num_from_string(line);
 
-    ok(result->bols[2] == 1, "First ball should be 2");
-    ok(result->bols[14] == 1, "Seccond ball should be 15");
-    ok(result->bols[19] == 1, "Third ball should be 20");
+    ok(result->balls[2] == 1, "First ball should be 2");
+    ok(result->balls[14] == 1, "Seccond ball should be 15");
+    ok(result->balls[19] == 1, "Third ball should be 20");
 
     free(result);
 }
