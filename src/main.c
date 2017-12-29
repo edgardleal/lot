@@ -69,7 +69,8 @@ void print_report()
 void generate_numbers()
 {
     struct Num  *num  = newNum();
-    struct Node *tree = loadFromFile(config.MY_NUMBERS_FILE_NAME);
+    debug("Loading numbers from file...");
+    struct Node *tree = list_loadFromFile(config.MY_NUMBERS_FILE_NAME);
     unsigned long i = 0;
     int equal = 0;
     tree->current->print(tree->current);

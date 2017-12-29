@@ -7,6 +7,7 @@
 #include "num.h"
 #include "list.h"
 #include "args.h"
+#include "app.h"
 
 static unsigned long id_counter = 0;
 static void inc_next_filled(struct Num *this, unsigned int start);

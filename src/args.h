@@ -17,7 +17,6 @@
 #include <argp.h>
 #define out(text, args...) do { printf(text, ##args); } while(0)
 #define debug(text, args...) do { if(IS_DEBUG) out(text, ##args); } while(0)
-#define die(text, args...) do { fprintf(stderr, text, ##args); exit(1); } while(0)
 
 static char args_doc[] = "none";
 static char description[] = "Lotofacil in C";

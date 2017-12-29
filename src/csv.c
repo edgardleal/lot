@@ -5,7 +5,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#include "args.h"
+#include "app.h"
 
 /** \fn
  * Setup each column string with an empty String with 4 blocks

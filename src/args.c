@@ -11,6 +11,7 @@
 #include <argp.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "args.h"
 #include "num.h"
 
