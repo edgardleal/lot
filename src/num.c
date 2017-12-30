@@ -143,25 +143,6 @@ extern struct Num * num_clone(struct Num *this)
     return result;
 }
 
-/**
- * Returns the number of bols closed to the end ( 25 )
- *
- *
- */
-static int bols_in_the_end(struct Num* this)
-{
-    int i, result = 0;
-    for(i = 24; i > -1; i = i - 1)
-    {
-        if(this->bols[i] == 0)
-        {
-            break;
-        }
-        result = result + 1;
-    }
-    return result;
-}
-
 static void inc_next_filled(struct Num *this, unsigned int start)
 {
     int i;

@@ -3,7 +3,7 @@ CC=gcc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
-CFLAGS=-ansi -lm
+CFLAGS=-Wall -O3 -ansi -lm
 
 
 _DEPS= report.h csv.h args.h num.h list.h strbuffer.h

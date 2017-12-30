@@ -32,7 +32,6 @@ extern struct Num * num_clone(struct Num *this);
 extern int num_line(struct Num *this, int line);
 extern void num_destroy(struct Num *this);
 static char * iff(int condition, char *iftrue, char *iffalse);
-static int bols_in_the_end(struct Num *this);
 static int num_compare(struct Num *this, struct Num *other);
 static struct Node * num_load_file(struct Num*, char*);
 static void num_inc(struct Num *this);
