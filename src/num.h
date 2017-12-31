@@ -27,11 +27,17 @@ struct Num {
     struct Num* (*clone)(struct Num*);
 };
 
-extern struct Num * newNum();
-extern struct Num * num_clone(struct Num *);
+extern struct Num * 
+newNum();
+
+extern struct Num * 
+num_clone(struct Num *);
 extern int num_line(struct Num *, int line);
 extern void num_destroy(struct Num *);
-static int bols_in_the_end(struct Num *);
+
+static int 
+bols_in_the_end(struct Num *);
+
 static int num_compare(struct Num *, struct Num *other);
 static struct Node * num_load_file(struct Num*, char*);
 static void num_inc(struct Num *);

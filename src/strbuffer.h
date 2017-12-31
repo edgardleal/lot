@@ -12,10 +12,10 @@ struct StrBuffer {
 };
 
 extern struct StrBuffer *newBuffer();
-static void str_cat(struct StrBuffer *this, char c);
-static void str_strcat(struct StrBuffer *this, char *c);
-static void str_clear(struct StrBuffer *this);
-static int str_size(struct StrBuffer *this);
+static void str_cat(struct StrBuffer *, char c);
+static void str_strcat(struct StrBuffer *, char *c);
+static void str_clear(struct StrBuffer *);
+static int str_size(struct StrBuffer *);
 
 
 #endif

@@ -7,10 +7,10 @@ CFLAGS=-ansi -lm
 # CFLAGS=-ansi /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 
 
-_DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h 
+_DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h number/simulation.h
 DEPS=$(patsubst %,$(SRC)/%,$(_DEPS)) ./genann/genann.h
 
-_OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o
+_OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o number/simulation.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
 _TEST = test_csv.o test_report.o

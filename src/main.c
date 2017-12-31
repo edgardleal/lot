@@ -19,6 +19,7 @@
 #include "args.h"
 #include "app.h"
 #include "csv.h"
+#include "number/simulation.h"
 
 void generate_numbers(void);
 void print_report(void);
@@ -32,6 +33,10 @@ int main(int argc, char **argv)
     if(config.PRINT_REPORT)
     {
         print_report();
+    }
+    else if (config.SIMULATION)
+    {
+        simulation_report();
     }
     else
     {
@@ -74,7 +79,7 @@ void simulation()
  */
 void generate_numbers()
 {
-    struct Num  *num  = newNum();
+    struct Num *num  = newNum();
     debug("Loading numbers from file...");
     struct Node *tree = list_loadFromFile(config.MY_NUMBERS_FILE_NAME);
     unsigned long i = 0;

@@ -258,14 +258,20 @@ static void num_print(struct Num *this)
 static void num_toString(struct Num *this, char* text)
 {
     text[0] = '\0';
-    if(config.OUTPUT_FORMAT[0] == 'g')
+    if (config.OUTPUT_FORMAT[0] == 'g')
     {
         output_num_graph(this, text);
     } else 
-    if(config.OUTPUT_FORMAT[0] == 'b')
+    if (config.OUTPUT_FORMAT[0] == 'b')
     {
         output_num_binary(this, text);
-    } else {
+    } 
+    if (config.OUTPUT_FORMAT[0] == 'c')
+    {
+        output_num_csv(this, text);
+    }
+    else 
+    {
         output_num_simple(this, text);
     }
 }
