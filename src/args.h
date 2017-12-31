@@ -15,12 +15,14 @@
 #ifndef ARGS_H
 #define ARGS_H
 #include <argp.h>
-#define out(text, args...) do { printf(text, ##args); } while(0)
-#define debug(text, args...) do { if(IS_DEBUG) out(text, ##args); } while(0)
-#define die(text, args...) do { fprintf(stderr, text, ##args); exit(1); } while(0)
 
 static char args_doc[] = "none";
 static char description[] = "Lotofacil in C";
+
+/** \struct Store the the possible options passed as command line args.
+ * These options are show in help screen.
+ *
+ */
 static struct argp_option options[] = {
     {"debug",      'd', 0, 0, "Execute in debug mode"},
     {"format",     'f', "format", 0, "Output format, should be b for binary, g for geometric and l for inline"},
@@ -32,10 +34,10 @@ static struct argp_option options[] = {
     {"similarity", 's', "similarity", 0, "How many the numbers has similarities, how they are equals."},
     {0}
 };
-int IS_DEBUG;
 
-/** \struct config
- * Store configuration for an execution.
+/** \struct
+ * Store the defaults options and modified option by command line arguments passed by the user.
+ *
  */
 extern struct config {
     int LINE1;

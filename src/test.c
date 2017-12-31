@@ -27,6 +27,7 @@ void test_all()
     mu_run_test(test_csv);
     mu_run_test(test_csv_new_num_from_string);
     mu_run_test(test_color_scale);
+    mu_run_test(test_atoi);
 }
 
 void test_init() 
@@ -37,11 +38,11 @@ void test_init()
     check_balls(num);
     num->inc(num);
 
-    mu_assert("Ball 15 should be zero after first inc operation", num->bols[14] == 0);
+    mu_assert("Ball 15 should be zero after first inc operation", num->balls[14] == 0);
 
     num->inc(num);
-    mu_assert("Ball 16 should be zero after seccond inc operation", num->bols[15] == 0);
-    mu_assert("Ball 17 should be one after seccond inc operation ", num->bols[16] == 1);
+    mu_assert("Ball 16 should be zero after seccond inc operation", num->balls[15] == 0);
+    mu_assert("Ball 17 should be one after seccond inc operation ", num->balls[16] == 1);
 
     num->inc(num);
     num->inc(num);
@@ -51,14 +52,14 @@ void test_init()
     num->inc(num);
     num->inc(num);
     num->inc(num);
-    ok(num->bols[24] == 1, "25 should be 1");
+    ok(num->balls[24] == 1, "25 should be 1");
 
     /* after 25 should reset */
     num->inc(num);
-    ok(num->bols[24] == 0, "25 should be 0 after first reset");
-    ok(num->bols[13] == 0, "14 should be 0 after first reset");
-    ok(num->bols[14] == 1, "15 should be 1 after first reset");
-    ok(num->bols[15] == 1, "16 should be 1 after first reset");
+    ok(num->balls[24] == 0, "25 should be 0 after first reset");
+    ok(num->balls[13] == 0, "14 should be 0 after first reset");
+    ok(num->balls[14] == 1, "15 should be 1 after first reset");
+    ok(num->balls[15] == 1, "16 should be 1 after first reset");
 
     num->destroy(num);
 }
@@ -71,7 +72,7 @@ void test_compare()
     mu_assert("Result should be 15", result == 15);
     other->inc(other);
     result = other->compare(other, this);
-    ok(14 == result, "Equals bols decrease after inc ");
+    ok(14 == result, "Equals balls decrease after inc ");
 
     other->inc(other);
     result = other->compare(other, this);
@@ -94,14 +95,14 @@ void test_toString()
 
 void check_balls(struct Num *this)
 {
-    mu_assert("Ball 12 should be one  ", this->bols[11]);
-    mu_assert("Ball 13 should be one  ", this->bols[12]);
-    mu_assert("Ball 14 should be one  ", this->bols[13]);
-    mu_assert("Ball 15 should be one  ", this->bols[14]);
-    ok(this->bols[15] == 0, "Ball 16 should be zero");
+    mu_assert("Ball 12 should be one  ", this->balls[11]);
+    mu_assert("Ball 13 should be one  ", this->balls[12]);
+    mu_assert("Ball 14 should be one  ", this->balls[13]);
+    mu_assert("Ball 15 should be one  ", this->balls[14]);
+    ok(this->balls[15] == 0, "Ball 16 should be zero");
     
-    ok(this->bols[16] == 0, "Ball 17 should be zero");
-    ok(this->bols[17] == 0, "Ball 18 should be zero");
+    ok(this->balls[16] == 0, "Ball 17 should be zero");
+    ok(this->balls[17] == 0, "Ball 18 should be zero");
 }
 
 void test_reset()
@@ -110,12 +111,12 @@ void test_reset()
     num->inc(num);
     num->reset(num);
     
-    ok(num->bols[14] == 1, "Ball 15 should be 1 in test_reset");
+    ok(num->balls[14] == 1, "Ball 15 should be 1 in test_reset");
 
     num->destroy(num);
 }
 
-void test_line_count()
+void test_line_count(void)
 {
     struct Num *num = newNum();
     num->inc(num);
@@ -130,17 +131,17 @@ void test_line_count()
     num->destroy(num);
 }
 
-void test_load_string()
+void test_load_string(void)
 {
     char *text = "15 16 17 18\n19 20 21 22 23 24 25";
     struct Num *num = newNum();
-    ok(num->bols[16] == 0, "Ball 17 should be 0 before load_string");
+    ok(num->balls[16] == 0, "Ball 17 should be 0 before load_string");
     num->load_string(num, text);
     
-    ok(num->bols[14] == 1, "Ball 15 should be 1 in ");
-    ok(num->bols[15] == 1, "Ball 16 should be 1 in ");
-    ok(num->bols[16] == 1, "Ball 17 should be 1 in ");
-    ok(num->bols[24] == 1, "Ball 25 should be 1 in ");
+    ok(num->balls[14] == 1, "Ball 15 should be 1 in ");
+    ok(num->balls[15] == 1, "Ball 16 should be 1 in ");
+    ok(num->balls[16] == 1, "Ball 17 should be 1 in ");
+    ok(num->balls[24] == 1, "Ball 25 should be 1 in ");
 
     num->destroy(num);
 }

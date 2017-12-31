@@ -14,12 +14,11 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <argp.h>
 #include "report.h"
-#include "num.h"
-#include "list.h"
 #include "args.h"
+#include "app.h"
+#include "csv.h"
 
 void generate_numbers(void);
 void print_report(void);
@@ -61,6 +60,11 @@ void print_report()
     result->destroyAndClean(result);
 }
 
+void simulation()
+{
+
+}
+
 /** \fn 
  *  \brief Generate number 
  *
@@ -71,7 +75,8 @@ void print_report()
 void generate_numbers()
 {
     struct Num  *num  = newNum();
-    struct Node *tree = loadFromFile(config.MY_NUMBERS_FILE_NAME);
+    debug("Loading numbers from file...");
+    struct Node *tree = list_loadFromFile(config.MY_NUMBERS_FILE_NAME);
     unsigned long i = 0;
     int equal = 0;
     tree->current->print(tree->current);
@@ -90,7 +95,7 @@ void generate_numbers()
                 maxEqual = equal;
             }
 
-            if(node->next != NULL)
+            if(node->next != NULL) /* useless comparation */
             {
                 node = node->next;
             } else {
