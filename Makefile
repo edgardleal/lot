@@ -4,12 +4,13 @@ SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
 CFLAGS=-ansi -lm
+# CFLAGS=-ansi /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 
 
-_DEPS= report.h csv.h args.h num.h list.h strbuffer.h
+_DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h 
 DEPS=$(patsubst %,$(SRC)/%,$(_DEPS)) ./genann/genann.h
 
-_OBJ = args.o num.o list.o strbuffer.o csv.o report.o
+_OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
 _TEST = test_csv.o test_report.o
@@ -48,6 +49,7 @@ memory: compile
 
 clean:
 	rm -r $(OUTDIR) || true
+	mkdir -p $(OUTDIR)/number
 	ctags -R .
 
 test: setup compileTest

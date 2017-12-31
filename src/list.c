@@ -5,14 +5,17 @@
 #include "args.h"
 #include "num.h"
 #include "list.h"
-#include "strbuffer.h"
+#include "app.h"
 
 static long instances_count = 0;
 
-extern struct Node *loadFromFile(char *fileName)
+extern struct Node *list_loadFromFile(char *fileName)
 {
     struct Node *result = newTree();
     FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        die("Cant open the file: [%s]", fileName);
+    }
     struct Num *num = NULL;
     unsigned char line[80];
     

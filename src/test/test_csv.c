@@ -7,17 +7,17 @@
  **/
 #ifndef TEST_CSV_C
 #define TEST_CSV_C
+
+#include <stdlib.h>
 #include "../minunit.h"
+#include "../csv.h"
 
-extern void test_csv(void);
-extern void test_csv_new_num_from_string(void);
+void test_csv(void);
+void test_csv_new_num_from_string(void);
+void test_atoi(void);
 
-extern void test_csv(void)
+void test_csv(void)
 {
-    char *text = "XXXX";
-
-    ok(text[0] == 'X', "X founded");
-
     char *line = "1,2,3\0";
     char **columns = (char**)malloc(sizeof(char**) * 20);
 
@@ -30,17 +30,30 @@ extern void test_csv(void)
     ok(columns[2][0] == '3', "third char equal 3");
 }
 
-extern void test_csv_new_num_from_string(void)
+/** \fn test_csv_new_num_from_string
+ *  Test the creation of a new Num from an csv String.
+ */
+void test_csv_new_num_from_string(void)
 {
     char *line = "1,222, \"01/02/1500\", 20, 15,2";
     struct Num *result = csv_new_num_from_string(line);
 
-    ok(result->bols[2] == 1, "First ball should be 2");
-    ok(result->bols[14] == 1, "Seccond ball should be 15");
-    ok(result->bols[19] == 1, "Third ball should be 20");
+    ok(result->balls[2] == 1, "First ball should be 2");
+    ok(result->balls[14] == 1, "Seccond ball should be 15");
+    ok(result->balls[19] == 1, "Third ball should be 20");
 
     free(result);
 }
 
+/**
+ * \fn test_atoi
+ * \brief check conversion from string to int 
+ *
+ */
+void test_atoi(void)
+{
+    ok(atoi("01") == 1, "conversion from 01 to int 1");
+}
+
 #endif
-/* vim: set expandtab tabstop=4 shiftwidth=4 :*/
+/** vim: set expandtab tabstop=4 shiftwidth=4 :*/

@@ -5,8 +5,10 @@
 #include <string.h>
 #include <unistd.h>
 #include "list.h"
-#include "args.h"
+#include "app.h"
 
+static const int COLUMNS_TO_SKIP = 2;
+static const int COLUMNS_COLUMNS_COUNT = 17;
 /** \fn
  * Setup each column string with an empty String with 4 blocks
  *
@@ -17,6 +19,7 @@ extern void csv_start_columns(char** columns, int size)
     for(i = 0; i < size; i = i + 1)
     {
         columns[i] = (char*)malloc(sizeof(char) * 5);
+        strcpy(columns[i], "00");
     }
 }
 
@@ -35,7 +38,7 @@ extern void split_csv(char *line, char **result, int columns_count)
         len = strlen(line),
         columnCount = 0;
     for(i = 0; i <= len; i++){
-        if(line[i] == ',' || line[i] == '\0')
+        if(line[i] == ',' || line[i] == ';' || line[i] == '\0')
         {
             strcpy(result[columnCount], buffer);
             columnCount = columnCount + 1;
@@ -65,24 +68,27 @@ extern void split_csv(char *line, char **result, int columns_count)
 extern struct Num * csv_new_num_from_string(char *string)
 {
     struct Num *result = newNum();
-    char **columns = (char**)malloc(sizeof(char**) * 30);
-    csv_start_columns(columns, 30);
-    split_csv(string, columns, 30);
+    char **columns = (char**) malloc(sizeof(char**) * COLUMNS_COLUMNS_COUNT);
+    csv_start_columns(columns, COLUMNS_COLUMNS_COUNT);
+    split_csv(string, columns, COLUMNS_COLUMNS_COUNT);
 
-    int i;
+    int i, index, started = 0;
     for (i = 0; i < 15; i++) {
-        result->bols[atoi(columns[i + 3]) - 1] = 1;
-        free(columns[i + 3]);
-    }
-    for (i = 18; i < 30; i++) {
+        index = atoi(columns[i + COLUMNS_TO_SKIP]) - 1;
+        if (index < 0 || index > 24) {
+            continue;
+        }
+        started = 1;
+        result->balls[index] = 1;
         free(columns[i]);
     }
 
-    free(columns[0]);
-    free(columns[1]);
-    free(columns[2]);
     free(columns);
-    return result;
+    if (started) {
+        return result;
+    }
+    free(result);
+    return NULL;
 }
 
 /** \fn
@@ -98,6 +104,10 @@ extern void csv_load_from_file(char *file_name, struct Node *node)
         die("The file [%s] dont exits!!!\n", file_name);
     }
     FILE *file = fopen(file_name, "r");
+    if (file == NULL) {
+        die("Cant read the file [%s]\n", file_name);
+    }
+    debug("Loading file: %s\n", file_name);
     struct Num *num = NULL;
     unsigned char line[650];
     
@@ -108,9 +118,15 @@ extern void csv_load_from_file(char *file_name, struct Node *node)
             continue;
         }
         num = csv_new_num_from_string(line);
-        node->add(node, num);
+        debug("Line read: [%s]\n", line);
+        if (num != NULL) {
+            node->add(node, num);
+        } else {
+            debug("This line is discarted.\n");
+        }
     }
 
+    debug("File loaded succefull !\n");
     fclose(file);
 }
 
