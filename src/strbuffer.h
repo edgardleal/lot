@@ -13,14 +13,14 @@ struct StrBuffer {
 
 struct StrPool {
     struct StrBuffer **itens;
-    int size = 0;
-    int capacity = 0;
+    int size;
+    int capacity;
 };
 
-static StrPool* str_poll;
+static struct StrPool* str_poll;
 
-extern struct StrBuffer *new_string(char*);
-extern struct str_free_pool(void);
+extern struct StrBuffer *new_string(char* text);
+extern void str_free_pool();
 extern struct StrBuffer *newBuffer();
 static void str_cat(struct StrBuffer *, char c);
 static void str_strcat(struct StrBuffer *, char *c);
