@@ -1,5 +1,5 @@
 OUTDIR=obj
-CC=cc
+CC=gcc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
@@ -10,7 +10,7 @@ CFLAGS=-ansi -lm /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 _DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h number/simulation.h
 DEPS=$(patsubst %,$(SRC)/%,$(_DEPS)) ./genann/genann.h
 
-_OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o number/simulation.o
+_OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o number/simulation.o main.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
 _TEST = test_csv.o test_report.o
@@ -22,6 +22,7 @@ all: clean test compile production
 setup: 
 	if [ ! -d "$(OUTDIR)" ]; then mkdir -p $(OUTDIR); fi
 
+$(OUTDIR)/main.o: $(SRC)/main.c
 $(TEST_OBJ): $(DEPS)
 	$(CC) -g $(CFLAGS) -c -o $@ $< 
 
@@ -33,7 +34,7 @@ compileDebug: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
 
 compileTest: $(TEST_OBJ)
-	gcc -g $(CFLAGS) $^ -o $(OUTDIR)/test
+	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/test
 
 compileProduction: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot
