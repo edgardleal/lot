@@ -23,6 +23,7 @@ simulation_report(void)
     struct Node *history_walker = history, 
                *my_walker = my_numbers;
 
+    int points_array[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int points = 0, index = 0;
     do
     {
@@ -30,6 +31,7 @@ simulation_report(void)
         do
         {
             points = my_walker->current->compare(my_walker->current, history_walker->current);
+            points_array[points - 1] = points_array[points - 1] + 1;
             out("%d - %d\n", index, points);
             my_walker = my_walker->next;
         } while(my_walker != NULL);
@@ -37,6 +39,16 @@ simulation_report(void)
         history_walker = history_walker->next;
     } while(history_walker != NULL);
 
+    out("\n");
+    out("+---------+------------+\n");
+    out("| Acertos | Quantidade |\n");
+    out("+---------+------------+\n");
+    for (int i = 0; i < 15; i++)
+    {
+        out("| %7d | %10d |\n", i + 1, points_array[i]);
+
+    }
+    out("+---------+------------+\n");
     history->destroyAndClean(history);
     my_numbers->destroyAndClean(my_numbers);
 }

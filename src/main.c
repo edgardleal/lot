@@ -65,11 +65,6 @@ void print_report()
     result->destroyAndClean(result);
 }
 
-void simulation()
-{
-
-}
-
 /** \fn 
  *  \brief Generate number 
  *
@@ -86,7 +81,14 @@ void generate_numbers()
     int equal = 0;
     tree->current->print(tree->current);
 
-    struct Node *node = NULL;
+
+
+    struct Node *node = tree->next;
+    while(node != NULL)
+    {
+        node->current->print(node->current);
+        node = node->next;
+    }
     while(i < config.LIMIT) 
     {
         node = tree;

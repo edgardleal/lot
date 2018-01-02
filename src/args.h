@@ -25,7 +25,7 @@ static char description[] = "Lotofacil in C";
  */
 static struct argp_option options[] = {
     {"debug",      'd', 0, 0, "Execute in debug mode"},
-    {"sumulation", 't', 0, 0, "Exibe quanto voce ganharia em cada sorteio passado"},
+    {"simulation", 't', 0, 0, "Exibe quanto voce ganharia em cada sorteio passado"},
     {"format",     'f', "format", 0, "Output format, should be b for binary, g for geometric and l for inline"},
     {"limit",      'l', "limit", 0, "Define the max numbers generated"},
     {"llimit",     'n', "lineLimit", 0, "This is the limit of numbers by line in geometric form"},
