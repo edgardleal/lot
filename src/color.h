@@ -1,6 +1,8 @@
-/* \file color.h 
- * \brief This file was copied from GIT project.
+/** \file color.h 
+ *  \brief This file was copied from GIT project.
  *
+ * Here you can find funcionalities to use color in terminal 
+ * applications.
  */
 #ifndef COLOR_H
 #define COLOR_H

@@ -22,6 +22,14 @@ this command will create the file ./obj/test and execute this program.
 
 ## Building 
 
+### Dependencies 
+
+    argp
+
+#### On Mac OS
+
+`brew install argp-standalone`
+
 `make production`
 this command will create the program ./obj/lot
 

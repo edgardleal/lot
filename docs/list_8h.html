@@ -68,7 +68,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Data Structures</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Macros</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -91,15 +91,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Implements a linked list of <a class="el" href="structNum.html">Num</a>.  
+<p>Implements a linked list of <a class="el" href="structNum.html" title="A combination of numbers. ">Num</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;num.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="num_8h_source.html">num.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for list.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="list_8h__incl.png" border="0" usemap="#src_2list_8h" alt=""/></div>
 <map name="src_2list_8h" id="src_2list_8h">
-<area shape="rect" id="node2" href="num_8h_source.html" title="num.h" alt="" coords="12,80,71,107"/></map>
+<area shape="rect" id="node2" href="num_8h.html" title="This file represents a combination of numbers. " alt="" coords="12,80,71,107"/></map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="list_8h__dep__incl.png" border="0" usemap="#src_2list_8hdep" alt=""/></div>
+<map name="src_2list_8hdep" id="src_2list_8hdep">
+<area shape="rect" id="node2" href="report_8h.html" title="Funcionalities to generate reports. " alt="" coords="84,80,172,107"/><area shape="rect" id="node3" href="main_8c.html" title="Main entry point for application. " alt="" coords="5,155,88,181"/><area shape="rect" id="node4" href="test__report_8c.html" title="units tests for report.h " alt="" coords="111,155,254,181"/><area shape="rect" id="node5" href="test_8h.html" title="Aggregate all unit tests. " alt="" coords="144,229,221,256"/></map>
 </div>
 </div>
 <p><a href="list_8h_source.html">Go to the source code of this file.</a></p>
@@ -115,20 +122,20 @@ Functions</h2></td></tr>
 struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>newTree</b> ()</td></tr>
 <tr class="separator:a53a5ab9319b544637cbdd4f0682daffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a085f55fa9398b0f52d0fc46728b362f1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a085f55fa9398b0f52d0fc46728b362f1"></a>
-struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>loadFromFile</b> (char *)</td></tr>
+struct <a class="el" href="structNode.html">Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>list_loadFromFile</b> (char *)</td></tr>
 <tr class="separator:a085f55fa9398b0f52d0fc46728b362f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implements a linked list of <a class="el" href="structNum.html">Num</a>. </p>
+<div class="textblock"><p>Implements a linked list of <a class="el" href="structNum.html" title="A combination of numbers. ">Num</a>. </p>
 <p>===================================================================================== </p><pre class="fragment">  Filename:  list.h
-</pre><p> Description: Implements a linked list of structs <a class="el" href="structNum.html">Num</a> </p><pre class="fragment">Version:  1.0
+</pre><p> Description: Implements a linked list of structs <a class="el" href="structNum.html" title="A combination of numbers. ">Num</a> </p><pre class="fragment">Version:  1.0
 Created:  01-03-2017 18:53:17
 </pre><p> Revision: none Compiler: gcc</p>
 <p>Author: Edgard Leal <a href="#" onclick="location.href='mai'+'lto:'+'edg'+'ar'+'dle'+'al'+'@gm'+'ai'+'l.c'+'om'; return false;">edgar<span style="display: none;">.nosp@m.</span>dlea<span style="display: none;">.nosp@m.</span>l@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> Organization: </p><hr/>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 1 2017 20:11:47 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Mar 5 2017 11:39:14 for Lot by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.8
 </small></address>

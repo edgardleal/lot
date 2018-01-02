@@ -1,7 +1,5 @@
-/*! \file Main
- * =====================================================================================
- *
- *       Filename:  main.c
+/** \file main.c
+ *  \brief Main entry point for application
  *
  *    Description:  Main entry point of application
  *
@@ -13,27 +11,74 @@
  *         Author:  Edgard Leal
  *   Organization:  
  *
- * =====================================================================================
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <argp.h>
-#include "num.h"
-#include "list.h"
+#include "report.h"
 #include "args.h"
+#include "app.h"
+#include "csv.h"
 
-#define MAX_EQUAL 6
+void generate_numbers(void);
+void print_report(void);
 
-int main() 
+/** \fn Main entry point of this application.
+ */
+int main(int argc, char **argv) 
 {
-    struct config config;
-    args_default(&config);
+    args_default();
     argp_parse(&argp, argc, argv, 0, 0, &config);
+    if(config.PRINT_REPORT)
+    {
+        print_report();
+    }
+    else
+    {
+        generate_numbers();
+    }
 
+    return 0;
+}
+
+/** \fn
+ *  \brief Print report for ~/.lot/results.csv
+ *
+ *  Print a colored statistic report for historical results in the file 
+ *  ~/.lot/results.csv.
+ */
+void print_report()
+{
+    struct Node *result = newTree();
+    struct MostUsed *data = newMostUsed();
+    csv_load_from_file(config.RESULT_PATH, result);
+
+    fill_most_used(result, data);
+    print_most_used(data);
+
+    free(data);
+    result->destroyAndClean(result);
+}
+
+void simulation()
+{
+
+}
+
+/** \fn 
+ *  \brief Generate number 
+ *
+ *  Generate numbers based on option passed to this program 
+ *  by command line, and print these numbers on default output.
+ *
+ */
+void generate_numbers()
+{
     struct Num  *num  = newNum();
-    struct Node *tree = loadFromFile("numbers");
-    unsigned long i = 0, equal = 0;
+    debug("Loading numbers from file...");
+    struct Node *tree = list_loadFromFile(config.MY_NUMBERS_FILE_NAME);
+    unsigned long i = 0;
+    int equal = 0;
     tree->current->print(tree->current);
 
     struct Node *node = NULL;
@@ -50,19 +95,19 @@ int main()
                 maxEqual = equal;
             }
 
-            if(node->next != NULL)
+            if(node->next != NULL) /* useless comparation */
             {
                 node = node->next;
             } else {
                 node = NULL;
             }
         }
-        if(maxEqual <= MAX_EQUAL) {
-            if(num_line(num, 1) >= 3)
-            if(num_line(num, 2) >= 3)
-            if(num_line(num, 3) >= 3)
-            if(num_line(num, 4) >= 3)
-            if(num_line(num, 5) >= 3)
+        if(maxEqual <= config.SIMILARITY) {
+            if(num_line(num, 1) >= config.LINE_LIMIT)
+            if(num_line(num, 2) >= config.LINE_LIMIT)
+            if(num_line(num, 3) >= config.LINE_LIMIT)
+            if(num_line(num, 4) >= config.LINE_LIMIT)
+            if(num_line(num, 5) >= config.LINE_LIMIT)
             {
                 debug("# Equal: %d\n", maxEqual);
                 num->print(num);
@@ -73,8 +118,5 @@ int main()
         i = i + 1;
     }
 
-    num->destroy(num);
     tree->destroyAndClean(tree);
-
-    return 0;
 }

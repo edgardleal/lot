@@ -5,15 +5,17 @@
 #include "args.h"
 #include "num.h"
 #include "list.h"
-#include "strbuffer.h"
+#include "app.h"
 
 static long instances_count = 0;
-static unsigned char DEBUG = 1;
 
-extern struct Node *loadFromFile(char *fileName)
+extern struct Node *list_loadFromFile(char *fileName)
 {
     struct Node *result = newTree();
     FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        die("Cant open the file: [%s]", fileName);
+    }
     struct Num *num = NULL;
     unsigned char line[80];
     
@@ -27,7 +29,9 @@ extern struct Node *loadFromFile(char *fileName)
         result->add(result, num);
     }
 
+    /* This object ( num ) will be freed in list 
     free(num);
+     */
     fclose(file);
     return result;
 }
@@ -38,12 +42,14 @@ static void tree_destroy_and_clean(struct Node *this)
     {
         this->next->previus = NULL;
         tree_destroy_and_clean(this->next);
+        this->next = NULL;
     }
 
     if(this->previus != NULL) 
     {
         this->previus->next = NULL;
         tree_destroy_and_clean(this->previus);
+        this->previus = NULL;
     }
 
     if(this)
