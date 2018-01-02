@@ -1,10 +1,10 @@
-OUTDIR=./obj
-CC=gcc
+OUTDIR=obj
+CC=cc
 SRC=src
 IDIR=
 # CFLAGS=-Wall -Werror 
-CFLAGS=-ansi -lm
-# CFLAGS=-ansi /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
+# CFLAGS=-ansi -lm
+CFLAGS=-ansi -lm /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 
 
 _DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h number/simulation.h
@@ -22,9 +22,12 @@ all: clean test compile production
 setup: 
 	if [ ! -d "$(OUTDIR)" ]; then mkdir -p $(OUTDIR); fi
 
-$(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
-	@echo "compiling " $@
+$(TEST_OBJ): $(DEPS)
 	$(CC) -g $(CFLAGS) -c -o $@ $< 
+
+#$(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
+#	@echo "compiling " $@
+#	$(CC) -g $(CFLAGS) -c -o $@ $< 
 
 compileDebug: $(OBJ) $(OUTDIR)/main.o 
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
@@ -58,6 +61,8 @@ test: setup compileTest
 debug: setup compileDebug 
 	gdb $(OUTDIR)/test
 
+list:
+	    @$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | egrep -v -e '^[^[:alnum:]]' -e '^$@$$' | xargs
 
 .DEFAULT: test
 .PHONY: clean

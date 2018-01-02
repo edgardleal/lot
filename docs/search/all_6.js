@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['strbuffer',['StrBuffer',['../structStrBuffer.html',1,'']]]
+  ['report_2eh',['report.h',['../report_8h.html',1,'']]]
 ];
