@@ -54,7 +54,7 @@ doc:
 	doxygen .doxygen
 
 memory: compile
-	valgrind obj/debug
+	valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all obj/debug
 
 clean:
 	rm -r $(OUTDIR) || true

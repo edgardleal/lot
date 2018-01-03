@@ -125,5 +125,6 @@ void generate_numbers()
         i = i + 1;
     }
 
+    free(num);
     tree->destroyAndClean(tree);
 }
