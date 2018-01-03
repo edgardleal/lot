@@ -8,11 +8,34 @@ static int str_size(struct StrBuffer *this)
     return strlen(this->buffer);
 }
 
+extern struct StrBuffer *new_string(char* text)
+{
+    struct StrBuffer *result = newBuffer();
+
+    return result;
+}
+
+extern void str_free_pool()
+{
+    int i;
+    for (i = 0; i < sizeof(str_poll); i++)
+    {
+
+    }
+    free(str_poll);
+}
+
 extern struct StrBuffer *newBuffer()
 {
 	struct StrBuffer *result = (struct StrBuffer*)malloc(sizeof(struct StrBuffer));
 	result->buffer[0] = '\0';
-
+    if (str_poll == NULL)
+    {
+        str_poll = (struct StrPool*) malloc(sizeof(struct StrPool));
+        str_poll->capacity = 10;
+        str_poll->size = 0;
+        str_poll->itens = (struct StrBuffer**) malloc(sizeof(struct StrBuffer) * 10);
+    }
 	result->cat = &str_cat;
 	result->strcat = &str_strcat;
 	result->clear = &str_clear;
