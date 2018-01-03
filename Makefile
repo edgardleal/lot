@@ -2,9 +2,18 @@ OUTDIR=./obj
 CC=gcc
 SRC=src
 IDIR=
-# CFLAGS=-Wall -Werror 
-CFLAGS=-ansi -I $(OUTDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
-# CFLAGS=-ansi /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
+
+ifeq ($(OS),Windows_NT)
+    detected_OS := Windows
+else
+    detected_OS := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+endif	
+
+ifeq ($(detected_OS), Linux)
+	CFLAGS=-ansi -lm -I $(OUTDIR)
+else
+	CFLAGS=-ansi -Wall -I $(OUTDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
+endif
 
 
 _DEPS= csv.h args.h num.h list.h strbuffer.h lang.h number/output.h report.h number/simulation.h
@@ -30,7 +39,7 @@ compileDebug: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
 
 compileTest: $(TEST_OBJ)
-	gcc -g $(CFLAGS) $^ -o $(OUTDIR)/test
+	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/test
 
 compileProduction: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot

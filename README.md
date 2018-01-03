@@ -16,6 +16,15 @@ this command will create the file ./obj/test and execute this program.
 ### Test memory leak ( need valgrind installed )
 `make memory`
 
+## TODO
+
+* [ ] Densidade dos numeros 
+* [ ] Salvar numeros gerados 
+* [ ] Exibir "Meus Numeros"
+* [ ] Exibir resultados 
+* [ ] Atualizar resultados 
+* [ ] Implementar comandos 
+
 ## Building  
 
 ### Dependencies 

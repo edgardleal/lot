@@ -24,6 +24,7 @@ struct Num {
     void (*write_to_file)(struct Num*, char*);
     void (*load_string)(struct Num*, char*);
     void (*reset)(struct Num*);
+    int  (*density)(struct Num*);
     struct Num* (*clone)(struct Num*);
 };
 
@@ -47,5 +48,6 @@ static void num_reset(struct Num *);
 static void num_switch(struct Num *, int a, int b);
 static void num_toString(struct Num *, char* text);
 static void num_write_file(struct Num*, char*);
+static int  num_density(struct Num*);
 
 #endif

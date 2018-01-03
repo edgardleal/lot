@@ -17,7 +17,8 @@ extern struct StrBuffer *new_string(char* text)
 
 extern void str_free_pool()
 {
-    for (int i = 0; i < sizeof(str_poll); i++)
+    int i;
+    for (i = 0; i < sizeof(str_poll); i++)
     {
 
     }

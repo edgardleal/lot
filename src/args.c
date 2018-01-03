@@ -101,6 +101,8 @@ parse_opt(int key, char *arg, struct argp_state *state)
         case 't':
             config.SIMULATION = 1;
             break;
+        case 'c':
+            break;
         case ARGP_KEY_ARG: return 0;
         default: return ARGP_ERR_UNKNOWN;
     }   

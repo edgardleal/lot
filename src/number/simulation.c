@@ -10,6 +10,16 @@
 #include "../list.h"
 #include "../app.h"
 #include "../num.h"
+#include "../csv.h"
+
+static float reward_values[15] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    4,     /* 11 */
+    8,     /* 12 */
+    20,    /* 13 */
+    1500,  /* 14 */
+    500000 /* 15 */
+};
 
 void
 simulation_report(void)
@@ -25,6 +35,7 @@ simulation_report(void)
 
     int points_array[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     int points = 0, index = 0;
+    float total = 0;
     do
     {
         index++;
@@ -32,6 +43,7 @@ simulation_report(void)
         {
             points = my_walker->current->compare(my_walker->current, history_walker->current);
             points_array[points - 1] = points_array[points - 1] + 1;
+            total = reward_values[points - 1] + total - 2000;
             out("%d - %d\n", index, points);
             my_walker = my_walker->next;
         } while(my_walker != NULL);
@@ -43,12 +55,17 @@ simulation_report(void)
     out("+---------+------------+\n");
     out("| Acertos | Quantidade |\n");
     out("+---------+------------+\n");
-    for (int i = 0; i < 15; i++)
+    int i;
+    for (i = 0; i < 15; i++)
     {
         out("| %7d | %10d |\n", i + 1, points_array[i]);
 
     }
     out("+---------+------------+\n");
+    /*
+    out("|---  %10.2f  -----|\n", total);
+    out("+---------+------------+\n");
+    */
     history->destroyAndClean(history);
     my_numbers->destroyAndClean(my_numbers);
 }

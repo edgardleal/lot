@@ -120,7 +120,7 @@ static void num_write_file(struct Num *this, char *fileName)
         die("Canot open the file [%s]", fileName);
         return;
     } else {
-				char *out;
+        char out[100];
         this->toString(this, out);
         fprintf(fp, "%s", out);
         fclose(fp);
@@ -340,6 +340,7 @@ extern struct Num *newNum()
     result->write_to_file  = &num_write_file;
     result->load_string    = &num_load_string;
     result->reset          = &num_reset;
+    result->density        = &num_density;
 
 
     int i               = 0;
@@ -352,6 +353,12 @@ extern struct Num *newNum()
     }
 
   return result;
+}
+
+extern int num_density(struct Num* this)
+{
+
+    return 0;
 }
 
 #endif
