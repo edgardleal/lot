@@ -32,17 +32,17 @@ struct Node {
 	struct Node *next;
 	struct Node *previus;
 
-	void (*destroy)(struct Node *this);
-	void (*destroyAndClean)(struct Node *this);
+	void (*destroy)(struct Node *);
+	void (*destroyAndClean)(struct Node *);
 
-	void (*add)    (struct Node *this, struct Num *num);
+	void (*add)    (struct Node *, struct Num *);
 };
 
 extern struct Node *newTree();
 extern struct Node *list_loadFromFile(char *);
-static void destroyTree(struct Node *this);
-static void addNode(struct Node* this, struct Num *num);
-static void tree_destroy_and_clean(struct Node *this);
+static void destroyTree(struct Node *);
+static void addNode(struct Node*, struct Num *num);
+static void tree_destroy_and_clean(struct Node *);
 
 
 
