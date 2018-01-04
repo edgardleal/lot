@@ -25,6 +25,7 @@ void test_all()
     mu_run_test(test_load_string);
     mu_run_test(test_line_count);
     mu_run_test(test_csv);
+    mu_run_test(test_csv_different_separator);
     mu_run_test(test_csv_new_num_from_string);
     mu_run_test(test_color_scale);
     mu_run_test(test_atoi);
@@ -34,6 +35,7 @@ void test_init()
 {
     struct Num *num;
     num = newNum();
+    num->reset(num);
 
     check_balls(num);
     num->inc(num);
@@ -68,6 +70,9 @@ void test_compare()
 {
     struct Num *this = newNum(),
           *other = newNum();
+    other->reset(other);
+    this->reset(this);
+
     int result = this->compare(this, other);
     mu_assert("Result should be 15", result == 15);
     other->inc(other);

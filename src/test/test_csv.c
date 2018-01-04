@@ -11,10 +11,26 @@
 #include <stdlib.h>
 #include "../minunit.h"
 #include "../csv.h"
+#include "../num.h"
 
 void test_csv(void);
+void test_csv_different_separator(void);
 void test_csv_new_num_from_string(void);
 void test_atoi(void);
+
+void test_csv_different_separator(void)
+{
+    char *line = " 1;2;3\0";
+    char **columns = (char**)malloc(sizeof(char**) * 20);
+
+    csv_start_columns(columns, 20);
+    ok(1, "Started");
+
+    split_csv(line, columns, 20);
+    ok(columns[0][0] == '1', "start");
+    ok(columns[1][0] == '2', "second char equal 2");
+    ok(columns[2][0] == '3', "third char equal 3");
+}
 
 void test_csv(void)
 {
@@ -30,15 +46,17 @@ void test_csv(void)
     ok(columns[2][0] == '3', "third char equal 3");
 }
 
+
 /** \fn test_csv_new_num_from_string
  *  Test the creation of a new Num from an csv String.
  */
 void test_csv_new_num_from_string(void)
 {
-    char *line = "1,222, \"01/02/1500\", 20, 15,2";
+    char *line = "1, \"01/02/1500\", 20, 15,2";
     struct Num *result = csv_new_num_from_string(line);
 
-    ok(result->balls[2] == 1, "First ball should be 2");
+    ok(result->balls[0] == 0, "Ball 1 shoulb be 0 (zero)");
+    ok(result->balls[1] == 1, "First ball should be 2");
     ok(result->balls[14] == 1, "Seccond ball should be 15");
     ok(result->balls[19] == 1, "Third ball should be 20");
 

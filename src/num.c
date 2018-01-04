@@ -342,13 +342,9 @@ extern struct Num *newNum()
     result->density        = &num_density;
 
 
-    int i               = 0;
-    for(i = 0;i<25;i++) {
-        if ( i < 15) {
-            result->balls[i] = 1;
-        } else { 
-            result->balls[i] = 0;
-        }
+    int i = 0;
+    for(i = 0; i<25; i++) {
+        result->balls[i] = 0;
     }
 
   return result;
