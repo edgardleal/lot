@@ -21,14 +21,28 @@ char *COLOR_SCALE[10] = {
 void fill_most_used(struct Node *node, struct MostUsed *data)
 {
     struct Node *tmp = node;
-    int i;
+    int i,
+        lineIndex = 0,
+        total = 0;
+    // TODO: count lines
+    // TODO: count columns 
     do {
+        total++;
         for (i = 0; i < 25; i++) {
+            if ((i + 1) % 5 == 0 && lineIndex < 5) 
+            {
+                lineIndex += 1;
+            }
+            data->lines[lineIndex] += tmp->current->balls[i];
             data->balls[i] += 
                 tmp->current->balls[i];
         }
         tmp = tmp->next;
     } while(tmp != NULL);
+
+    for (i = 0; i < 5;  i++) {
+        data->lines[i] = (int)(data->lines[i] / total);
+    }
 
     for (i = 0; i < 25; i++) {
         if(data->balls[i] > data->max)
@@ -51,6 +65,10 @@ extern struct MostUsed *newMostUsed()
     for (i = 0; i < 25; i++) {
         result->balls[i] = 0;
     }
+    for (i = 0; i < 5; i++) {
+        result->cols[i] = 0;
+        result->lines[i] = 0;
+    }
 
     return result;
 }
@@ -66,7 +84,7 @@ char *color_for_ratio(int min, int max, int value)
     int index = (int)((value - min) / (v / 10.0));
     debug("Index = %d\n", index);
     index = max(index, 9);
-    return COLOR_SCALE[index];
+    return COLOR_SCALE[index - 1];
 }
 
 void print_most_used(struct MostUsed *data)
@@ -96,6 +114,14 @@ void print_most_used(struct MostUsed *data)
     out("\n----------------------------------------\n");
     for (i = 0; i < 25; i++) {
         out("%s%d - %d\n", i  < 9 ? "0" : "", i + 1, data->balls[i]);
+    }
+    out("\n----------------------------------------\n");
+    for (i = 0; i < 5; i++) {
+        out("Linha %d -> %d\n", i + 1, data->lines[i]);
+    }
+    out("\n----------------------------------------\n");
+    for (i = 0; i < 5; i++) {
+        out("Coluna %d -> %d\n", i + 1, data->cols[i]);
     }
     out("\n----------------------------------------\n");
 }

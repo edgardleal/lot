@@ -26,6 +26,8 @@ struct MostUsed {
     int max;
     int min;
     int balls[25];
+    int cols[5];
+    int lines[5];
 };
 
 extern struct MostUsed *newMostUsed(void);
