@@ -146,9 +146,8 @@ extern struct Num * num_clone(struct Num *this)
     return result;
 }
 
-/**
+/** \fn
  * Returns the number of bols closed to the end ( 25 )
- *
  *
  */
 static int bols_in_the_end(struct Num* this)
@@ -178,7 +177,7 @@ static void inc_next_filled(struct Num *this, unsigned int start)
     }
 }
 
-/*
+/** \fn
  * Steps: 
  *
  * 1 - if last number isnt filled                   | Done  
@@ -283,9 +282,9 @@ extern void num_destroy(struct Num *this)
       free(this);
 }
 
-/**
- * Return the amount of numbers are equals in both numbers.
- *
+/** \fn
+ * Return the amount of numbers are equals in both numbers.  
+ * 
  */
 static int num_compare(struct Num *this, struct Num *other)
 {

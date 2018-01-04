@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.14"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Lot: StrBuffer Struct Reference</title>
+<title>Lot: Command Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -64,30 +64,30 @@ $(function() {
   <div class="summary">
 <a href="#pub-attribs">Data Fields</a>  </div>
   <div class="headertitle">
-<div class="title">StrBuffer Struct Reference</div>  </div>
+<div class="title">Command Struct Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a1d4142681b46b5b2d50543b65de1c1f4"><td class="memItemLeft" align="right" valign="top"><a id="a1d4142681b46b5b2d50543b65de1c1f4"></a>
-char&#160;</td><td class="memItemRight" valign="bottom"><b>buffer</b> [255]</td></tr>
-<tr class="separator:a1d4142681b46b5b2d50543b65de1c1f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2d672afa54d8860c9dad596ba7d70a90"><td class="memItemLeft" align="right" valign="top"><a id="a2d672afa54d8860c9dad596ba7d70a90"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>cat</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *, char)</td></tr>
-<tr class="separator:a2d672afa54d8860c9dad596ba7d70a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ec56896d13130e9e67c2d67e713cce5"><td class="memItemLeft" align="right" valign="top"><a id="a2ec56896d13130e9e67c2d67e713cce5"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>strcat</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *, char *)</td></tr>
-<tr class="separator:a2ec56896d13130e9e67c2d67e713cce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f57777ab73f402a3da2838a66ebd2c4"><td class="memItemLeft" align="right" valign="top"><a id="a2f57777ab73f402a3da2838a66ebd2c4"></a>
-void(*&#160;</td><td class="memItemRight" valign="bottom"><b>clear</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *)</td></tr>
-<tr class="separator:a2f57777ab73f402a3da2838a66ebd2c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9959c60f8ebe3b1c849899e30d6fe5a"><td class="memItemLeft" align="right" valign="top"><a id="ad9959c60f8ebe3b1c849899e30d6fe5a"></a>
-int(*&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> )(struct <a class="el" href="structStrBuffer.html">StrBuffer</a> *)</td></tr>
-<tr class="separator:ad9959c60f8ebe3b1c849899e30d6fe5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac61810b8e87055d1648ec142086eb0e"><td class="memItemLeft" align="right" valign="top"><a id="aac61810b8e87055d1648ec142086eb0e"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>name</b></td></tr>
+<tr class="separator:aac61810b8e87055d1648ec142086eb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a78691934ef64ebaf422d8ae1ca5f0698"><td class="memItemLeft" align="right" valign="top"><a id="a78691934ef64ebaf422d8ae1ca5f0698"></a>
+char *&#160;</td><td class="memItemRight" valign="bottom"><b>command_line</b></td></tr>
+<tr class="separator:a78691934ef64ebaf422d8ae1ca5f0698"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1077298d41aa7fee893ade70c787cd8a"><td class="memItemLeft" align="right" valign="top"><a id="a1077298d41aa7fee893ade70c787cd8a"></a>
+t_command&#160;</td><td class="memItemRight" valign="bottom"><b>function</b></td></tr>
+<tr class="separator:a1077298d41aa7fee893ade70c787cd8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d48895cb4d6a73b9d5ebb8414bdd540"><td class="memItemLeft" align="right" valign="top"><a id="a2d48895cb4d6a73b9d5ebb8414bdd540"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>free</b> )(struct <a class="el" href="structCommand.html">Command</a> *)</td></tr>
+<tr class="separator:a2d48895cb4d6a73b9d5ebb8414bdd540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0cf0ac640db48da316746981bf926ce"><td class="memItemLeft" align="right" valign="top"><a id="ae0cf0ac640db48da316746981bf926ce"></a>
+void(*&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> )(struct <a class="el" href="structCommand.html">Command</a> *, char *)</td></tr>
+<tr class="separator:ae0cf0ac640db48da316746981bf926ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this struct was generated from the following file:<ul>
-<li>src/<a class="el" href="strbuffer_8h_source.html">strbuffer.h</a></li>
+<li>src/<a class="el" href="command_8h_source.html">command.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

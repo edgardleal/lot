@@ -5,6 +5,8 @@ engines:
       threshold: 100
   markdownlint:
     enabled: true
+  fixme:
+    enabled: true
   duplication:
         enabled: true
     config:
