@@ -34,17 +34,19 @@ simulation_report(void)
                *my_walker = my_numbers;
 
     int points_array[15] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    int points = 0, index = 0;
+    int points = 0, index = 0, my_index = 0;
     float total = 0;
     do
     {
         index++;
+        my_index = 0;
         do
         {
+            my_index++;
             points = my_walker->current->compare(my_walker->current, history_walker->current);
             points_array[points - 1] = points_array[points - 1] + 1;
             total = reward_values[points - 1] + total - 2000;
-            out("%d - %d\n", index, points);
+            out("%4d - %2d - %d\n", index, my_index, points);
             my_walker = my_walker->next;
         } while(my_walker != NULL);
         my_walker = my_first;
