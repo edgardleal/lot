@@ -22,7 +22,7 @@ DEPS=$(patsubst %,$(SRC)/%,$(_DEPS)) ./genann/genann.h
 _OBJ = args.o num.o list.o strbuffer.o csv.o report.o lang.o number/output.o number/simulation.o
 OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
-_TEST = test_csv.o test_report.o
+_TEST = test_csv.o test_report.o test_num.o
 TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))
 TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
 

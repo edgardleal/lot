@@ -23,6 +23,7 @@ extern void args_default()
     char data_path[155], 
          numbers_file_name[200], 
          results_file_name[200];
+
     data_path[0] = '\0';
     strcat(data_path, home);
     strcat(data_path, "/.lot/");
@@ -31,7 +32,7 @@ extern void args_default()
     strcat(numbers_file_name, "mynumbers");
 
     strcpy(results_file_name, data_path);
-    strcpy(results_file_name, "results.csv");
+    strcat(results_file_name, "results.csv");
     debug("Defining [%s] as default result file.\n", results_file_name);
 
     config.LINE1 = 0;

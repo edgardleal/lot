@@ -7,6 +7,7 @@
 #include "csv.h"
 #include "test/test_csv.c"
 #include "test/test_report.c"
+#include "test/test_num.h"
 
 int
 main()

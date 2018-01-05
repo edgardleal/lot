@@ -15,6 +15,7 @@
 struct Num {
     long id;
     int balls[25];
+    int cols[5];
     void (*toString)(struct Num*, char*);
     void (*print)(struct Num*);
     void (*inc)  (struct Num*);
@@ -49,5 +50,7 @@ static void num_switch(struct Num *, int a, int b);
 static void num_toString(struct Num *, char* text);
 static void num_write_file(struct Num*, char*);
 static int  num_density(struct Num*);
+extern int num_line(struct Num *, int);
+extern int num_cols(struct Num *, int);
 
 #endif

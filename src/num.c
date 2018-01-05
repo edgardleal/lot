@@ -299,6 +299,21 @@ static int num_compare(struct Num *this, struct Num *other)
     return result;
 }
 
+extern int num_cols(struct Num *this, int col)
+{
+    int i, result = 0;
+    for (i = 0; i < 25; i++)
+    {
+        if (this->balls[i] && ( i + 1 == col || ((i + 1) % 5) == col))
+        {
+            result++;
+        }
+
+    }
+
+    return result;
+}
+
 extern int num_line(struct Num *this, int line)
 {
     int i, start = (line - 1) * 5, result = 0;

@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "report.h"
 #include "app.h"
+#include "num.h"
 #define max(a, b) a>b?a:b;
 
 char *COLOR_SCALE[10] = {
@@ -24,25 +25,30 @@ void fill_most_used(struct Node *node, struct MostUsed *data)
     int i,
         lineIndex = 0,
         total = 0;
-    // TODO: count lines
+    /*
     // TODO: count columns 
+    // */
     do {
         total++;
+        for (lineIndex = 0; lineIndex < 5; lineIndex++) {
+            data->lines[lineIndex] += num_line(tmp->current, i + 1);
+        }
         for (i = 0; i < 25; i++) {
             if ((i + 1) % 5 == 0 && lineIndex < 5) 
             {
                 lineIndex += 1;
             }
-            data->lines[lineIndex] += tmp->current->balls[i];
             data->balls[i] += 
                 tmp->current->balls[i];
         }
         tmp = tmp->next;
     } while(tmp != NULL);
 
+    /*
     for (i = 0; i < 5;  i++) {
-        data->lines[i] = (int)(data->lines[i] / total);
+        data->lines[i] = data->lines[i] / total;
     }
+    */
 
     for (i = 0; i < 25; i++) {
         if(data->balls[i] > data->max)
@@ -75,9 +81,6 @@ extern struct MostUsed *newMostUsed()
 
 char *color_for_ratio(int min, int max, int value)
 {
-    /*
-     *  TODO: review
-     */
     if(value <= min)
         return COLOR_SCALE[0];
     int v = max - min;
