@@ -16,6 +16,7 @@ struct Num {
     long id;
     int balls[25];
     int cols[5];
+    int lines[5];
     void (*toString)(struct Num*, char*);
     void (*print)(struct Num*);
     void (*inc)  (struct Num*);
@@ -25,6 +26,7 @@ struct Num {
     void (*write_to_file)(struct Num*, char*);
     void (*load_string)(struct Num*, char*);
     void (*reset)(struct Num*);
+    void (*clear)(struct Num*);
     int  (*density)(struct Num*);
     struct Num* (*clone)(struct Num*);
 };
@@ -46,6 +48,7 @@ static void num_inc(struct Num *);
 static void num_load_string(struct Num *, char *text);
 static void num_print(struct Num *);
 static void num_reset(struct Num *);
+static void num_clear(struct Num *);
 static void num_switch(struct Num *, int a, int b);
 static void num_toString(struct Num *, char* text);
 static void num_write_file(struct Num*, char*);

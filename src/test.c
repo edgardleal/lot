@@ -32,6 +32,8 @@ void test_all()
     mu_run_test(test_atoi);
 
     mu_run_test(test_num_cols);
+    mu_run_test(test_num_lines);
+    mu_run_test(test_num_reset);
 }
 
 void test_init() 
@@ -41,6 +43,7 @@ void test_init()
     num->reset(num);
 
     check_balls(num);
+    ok(num->inc != NULL, "ince function is filled");
     num->inc(num);
 
     mu_assert("Ball 15 should be zero after first inc operation", num->balls[14] == 0);

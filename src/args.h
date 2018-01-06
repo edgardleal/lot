@@ -42,7 +42,7 @@ static struct argp_option options[] = {
  * Store the defaults options and modified option by command line arguments passed by the user.
  *
  */
-extern struct config {
+struct config {
     int LINE1;
     int LINE2;
     int LINE3;
