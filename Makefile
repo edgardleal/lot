@@ -1,7 +1,7 @@
 OUTDIR=./obj
 CC=gcc
 SRC=src
-IDIR=
+IDIR=$(OUTDIR)
 
 ifeq ($(OS),Windows_NT)
     detected_OS := Windows
@@ -10,9 +10,9 @@ else
 endif	
 
 ifeq ($(detected_OS), Linux)
-	CFLAGS=-ansi -lm -I $(OUTDIR)
+	CFLAGS=-ansi -lm -I $(IDIR)
 else
-	CFLAGS=-ansi -Wall -I $(OUTDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
+	CFLAGS=-ansi -Wall -I $(IDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 endif
 
 
@@ -24,12 +24,13 @@ OBJ = $(patsubst %,$(OUTDIR)/%,$(_OBJ)) genann/genann.o
 
 _TEST = test_csv.o test_report.o test_num.o
 TEST = $(patsubst %,$(OUTDIR)/test/%,$(_TEST))
-TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(OUTDIR)/test.o
+TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(TEST) $(OUTDIR)/test.o
 
 all: clean test compile production
 
 setup: 
-	if [ ! -d "$(OUTDIR)" ]; then mkdir -p $(OUTDIR); fi
+	if [ ! -d "$(OUTDIR)/num" ]; then mkdir -p $(OUTDIR)/num; fi
+	if [ ! -d "$(OUTDIR)/test" ]; then mkdir -p $(OUTDIR)/test; fi
 
 $(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
 	@echo "compiling " $@
@@ -39,7 +40,7 @@ compileDebug: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
 
 compileTest: $(TEST_OBJ)
-	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/test
+	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/run_tests
 
 compileProduction: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot
@@ -62,7 +63,7 @@ clean:
 	ctags -R .
 
 test: setup compileTest
-	$(OUTDIR)/test
+	$(OUTDIR)/run_tests
 
 debug: setup compileDebug 
 	gdb $(OUTDIR)/test

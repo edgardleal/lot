@@ -12,11 +12,8 @@
 #include "../minunit.h"
 #include "../csv.h"
 #include "../num.h"
+#include "test_csv.h"
 
-void test_csv(void);
-void test_csv_different_separator(void);
-void test_csv_new_num_from_string(void);
-void test_atoi(void);
 
 void test_csv_different_separator(void)
 {

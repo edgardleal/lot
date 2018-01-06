@@ -18,7 +18,8 @@
 #include <string.h>
 #include "../report.h"
 #include "../minunit.h"
-void test_color_scale(void);
+#include "test_report.h"
+
 char *get_ratio(void);
 int min, max, value;
 char *result;
