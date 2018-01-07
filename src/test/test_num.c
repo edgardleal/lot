@@ -3,6 +3,15 @@
 #include "test_num.h"
 #include "../num.h"
 
+/**
+ *
+ 1  2  3  4  5 
+ 6  7  8  9 10 
+11 12 13 14 15 
+16 17 18 19 20 
+21 22 23 24 25 
+ *
+ */
 void test_num_cols(void)
 {
     struct Num *num = newNum();
@@ -14,9 +23,12 @@ void test_num_cols(void)
     ok(num->cols[3] == 0, "cols 4 should be 0");
     ok(num->cols[4] == 0, "cols 5 should be 0");
 
-    num->load_string(num, "1 2 3 ");
-    ok(num->cols[1] == 1, "col 1 should be 1");
-    ok(num->cols[2] == 1, "col 2 should be 1");
+    num->load_string(num, "1 2 3 5 7 ");
+    ok(num->cols[0] == 1, "col 1 should be 1");
+    ok(num->cols[1] == 2, "col 2 should be 2");
+    ok(num->cols[2] == 1, "col 3 should be 1");
+    ok(num->cols[3] == 0, "col 4 should be 0");
+    ok(num->cols[4] == 1, "col 5 should be 1");
 
     num->destroy(num);
 }
@@ -82,7 +94,8 @@ extern void test_num_reset(void)
     ok(num->cols[2] == 3, "col 3 should be 3");
     ok(num->cols[3] == 3, "col 4 should be 3 and now is %d", 
             num->cols[3]);
-    ok(num->cols[4] == 3, "col 5 should be 3");
+    ok(num->cols[4] == 3, "col 5 should be 3 and now is %d",
+            num->cols[4]);
 
     num->destroy(num);
 }

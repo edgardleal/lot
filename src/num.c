@@ -45,20 +45,29 @@ static void num_load_string(struct Num *this, char *text)
         else if(tmp[0] != '\0') /* if string tmp is not empty */
         {
             int ball = atoi(tmp);
-            int coll = ball < 6 ? ball : ball % 5;
-            if (coll == 0) coll = 5; 
-            int line = ball < 6 ? 1 : (ball - coll) / 5 + 1;
-
             this->balls[ball - 1] = 1;
-            this->cols[coll - 1] += 1;
-            this->lines[line - 1] += 1;
+            setup_cols_and_lines(this, ball);
 
             tmp[0] = '\0';
         }
 
     }
     if(tmp[0] != '\0')
-        this->balls[atoi(tmp) - 1] = 1;
+    {
+        int ball = atoi(tmp) - 1;
+        this->balls[ball] = 1;
+        setup_cols_and_lines(this, ball);
+    }
+}
+
+void setup_cols_and_lines(struct Num *num, int ball)
+{
+    int coll = ball < 6 ? ball : ball % 5;
+    if (coll == 0) coll = 5; 
+    int line = ball < 6 ? 1 : (ball - coll) / 5 + 1;
+
+    num->cols[coll - 1] += 1;
+    num->lines[line - 1] += 1;
 }
 
 static struct Node * num_load_file(struct Num *this, char *file_name)
@@ -367,8 +376,8 @@ static void num_reset(struct Num *this)
     this->cols[0] = 3;
     this->cols[1] = 3;
     this->cols[2] = 3;
-    this->cols[3] = 0;
-    this->cols[4] = 0;
+    this->cols[3] = 3;
+    this->cols[4] = 3;
 
     this->lines[0] = 5;
     this->lines[1] = 5;
