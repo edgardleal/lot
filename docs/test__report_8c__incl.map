@@ -1,7 +1,8 @@
 <map id="src/test/test_report.c" name="src/test/test_report.c">
 <area shape="rect" id="node3" href="$report_8h.html" title="Funcionalities to generate reports. " alt="" coords="95,80,173,107"/>
-<area shape="rect" id="node8" href="$minunit_8h.html" title="A simple unit test framework. " alt="" coords="197,80,284,107"/>
-<area shape="rect" id="node4" href="$list_8h.html" title="Implements a linked list of Num. " alt="" coords="67,155,118,181"/>
-<area shape="rect" id="node6" href="$color_8h.html" title="This file was copied from GIT project. " alt="" coords="143,155,205,181"/>
-<area shape="rect" id="node5" href="$num_8h.html" title="This file represents a combination of numbers. " alt="" coords="62,229,121,256"/>
+<area shape="rect" id="node8" href="$minunit_8h.html" title="A simple unit test framework. " alt="" coords="189,155,276,181"/>
+<area shape="rect" id="node9" href="$test__report_8h_source.html" title="test_report.h" alt="" coords="249,80,344,107"/>
+<area shape="rect" id="node4" href="$list_8h.html" title="Implements a linked list of Num. " alt="" coords="29,155,79,181"/>
+<area shape="rect" id="node6" href="$color_8h.html" title="This file was copied from GIT project. " alt="" coords="103,155,165,181"/>
+<area shape="rect" id="node5" href="$num_8h.html" title="This file represents a combination of numbers. " alt="" coords="25,229,83,256"/>
 </map>

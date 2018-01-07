@@ -1,3 +1,6 @@
 <map id="src/csv.h" name="src/csv.h">
-<area shape="rect" id="node2" href="$test_8h.html" title="Aggregate all unit tests. " alt="" coords="5,80,83,107"/>
+<area shape="rect" id="node2" href="$main_8c.html" title="Main entry point for application. " alt="" coords="5,80,88,107"/>
+<area shape="rect" id="node3" href="$simulation_8c.html" title="Gera uma simulacao dos seus numeros em cada sorteio registrado no historico. " alt="" coords="111,80,273,107"/>
+<area shape="rect" id="node4" href="$test__csv_8c.html" title="Tests for file csv.h. " alt="" coords="296,80,427,107"/>
+<area shape="rect" id="node5" href="$test_8h.html" title="Aggregate all unit tests. " alt="" coords="451,80,528,107"/>
 </map>
