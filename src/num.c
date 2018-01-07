@@ -216,7 +216,6 @@ static void inc_next_filled(struct Num *this, unsigned int start)
  */
 static void num_inc(struct Num* this)
 {
-    out("inniciando o incremento do numero ");
     if (this == NULL) die("Number you are increment is null !"); 
     if(this->balls[24] == 0)
     {
@@ -248,7 +247,27 @@ static void num_inc(struct Num* this)
             }
         }
     }                                /* if last number is not filled */
-    out("numero incrementado");
+    fill_cols_and_line(this);
+}
+
+void fill_cols_and_line(struct Num *num)
+{
+    int i;
+    for (i = 0; i < 5; i++)
+    {
+        num->cols[i] = 0;
+        num->lines[i]= 0;
+    }
+
+    int ball = 0;
+    for (i = 0; i < 25; i++)
+    {
+        ball = i + 1;
+        if (num->balls[i])
+        {
+            setup_cols_and_lines(num, ball);
+        }
+    }
 }
 
 static void num_print(struct Num *this)

@@ -55,5 +55,6 @@ static void num_write_file(struct Num*, char*);
 static int  num_density(struct Num*);
 extern int num_line(struct Num *, int);
 extern int num_cols(struct Num *, int);
+static void setup_cols_and_lines(struct Num *num, int ball);
 
 #endif

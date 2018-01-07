@@ -65,6 +65,15 @@ void print_report()
     result->destroyAndClean(result);
 }
 
+int columns_fit(struct Num *num, int limit)
+{
+    return num->cols[0] >= limit 
+        && num->cols[1] >= limit
+        && num->cols[2] >= limit
+        && num->cols[3] >= limit
+        && num->cols[4] >= limit;
+
+}
 /** \fn 
  *  \brief Generate number 
  *
@@ -111,6 +120,7 @@ void generate_numbers()
             }
         }
         if(maxEqual <= config.SIMILARITY) {
+            if(columns_fit(num, config.COLUMN_LIMIT))
             if(num_line(num, 1) >= config.LINE_LIMIT)
             if(num_line(num, 2) >= config.LINE_LIMIT)
             if(num_line(num, 3) >= config.LINE_LIMIT)
