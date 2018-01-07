@@ -41,6 +41,7 @@ extern void args_default()
     config.LINE4 = 0;
     config.LINE5 = 0;
     config.DEBUG = 0;
+    config.APPEND = 0;
     config.LIMIT = MAX_NUMBER;
     config.LINE_LIMIT = 3;
     config.COLUMN_LIMIT = 2;
@@ -64,6 +65,10 @@ parse_opt(int key, char *arg, struct argp_state *state)
 {
     long value;
     switch (key) {
+        case 'a':
+            config.APPEND = 1;
+            debug("Using append option\n");
+            break;
         case 'd': 
             config.DEBUG = 1; 
             IS_DEBUG = 1;

@@ -83,6 +83,8 @@ int columns_fit(struct Num *num, int limit)
  */
 void generate_numbers()
 {
+    FILE *appendFile;
+    char appendBuffer[30];
     struct Num *num  = newNum();
     num->reset(num);
     debug("Loading numbers from file...");
@@ -91,6 +93,10 @@ void generate_numbers()
     int equal = 0;
     tree->current->print(tree->current);
 
+    if (config.APPEND) 
+    {
+        appendFile = fopen(config.MY_NUMBERS_FILE_NAME, "a");
+    }
 
 
     struct Node *node = tree->next;
@@ -129,11 +135,21 @@ void generate_numbers()
             {
                 debug("# Equal: %d\n", maxEqual);
                 num->print(num);
+                if (config.APPEND)
+                {
+                    output_num_simple(num, appendBuffer);
+                    fprintf(appendFile, appendBuffer);
+                }
                 tree->add(tree, num->clone(num));
             }
         }
         num->inc(num);
         i = i + 1;
+    }
+
+    if (config.APPEND) 
+    {
+        fclose(appendFile);
     }
 
     free(num);

@@ -52,6 +52,7 @@ struct config {
     int LINE5;
     int DEBUG;
     int LINE_LIMIT;
+    int APPEND;
     int COLUMN_LIMIT;
     char SIMULATION;
     int SIMILARITY;
