@@ -14,6 +14,11 @@
 static unsigned long id_counter = 0;
 static void inc_next_filled(struct Num *this, unsigned int start);
 
+/**
+ * /fn num_load_string
+ * /brief float a combination from a string filled with a sequence of number separated by spaces
+ *
+ */
 static void num_load_string(struct Num *this, char *text)
 {
     int i = 0;
@@ -21,10 +26,7 @@ static void num_load_string(struct Num *this, char *text)
     char tmp[3];
 
     tmp[0] = '\0';
-    for(i = 0; i < 24; i = i + 1)
-    {
-        this->balls[i] = 0;
-    }
+    this->clear(this);
 
     for(i = 0; i < size; i = i + 1)
     {
@@ -42,13 +44,30 @@ static void num_load_string(struct Num *this, char *text)
         }
         else if(tmp[0] != '\0') /* if string tmp is not empty */
         {
-            this->balls[atoi(tmp) - 1] = 1;
+            int ball = atoi(tmp);
+            this->balls[ball - 1] = 1;
+            setup_cols_and_lines(this, ball);
+
             tmp[0] = '\0';
         }
 
     }
     if(tmp[0] != '\0')
-        this->balls[atoi(tmp) - 1] = 1;
+    {
+        int ball = atoi(tmp) - 1;
+        this->balls[ball] = 1;
+        setup_cols_and_lines(this, ball);
+    }
+}
+
+void setup_cols_and_lines(struct Num *num, int ball)
+{
+    int coll = ball < 6 ? ball : ball % 5;
+    if (coll == 0) coll = 5; 
+    int line = ball < 6 ? 1 : (ball - coll) / 5 + 1;
+
+    num->cols[coll - 1] += 1;
+    num->lines[line - 1] += 1;
 }
 
 static struct Node * num_load_file(struct Num *this, char *file_name)
@@ -197,6 +216,7 @@ static void inc_next_filled(struct Num *this, unsigned int start)
  */
 static void num_inc(struct Num* this)
 {
+    if (this == NULL) die("Number you are increment is null !"); 
     if(this->balls[24] == 0)
     {
         inc_next_filled(this, 24);
@@ -227,6 +247,27 @@ static void num_inc(struct Num* this)
             }
         }
     }                                /* if last number is not filled */
+    fill_cols_and_line(this);
+}
+
+void fill_cols_and_line(struct Num *num)
+{
+    int i;
+    for (i = 0; i < 5; i++)
+    {
+        num->cols[i] = 0;
+        num->lines[i]= 0;
+    }
+
+    int ball = 0;
+    for (i = 0; i < 25; i++)
+    {
+        ball = i + 1;
+        if (num->balls[i])
+        {
+            setup_cols_and_lines(num, ball);
+        }
+    }
 }
 
 static void num_print(struct Num *this)
@@ -299,6 +340,24 @@ static int num_compare(struct Num *this, struct Num *other)
     return result;
 }
 
+
+static void num_clear(struct Num *this)
+{
+    this->cols[0]  = 0;
+    this->cols[1]  = 0;
+    this->cols[2]  = 0;
+    this->cols[3]  = 0;
+    this->cols[4]  = 0;
+    this->lines[0] = 0;
+    this->lines[1] = 0;
+    this->lines[2] = 0;
+    this->lines[3] = 0;
+    this->lines[4] = 0;
+
+    int i;
+    for (i = 0; i < 25; this->balls[i++] = 0);
+}
+
 extern int num_cols(struct Num *this, int col)
 {
     int i, result = 0;
@@ -327,8 +386,23 @@ extern int num_line(struct Num *this, int line)
     return result;
 }
 
+/**
+ * /fn num_reset
+ * /brief make this ball filled from one to fifteen
+ */
 static void num_reset(struct Num *this)
 {
+    this->cols[0] = 3;
+    this->cols[1] = 3;
+    this->cols[2] = 3;
+    this->cols[3] = 3;
+    this->cols[4] = 3;
+
+    this->lines[0] = 5;
+    this->lines[1] = 5;
+    this->lines[2] = 5;
+    this->lines[3] = 0;
+    this->lines[4] = 0;
     int i;
     for(i = 0; i < 24; i = i + 1)
     {
@@ -355,7 +429,7 @@ extern struct Num *newNum()
     result->load_string    = &num_load_string;
     result->reset          = &num_reset;
     result->density        = &num_density;
-
+    result->clear          = &num_clear;
 
     int i = 0;
     for(i = 0; i<25; i++) {

@@ -16,8 +16,6 @@
 #define TEST_H
 #include "num.h"
 #include "csv.h"
-#include "test/test_csv.c"
-#include "test/test_report.c"
 
 void check_balls(struct Num*);
 void test_compare(void);

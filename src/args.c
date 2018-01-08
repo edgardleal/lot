@@ -42,7 +42,8 @@ extern void args_default()
     config.LINE5 = 0;
     config.DEBUG = 0;
     config.LIMIT = MAX_NUMBER;
-    config.LINE_LIMIT = 4;
+    config.LINE_LIMIT = 3;
+    config.COLUMN_LIMIT = 2;
     strcpy(config.MY_NUMBERS_FILE_NAME, numbers_file_name);
     strcpy(config.RESULT_PATH, results_file_name);
     config.SIMILARITY = 8;
@@ -86,6 +87,10 @@ parse_opt(int key, char *arg, struct argp_state *state)
         case 'f':
             config.OUTPUT_FORMAT = arg;
             debug("Defining output format to: [%s]\n", arg);
+            break;
+        case 'y':
+            config.COLUMN_LIMIT = atoi(arg);
+            debug("Defining column limit to: [%s]\n", arg);
             break;
         case 'n':
             config.LINE_LIMIT = atoi(arg);

@@ -20,6 +20,7 @@
 #define CSV_H
 #include <stdio.h>
 #include <stdlib.h>
+#include "list.h"
 
 extern void split_csv(char *, char**, int);
 extern void csv_start_columns(char**, int);

@@ -5,8 +5,8 @@
 #include "minunit.h"
 #include "num.h"
 #include "csv.h"
-#include "test/test_csv.c"
-#include "test/test_report.c"
+#include "test/test_csv.h"
+#include "test/test_report.h"
 #include "test/test_num.h"
 
 int
@@ -30,6 +30,10 @@ void test_all()
     mu_run_test(test_csv_new_num_from_string);
     mu_run_test(test_color_scale);
     mu_run_test(test_atoi);
+
+    mu_run_test(test_num_cols);
+    mu_run_test(test_num_lines);
+    mu_run_test(test_num_reset);
 }
 
 void test_init() 
@@ -39,6 +43,7 @@ void test_init()
     num->reset(num);
 
     check_balls(num);
+    ok(num->inc != NULL, "ince function is filled");
     num->inc(num);
 
     mu_assert("Ball 15 should be zero after first inc operation", num->balls[14] == 0);
@@ -167,4 +172,4 @@ void test_strcpy()
     ok(dest[2] == 'C', "third letter");
 }
 
-/* vim: set expandtab tabstop=4 tabshift=4 :*/
+/* vim: set expandtab tabstop=4 :*/

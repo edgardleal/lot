@@ -30,6 +30,8 @@ static struct argp_option options[] = {
     {"format",     'f', "format", 0, "Output format, should be b for binary, g for geometric and l for inline"},
     {"limit",      'l', "limit", 0, "Define the max numbers generated"},
     {"llimit",     'n', "lineLimit", 0, "This is the limit of numbers by line in geometric form"},
+    {"climit",     'y', "climit", 0, "The minimous numbers per columns"},
+    {"output",     'o', "output", 0, "Output file"},
     {"my",         'm', "myNumbers", 0, "The file path to your saved numbers in csv format"},
     {"report",     'p', 0, 0, "Print a analitics report over the results dataset."},
     {"result",     'r', "result", 0, "The path of csv result"},
@@ -42,7 +44,7 @@ static struct argp_option options[] = {
  * Store the defaults options and modified option by command line arguments passed by the user.
  *
  */
-extern struct config {
+struct config {
     int LINE1;
     int LINE2;
     int LINE3;
@@ -50,6 +52,7 @@ extern struct config {
     int LINE5;
     int DEBUG;
     int LINE_LIMIT;
+    int COLUMN_LIMIT;
     char SIMULATION;
     int SIMILARITY;
     char MY_NUMBERS_FILE_NAME[250];
