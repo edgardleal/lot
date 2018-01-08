@@ -28,8 +28,8 @@ TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(TEST) $(OUTDIR)/test.o
 
 all: clean test compile production
 
-setup: 
-	if [ ! -d "$(OUTDIR)/num" ]; then mkdir -p $(OUTDIR)/num; fi
+setup: $(OUTDIR)/number $(OUTDIR)/test
+	if [ ! -d "$(OUTDIR)/number" ]; then mkdir -p $(OUTDIR)/number; fi
 	if [ ! -d "$(OUTDIR)/test" ]; then mkdir -p $(OUTDIR)/test; fi
 
 $(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
