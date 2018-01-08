@@ -10,7 +10,7 @@ else
 endif	
 
 ifeq ($(detected_OS), Linux)
-	CFLAGS=-ansi -lm -I $(IDIR)
+	CFLAGS=-ansi --static -lm -I $(IDIR)
 else
 	CFLAGS=-ansi -Wall -I $(IDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 endif
@@ -40,7 +40,7 @@ compileDebug: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
 
 compileTest: $(TEST_OBJ)
-	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/run_tests
+	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/run_tests -lm
 
 compileProduction: $(OBJ) $(OUTDIR)/main.o
 	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/lot
