@@ -21,6 +21,7 @@
 #include "csv.h"
 #include "number/simulation.h"
 
+void better_numbers(void);
 void generate_numbers(void);
 void print_report(void);
 
@@ -37,6 +38,10 @@ int main(int argc, char **argv)
     else if (config.SIMULATION)
     {
         simulation_report();
+    }
+    else if (config.BETTER)
+    {
+        better_numbers();
     }
     else
     {
@@ -74,6 +79,50 @@ int columns_fit(struct Num *num, int limit)
         && num->cols[4] >= limit;
 
 }
+
+/**
+ * \fn better_numbers
+ * \brief choose the numbers with better result
+ *
+ */
+void better_numbers(void)
+{
+    struct Node *tree = newTree();
+    struct Num *num  = newNum();
+
+    out("Tree is filled: %d", tree != NULL);
+    out("loading csv result file ...\n");
+    csv_load_from_file(config.RESULT_PATH, tree);
+    out("csv loaded!");
+    struct Node *tmp = tree;
+    num->reset(num);
+
+    int i = 0,
+        inner_limit = 0,
+        difference = 0;
+    char number_buffer[30];
+    out("starting the loop...");
+    while(i < config.LIMIT)
+    {
+        tmp = tree;
+        difference = 0;
+        while(tmp != NULL && inner_limit < 200)
+        {
+            difference += tmp->current->compare(tmp->current, num);
+            tmp = tmp->next;
+            inner_limit++;
+        }
+        num->toString(num, number_buffer);
+        out("%10d - %s", difference);
+        num->inc(num);
+        i++;
+        tmp = tmp->next;
+    }
+
+    num->destroy(num);
+    tree->destroyAndClean(tree);
+}
+
 /** \fn 
  *  \brief Generate number 
  *

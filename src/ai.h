@@ -13,6 +13,10 @@
 /*  Not shown, loading your training and test data. */
 double **training_data_input, **training_data_output, **test_data_input;
 
+genann ai_load_from_file(char*);
+void ai_save_to_file(char*, genann);
+void ai_learn();
+
 /**  New network with 2 inputs,
  * 1 hidden layer of 3 neurons each,
  * and 2 outputs. 

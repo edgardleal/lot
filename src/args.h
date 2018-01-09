@@ -25,6 +25,7 @@ static char description[] = "Lotofacil in C";
  */
 static struct argp_option options[] = {
     {"debug",      'd', 0, 0, "Execute in debug mode"},
+    {"better",     'b', 0, 0, "Create betters numbers"},
     {"append",     'a', 0, 0, "Append generated numbers to ~/.lot/mynumbers file"},
     {"simulation", 't', 0, 0, "Exibe quanto voce ganharia em cada sorteio passado"},
     {"format",     'f', "format", 0, "Output format, should be b for binary, g for geometric and l for inline"},
@@ -53,6 +54,7 @@ struct config {
     int DEBUG;
     int LINE_LIMIT;
     int APPEND;
+    unsigned char BETTER;
     int COLUMN_LIMIT;
     char SIMULATION;
     int SIMILARITY;

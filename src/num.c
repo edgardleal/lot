@@ -13,6 +13,7 @@
 
 static unsigned long id_counter = 0;
 static void inc_next_filled(struct Num *this, unsigned int start);
+void fill_cols_and_line(struct Num *);
 
 /**
  * /fn num_load_string
