@@ -3,6 +3,10 @@
 
 typedef int (*t_command)(char *);
 
+/**
+ * /struct Command
+ * /brief Store a command sended by user
+ */
 struct Command {
     char *name;
     char *command_line;

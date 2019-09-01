@@ -1,6 +1,9 @@
 <map id="src/list.h" name="src/list.h">
-<area shape="rect" id="node2" href="$report_8h.html" title="Funcionalities to generate reports. " alt="" coords="84,80,172,107"/>
-<area shape="rect" id="node3" href="$main_8c.html" title="Main entry point for application. " alt="" coords="5,155,88,181"/>
-<area shape="rect" id="node4" href="$test__report_8c.html" title="units tests for report.h " alt="" coords="111,155,254,181"/>
-<area shape="rect" id="node5" href="$test_8h.html" title="Aggregate all unit tests. " alt="" coords="144,229,221,256"/>
+<area shape="rect" id="node2" href="$csv_8h.html" title="Load contents to csv files. " alt="" coords="280,80,356,107"/>
+<area shape="rect" id="node4" href="$simulation_8c.html" title="Gera uma simulacao dos seus numeros em cada sorteio registrado no historico. " alt="" coords="5,155,167,181"/>
+<area shape="rect" id="node7" href="$report_8h.html" title="Funcionalities to generate reports. " alt="" coords="443,80,531,107"/>
+<area shape="rect" id="node3" href="$main_8c.html" title="Main entry point for application. " alt="" coords="446,155,529,181"/>
+<area shape="rect" id="node5" href="$test__csv_8c.html" title="Tests for file csv.h. " alt="" coords="190,155,321,181"/>
+<area shape="rect" id="node6" href="$test_8h.html" title="Aggregate all unit tests. " alt="" coords="345,155,422,181"/>
+<area shape="rect" id="node8" href="$test__report_8c.html" title="units tests for report.h " alt="" coords="552,155,695,181"/>
 </map>

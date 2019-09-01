@@ -21,11 +21,11 @@
 
 #include "num.h"
 
-/* \struct 
- * Represents a single node of a linked list. Every node has a link to next and previus node, 
+/* \struct Node
+ * \brief Represents a single node of a linked list. Every node has a link to next and previus node, 
  * if this node is the first of the list, the point in previus field is NULL. If this is the last
  * node in this list, the fild next if NULL.
-     *
+ *
  */
 struct Node {
 	struct Num *current;
