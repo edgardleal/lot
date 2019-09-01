@@ -1,5 +1,5 @@
 OUTDIR=./obj
-CC=gcc
+CC=cc
 SRC=src
 IDIR=$(OUTDIR)
 
@@ -10,7 +10,7 @@ else
 endif	
 
 ifeq ($(detected_OS), Linux)
-	CFLAGS=-ansi --static -lm -I $(IDIR)
+	CFLAGS=--static -I $(IDIR) -Wall -Wshadow -O3 -g -march=native 
 else
 	CFLAGS=-ansi -Wall -I $(IDIR) /usr/local/Cellar/argp-standalone/1.3/lib/libargp.a
 endif
@@ -30,8 +30,12 @@ TEST_OBJ=$(OUTDIR)/minunit.o $(OBJ) $(TEST) $(OUTDIR)/test.o
 all: ## all: run all tasks
 all: clean test compile production
 
+genann/genann.c:
+	git submodule update --init genann
+
 setup: ## setup: create needed diretories to this application
-setup: 
+setup: genann/genann.c
+	echo OS $(detected_OS)
 	if [ ! -d "$(OUTDIR)/num" ]; then mkdir -p $(OUTDIR)/num; fi
 	if [ ! -d "$(OUTDIR)/number" ]; then mkdir -p $(OUTDIR)/number; fi
 	if [ ! -d "$(OUTDIR)/test" ]; then mkdir -p $(OUTDIR)/test; fi
@@ -41,7 +45,7 @@ $(OUTDIR)/%.o: $(SRC)/%.c $(DEPS)
 	$(CC) -g $(CFLAGS) -c -o $@ $< 
 
 compileDebug: $(OBJ) $(OUTDIR)/main.o 
-	$(CC) $(CFLAGS) -g $^ -o $(OUTDIR)/debug
+	$(CC) $(CFLAGS) -g $^ -lm -o $(OUTDIR)/debug
 
 compileTest: $(TEST_OBJ)
 	$(CC) -g $(CFLAGS) $^ -o $(OUTDIR)/run_tests -lm
